@@ -1,0 +1,9 @@
+{
+    "name": "GMTests",
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ]
+}
