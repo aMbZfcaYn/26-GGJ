@@ -4,18 +4,19 @@ public class PlayerControl : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Actions actions;
-    [Header("小刀设置")]
-    [SerializeField] private float attackRadius_knife = 1.5f;
-    [SerializeField] private float attackWidth_knife = 0.3f;
-    [SerializeField] private float attackAngle_knife = 90f;
-    [SerializeField] private float attackDuration_knife = 0.2f;
-    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
+
     private Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        // 设置当前武器类型
+        if (actions != null)
+        {
+            actions.SetCurrentWeapon(currentWeaponType);
+        }
     }
 
     void FixedUpdate()
@@ -28,14 +29,18 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-
         if (InputManager.DefaultAttackWasPressed)
         {
-
             switch (currentWeaponType)
             {
                 case WeaponType.knife:
-                    PerformMeleeAttack(attackRadius_knife, attackWidth_knife, attackAngle_knife, attackDuration_knife, enemyLayer, false);
+                case WeaponType.sword:
+                case WeaponType.hammer:
+                case WeaponType.magic_magic:
+                    PerformMeleeAttack();
+                    break;
+                case WeaponType.Spear:
+                    PerformSpearAttack();
                     break;
                 case WeaponType.magic_single:
                     PerformShoot();
@@ -43,9 +48,9 @@ public class PlayerControl : MonoBehaviour
                 case WeaponType.magic_spread:
                     PerformSpreadShot();
                     break;
-
             }
         }
+
         if (InputManager.DefaultAttackIsHeld)
         {
             if (currentWeaponType == WeaponType.magic_riffle)
@@ -56,21 +61,44 @@ public class PlayerControl : MonoBehaviour
 
         if (InputManager.SpecialAttackWasPressed)
         {
-            if (currentWeaponType == WeaponType.magic_riffle || currentWeaponType == WeaponType.magic_spread || currentWeaponType == WeaponType.magic_single)
+            if (currentWeaponType == WeaponType.magic_riffle ||
+                currentWeaponType == WeaponType.magic_spread ||
+                currentWeaponType == WeaponType.magic_single)
             {
-                PerformMeleeAttack(1f, 0.3f, 90f, 0.2f, enemyLayer, true);
+                PerformMagicMeleeAttack();
             }
         }
     }
-    private void PerformMeleeAttack(float attackRadius, float attackWidth,
-                float attackAngle, float attackDuration, LayerMask enemyLayer, bool isblunk)
+
+    private void PerformMeleeAttack()
     {
         if (actions != null)
         {
+            actions.PerformMeleeAttack(transform);
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
 
-            actions.PerformMeleeAttack(transform, attackRadius, attackWidth,
-                attackAngle, attackDuration, enemyLayer, isblunk);
+    private void PerformMagicMeleeAttack()
+    {
+        if (actions != null)
+        {
+            actions.PerformMeleeAttack(transform, true); // 魔法近战使用钝击
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
 
+    private void PerformSpearAttack()
+    {
+        if (actions != null)
+        {
+            actions.PerformSpearAttack(transform);
         }
         else
         {
@@ -82,9 +110,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (actions != null)
         {
-
             actions.PerformShoot(transform);
-
         }
         else
         {
@@ -96,9 +122,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (actions != null)
         {
-
             actions.PerformSpreadShot(transform);
-
         }
         else
         {
@@ -110,9 +134,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (actions != null)
         {
-
             actions.PerformRiffleShot(transform);
-
         }
         else
         {
