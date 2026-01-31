@@ -1,5 +1,6 @@
 using InputNamespace;
 using Management;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -7,18 +8,19 @@ public class PlayerControl : MonoBehaviour
     public bool blocked = false;
 
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private Actions actions;
-    [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
+    public Actions actions;
+    public WeaponType currentWeaponType = WeaponType.knife;
 
     private Rigidbody2D rb;
     private AbilityManager ability;
     private AnimatorStateInfo currentAnimState;
 
 
-
-    [SerializeField] private GameObject leg;
+    public GameObject leg;
     public Animator LegAnimator;
     public Animator BodyAnimator;
+    public AnimatorController PlayerBodyAC;
+    public AnimatorController PlayerLegAC;
 
     private bool inAbility = false;
 
@@ -42,6 +44,12 @@ public class PlayerControl : MonoBehaviour
         {
             actions.SetCurrentWeapon(currentWeaponType);
         }
+
+        BodyAnimator = GetComponentsInChildren<Animator>()[0];
+        LegAnimator = GetComponentsInChildren<Animator>()[1];
+
+        BodyAnimator.runtimeAnimatorController = PlayerBodyAC;
+        LegAnimator.runtimeAnimatorController = PlayerLegAC;
     }
 
     void FixedUpdate()
@@ -52,9 +60,13 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
+        Debug.Log(InputManager.Movement);
+
         Vector2 movement = InputManager.Movement;
         rb.linearVelocity = movement * moveSpeed;
-        rb.linearVelocity = movement * moveSpeed;
+
+        Debug.Log(rb.linearVelocity);
+
         LegAnimator.SetFloat("MoveSpeed", rb.linearVelocity.magnitude);
         if (movement.magnitude > 0.1f)
         {
@@ -67,7 +79,6 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-
         if (BodyAnimator.GetBool("Attack"))
         {
             currentAnimState = BodyAnimator.GetCurrentAnimatorStateInfo(0);
@@ -105,33 +116,21 @@ public class PlayerControl : MonoBehaviour
 
                 case WeaponType.knife:
                     actions.PerformMeleeAttack_knife(transform);
-                    actions.PerformMeleeAttack_knife(transform);
-
                     break;
                 case WeaponType.sword:
                     actions.PerformMeleeAttack_sword(transform);
-
-                    actions.PerformMeleeAttack_sword(transform);
-
                     break;
                 case WeaponType.hammer:
                     actions.PerformMeleeAttack_hammer(transform);
-
-                    actions.PerformMeleeAttack_hammer(transform);
-
                     break;
                 case WeaponType.Spear:
                     PerformSpearAttack();
                     break;
                 case WeaponType.magic_single:
                     PerformShoot();
-
-
                     break;
                 case WeaponType.magic_spread:
                     PerformSpreadShot();
-
-
                     break;
             }
         }
@@ -151,13 +150,11 @@ public class PlayerControl : MonoBehaviour
         if (InputManager.SpecialAttackWasPressed)
         {
             BodyAnimator.SetBool("Attack2", true);
-            BodyAnimator.SetBool("Attack2", true);
             if (currentWeaponType == WeaponType.magic_riffle ||
                 currentWeaponType == WeaponType.magic_spread ||
                 currentWeaponType == WeaponType.magic_single)
             {
                 actions.PerformMeleeAttack_magic(transform);
-
             }
             BodyAnimator.SetBool("Attack2", false);
         }
@@ -246,4 +243,5 @@ public class PlayerControl : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+
 }

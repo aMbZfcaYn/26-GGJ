@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Management;
 using Management.Tag;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -47,7 +48,7 @@ namespace Possession
             GameEventManager.Instance.onPossessionTrigger.RemoveListener(StartPossessionSequence);
         }
 
-        private void StartPossessionSequence(GameObject enemy, GameObject player)
+        public void StartPossessionSequence(GameObject enemy, GameObject player)
         {
             TimeManager.Instance.SetTimeScale(0);
             camScript.enabled = false;
@@ -141,6 +142,16 @@ namespace Possession
                 camScript.enabled = true;
 
                 // 逻辑交接
+                var enemyFsm = enemy.GetComponent<EnemyFSM>();
+                enemyFsm.TransitionState(new Dead(enemyFsm));
+                
+                enemy.GetComponent<AIPath>().enabled = false;
+                enemy.GetComponent<Seeker>().enabled = false;
+                enemy.GetComponent<AIDestinationSetter>().enabled = false;
+                enemy.GetComponent<AStarAgent>().enabled = false;
+                enemy.GetComponent<EnemyFSM>().enabled = false;
+                enemy.GetComponent<Collider2D>().enabled = true;
+                
                 PerformPossessionLogic(player, enemy);
                 GameEventManager.Instance.onPossessionEnd.Invoke();
             });
@@ -148,15 +159,18 @@ namespace Possession
 
         private void PerformPossessionLogic(GameObject oldPlayer, GameObject newBody)
         {
-            Taggable taggable = newBody.GetComponent<Taggable>();
-            taggable.TryRemoveTag(TagManager.GetTag("Enemy"));
-            taggable.TryAddTag(TagManager.GetTag("Player"));
-
+            var oldPlayerControl = oldPlayer.GetComponent<PlayerControl>();
             var playerControl = newBody.AddComponent<PlayerControl>();
             var ability = newBody.AddComponent<AbilityManager>();
 
             playerControl.Init();
-            ability.SelectAbility();
+            playerControl.PlayerBodyAC = oldPlayerControl.PlayerBodyAC;
+            playerControl.PlayerLegAC = oldPlayerControl.PlayerLegAC;
+            playerControl.leg = newBody.transform.Find("Leg").gameObject;
+            playerControl.actions = newBody.GetComponent<EnemyFSM>().Actions;
+            playerControl.currentWeaponType = newBody.GetComponent<EnemyFSM>().Parameters.weaponType;
+            
+            ability.ApplySelectAbility();
 
             Destroy(oldPlayer);
         }

@@ -33,4 +33,9 @@ public abstract class AbilityBase : MonoBehaviour
     {
         isAbilityActive = false;
     }
+    
+    private void OnDestroy() {
+        Debug.Log($"{this.GetType().Name} 被销毁了！", gameObject);
+        Debug.Log(System.Environment.StackTrace); // 打印调用堆栈，看是谁删了它
+    }
 }

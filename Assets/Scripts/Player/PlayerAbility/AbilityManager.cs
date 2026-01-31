@@ -1,4 +1,5 @@
 using Management;
+using Management.SceneManage;
 using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
@@ -8,18 +9,16 @@ public class AbilityManager : MonoBehaviour
     private AbilityBase currentAbility;
     public bool needSwitcher = false;
 
-    private void Start()
+    private void OnEnable()
     {
-        GameEventManager.Instance.onLevelStart.AddListener(SelectAbility);
+        GameEventManager.Instance.OnNewSceneLoaded.AddListener(ApplySelectAbility);
     }
 
     // 供UI界面调用：传入 1, 2, 3 来选择
-    public void SelectAbility()
+    public void ApplySelectAbility()
     {
-        Debug.Log("Set ability" + GameManager.Instance.playerAbilityIndex);
         int abilityIndex = GameManager.Instance.playerAbilityIndex;
-        // 先移除旧能力（如果有）
-        if (currentAbility) Destroy(currentAbility);
+        Debug.Log("Set ability " + abilityIndex);
 
         switch (abilityIndex)
         {
@@ -34,7 +33,9 @@ public class AbilityManager : MonoBehaviour
                 currentAbility = gameObject.AddComponent<RemoteControlAbility>();
                 break;
         }
-
+        
+        Debug.Log(currentAbility);
+        
         // 初始化能力
         if (currentAbility)
         {
