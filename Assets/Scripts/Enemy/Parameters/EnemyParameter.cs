@@ -10,6 +10,7 @@ public class EnemyParameter : ScriptableObject
     [SerializeField] private float atkAngle;
 
     [SerializeField] private float stunDuration;
+    [SerializeField] private float knockbackMagnitude;
     
     [SerializeField] private float viewAngle;
 
@@ -18,6 +19,6 @@ public class EnemyParameter : ScriptableObject
     public float AtkRange => atkRange;
     public float AtkAngle => atkAngle;
     public float StunDuration => stunDuration;
-
+    public float KnockbackMagnitude => knockbackMagnitude;
     public float ViewAngle => viewAngle;
 }
