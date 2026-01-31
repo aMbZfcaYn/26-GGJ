@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 1108947188}
   - component: {fileID: 1108947187}
   - component: {fileID: 1108947186}
+  - component: {fileID: 1108947189}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -517,6 +518,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1108947189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108947185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1052e7214ccf634885d4d39fe1b060c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1292770373
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +605,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPossessionTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  onLevelFail:
+    m_PersistentCalls:
+      m_Calls: []
+  onLevelClear:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1420155408

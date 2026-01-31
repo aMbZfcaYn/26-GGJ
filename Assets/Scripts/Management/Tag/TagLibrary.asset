@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allTags:
   - {fileID: 11400000, guid: 497e47a468e5e604b935ec84a8b7e2c3, type: 2}
+  - {fileID: 11400000, guid: 4462aade4828b7e4c8e24080beb7fec7, type: 2}
+  - {fileID: 11400000, guid: 9f774082786f7144a9c09954d286629d, type: 2}
+  - {fileID: 11400000, guid: ecd42d3837bfdf64592b90d9e6ff3096, type: 2}

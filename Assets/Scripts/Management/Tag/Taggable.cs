@@ -19,6 +19,13 @@ namespace Management.Tag
             return true;
         }
 
+        public bool TryRemoveTag(GameTag tagToRemove)
+        {
+            if (tagToRemove is null || !HasTag(tagToRemove)) return false;
+            tags.Remove(tagToRemove);
+            return true;
+        }
+
         public static bool HasTag(GameObject obj, GameTag tagToCompare)
         {
             if (!obj) return false;
