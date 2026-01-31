@@ -1,32 +1,39 @@
 using UnityEngine;
 
-public class Stun : StateBase
+public class Stun : StateBase, IState
 {
     private float _stunTimer;
+    private readonly Transform _hitFrom;
 
-    public Stun(EnemyFSM fsm) : base(fsm) { }
-
-    public override void OnEnter()
+    public Stun(EnemyFSM fsm, Transform hitFrom) : base(fsm)
     {
-        base.OnEnter();
+        _hitFrom = hitFrom;
+    }
+
+    public void OnEnter()
+    {
         _stunTimer = 0f;
-        _fsm.Animator.SetTrigger("HitByBlunt");
+        _fsm.Animator.SetBool("Stun", true);
+
+        Vector3 lookPosition = new(_hitFrom.position.x, _fsm.transform.position.y, _hitFrom.position.z);
+        _fsm.transform.LookAt(lookPosition);
+
+        _fsm.gameObject.GetComponent<Rigidbody2D>().AddForce(
+            Vector3.back * _parameters.KnockbackMagnitude);
+
         _fsm.Agent.SetSpeed(0f);
     }
 
-    public override void OnUpdate()
+    public void OnUpdate()
     {
-        base.OnUpdate();
-
         _stunTimer += Time.fixedDeltaTime;
-        
+
         if (_stunTimer >= _parameters.StunDuration)
             _fsm.TransitionState(new Hunt(_fsm));
     }
 
-    public override void OnExit()
+    public void OnExit()
     {
-        base.OnExit();
-        _fsm.Animator.SetTrigger("WakeFromStun");
+        _fsm.Animator.SetBool("Stun", false);
     }
 }

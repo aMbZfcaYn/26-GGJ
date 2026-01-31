@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0da6319eb51401438cd1e5746599914, type: 3}
   m_Name: NormalEnemy
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  patrolSpeed: 3
+  huntSpeed: 5
   atkRange: 1
-  animator: {fileID: 0}
+  atkAngle: 30
+  stunDuration: 2
+  knockbackMagnitude: 5
+  viewAngle: 150
+  hearDistance: 10

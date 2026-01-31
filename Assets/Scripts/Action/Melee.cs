@@ -16,12 +16,15 @@ public class Melee : MonoBehaviour
         Taggable taggable = enemyObject.GetComponent<Taggable>();
         if (taggable.HasTag(TagManager.GetTag("Enemy")))
         {
+            EnemyFSM otherFSM = other.GetComponent<EnemyFSM>();
             if (isblunk)
             {
                 Debug.Log("钝器击中敌人: " + other.name);
+                otherFSM.TransitionState(new Stun(otherFSM, transform));
             }
             else
             {
+                otherFSM.TransitionState(new Dead(otherFSM));
                 Debug.Log("锐器击中敌人: " + other.name);
             }
 

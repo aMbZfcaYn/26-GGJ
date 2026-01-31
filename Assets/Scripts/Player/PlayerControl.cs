@@ -67,10 +67,13 @@ public class PlayerControl : MonoBehaviour
             switch (currentWeaponType)
             {
                 case WeaponType.knife:
+                    PerformMeleeAttack(currentWeaponType);
+                    break;
                 case WeaponType.sword:
+                    PerformMeleeAttack(currentWeaponType);
+                    break;
                 case WeaponType.hammer:
-                case WeaponType.magic_magic:
-                    PerformMeleeAttack();
+                    PerformMeleeAttack(currentWeaponType);
                     break;
                 case WeaponType.Spear:
                     PerformSpearAttack();
@@ -98,16 +101,16 @@ public class PlayerControl : MonoBehaviour
                 currentWeaponType == WeaponType.magic_spread ||
                 currentWeaponType == WeaponType.magic_single)
             {
-                PerformMagicMeleeAttack();
+                PerformMeleeAttack(currentWeaponType);
             }
         }
     }
 
-    private void PerformMeleeAttack()
+    private void PerformMeleeAttack(WeaponType weaponType)
     {
         if (actions != null)
         {
-            actions.PerformMeleeAttack(transform);
+            actions.PerformMeleeAttack(transform, weaponType);
         }
         else
         {
@@ -115,27 +118,13 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void PerformMagicMeleeAttack()
-    {
-        if (actions != null)
-        {
-            actions.PerformMeleeAttack(transform, true); // 魔法近战使用钝击
-        }
-        else
-        {
-            Debug.LogError("Actions组件未分配！");
-        }
-    }
+
 
     private void PerformSpearAttack()
     {
         if (actions != null)
         {
             actions.PerformSpearAttack(transform);
-        }
-        else
-        {
-            Debug.LogError("Actions组件未分配！");
         }
     }
 

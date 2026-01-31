@@ -17,8 +17,7 @@ namespace Management
 
         [SerializeField] private float possessionMaxEnergy;
         [Range(1, 10)] [SerializeField] private float possessionReduceRate;
-
-        private bool _possessionReduceAllowed = true;
+        [ReadOnly] [SerializeField] private bool isEnergyFilled;
 
         [Space(20)] [Header("Scenes")] [SerializeField]
         private int sceneIndex = 0;
@@ -51,23 +50,27 @@ namespace Management
         private void FixedUpdate()
         {
             // Would tell possession manager that possession is allowed. 
-            if (possessionEnergy >= possessionMaxEnergy)
-            {
-                GameEventManager.Instance.onEnergyFilled.Invoke();
-                possessionEnergy = possessionMaxEnergy;
-                _possessionReduceAllowed = false;
-            }
+            isEnergyFilled = possessionEnergy >= possessionMaxEnergy;
 
             // Reduce possession energy per frame
-            if (_possessionReduceAllowed && possessionEnergy > 0)
+            if (possessionEnergy > 0)
             {
                 possessionEnergy -= possessionReduceRate;
             }
 
-            if (_possessionReduceAllowed && possessionEnergy < 0)
+            if (possessionEnergy < 0)
             {
                 possessionEnergy = 0;
             }
+        }
+
+        /// <summary>
+        /// Public func for check if energy is filled to allow possession.
+        /// </summary>
+        /// <returns>True for filled, false for unfilled</returns>
+        public bool IsEnergyFilled()
+        {
+            return isEnergyFilled;
         }
 
         public void StartGame()
@@ -93,7 +96,7 @@ namespace Management
         {
             if (player == newPlayer) return;
             Taggable taggable = newPlayer.GetComponent<Taggable>();
-            if (taggable is null) return;
+            if (!taggable) return;
             if (taggable.HasTag(TagUtils.Type_Player) || !taggable.HasTag(TagUtils.Type_Enemy))
             {
                 Debug.LogError($"Unexpected possession to {newPlayer.name}");
@@ -158,7 +161,6 @@ namespace Management
         public void PossessionDone()
         {
             possessionEnergy = 0;
-            _possessionReduceAllowed = true;
         }
 
         /// <summary>
