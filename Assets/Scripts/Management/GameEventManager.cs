@@ -10,6 +10,7 @@ namespace Management
         public PossessionEndEvent onPossessionEnd = new();
         public LevelFailEvent onLevelFail = new();
         public LevelClearEvent onLevelClear = new();
+        public LevelFinishEvent onLevelFinish = new();
         public EnemyKilled onEnemyKilled = new();
         public EnergyFilled onEnergyFilled = new();
     }
@@ -38,6 +39,11 @@ namespace Management
 
     [System.Serializable]
     public class LevelClearEvent : UnityEvent
+    {
+    }
+
+    [System.Serializable]
+    public class LevelFinishEvent : UnityEvent
     {
     }
 

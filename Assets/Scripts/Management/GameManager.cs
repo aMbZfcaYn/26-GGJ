@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Management.SceneManage;
 using UnityEngine;
 using Utilities;
 
@@ -20,13 +20,18 @@ namespace Management
 
         [SerializeField] [TextArea(2, 10)] [Tooltip("Write scene names in sequence.")]
         private List<string> scenes;
-
+        
         public HashSet<GameObject> EnemyList;
+
+        public GameObject player;
 
         private void OnDisable()
         {
             GameEventManager.Instance?.onPossessionEnd.RemoveListener(PossessionDone);
-            GameEventManager.Instance?.onEnemyKilled.AddListener(PossessionEnergyGain);
+            GameEventManager.Instance?.onEnemyKilled.RemoveListener(PossessionEnergyGain);
+            GameEventManager.Instance?.onLevelClear.RemoveListener(LevelClear);
+            GameEventManager.Instance?.onLevelFail.RemoveListener(LevelFail);
+            GameEventManager.Instance?.onLevelFinish.RemoveListener(LevelFinish);
         }
 
         private void FixedUpdate()
@@ -79,6 +84,16 @@ namespace Management
         public void LevelFail()
         {
             // TODO: 
+        }
+
+        /// <summary>
+        /// Event func of event: onLevelFinish
+        /// </summary>
+        public void LevelFinish()
+        {
+            EnemyList.Clear();
+            ++sceneIndex;
+            SceneController.Instance.LoadScene(scenes[sceneIndex]);
         }
 
         /// <summary>
