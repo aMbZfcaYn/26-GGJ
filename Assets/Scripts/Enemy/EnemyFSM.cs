@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Management;
+using Management.Tag;
 using UnityEngine;
 
 public class EnemyFSM : MonoBehaviour
@@ -19,6 +20,7 @@ public class EnemyFSM : MonoBehaviour
     public Transform Player => player;
 
     private StateBase currentState;
+    private Taggable taggable;
 
     // Tips: 50 may cause bug if we have some unexpected small entities.
     private RaycastHit[] _hits = new RaycastHit[50];
@@ -27,10 +29,13 @@ public class EnemyFSM : MonoBehaviour
     {
         if (agent == null) agent = GetComponent<AStarAgent>();
         if (animator == null) animator = GetComponent<Animator>();
+        if (taggable == null) taggable = gameObject.AddComponent<Taggable>();
+        taggable.TryAddTag(TagUtils.Type_Enemy);
     }
 
     private void Start()
     {
+        GameManager.Instance.RegisterEnemy(this.gameObject);
         TransitionState(new Patrol(this));
     }
 
