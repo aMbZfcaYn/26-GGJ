@@ -8,8 +8,8 @@ public class PlayerControl : MonoBehaviour
     public bool blocked = false;
 
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private Actions actions;
-    [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
+    public Actions actions;
+    public WeaponType currentWeaponType = WeaponType.knife;
 
     private Rigidbody2D rb;
     private AbilityManager ability;
@@ -60,8 +60,13 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
+        Debug.Log(InputManager.Movement);
+        
         Vector2 movement = InputManager.Movement;
         rb.linearVelocity = movement * moveSpeed;
+        
+        Debug.Log(rb.linearVelocity);
+        
         LegAnimator.SetFloat("MoveSpeed", rb.linearVelocity.magnitude);
         if (movement.magnitude > 0.1f)
         {

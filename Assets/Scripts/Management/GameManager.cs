@@ -16,7 +16,7 @@ namespace Management
 
         [SerializeField] private float possessionMaxEnergy;
         [Range(1, 10)] [SerializeField] private float possessionReduceRate;
-        [Range(1, 200)] [SerializeField] private float possessionGain;
+        [Range(1, 2000)] [SerializeField] private float possessionGain;
         [ReadOnly] [SerializeField] private bool isEnergyFilled;
 
         [Space(20)] [Header("Scenes")] [SerializeField]

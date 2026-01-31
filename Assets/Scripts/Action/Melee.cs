@@ -14,7 +14,7 @@ public class Melee : MonoBehaviour
     private void Awake()
     {
         _taggable = GetComponent<Taggable>();
-        _taggable.TryAddTag(TagUtils.Type_AttckEntity);
+        _taggable?.TryAddTag(TagUtils.Type_AttckEntity);
     }
 
     public void changeOwner(GameObject owner)

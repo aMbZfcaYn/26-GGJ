@@ -193,8 +193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityCanvas: {fileID: 514912588}
   possessionEnergy: 0
-  possessionMaxEnergy: 0
+  possessionMaxEnergy: 1000
   possessionReduceRate: 1
+  possessionGain: 500
   isEnergyFilled: 0
   sceneIndex: 0
   scenes:
@@ -203,7 +204,7 @@ MonoBehaviour:
   - SuperTest
   player: {fileID: 0}
   playerAbilityIndex: 3
-  playerHp: 0
+  playerHp: 3
 --- !u!1 &386306218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1072,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPossessionTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1817486521}
+        m_TargetAssemblyTypeName: Possession.PossessionProcess, Assembly-CSharp
+        m_MethodName: StartPossessionSequence
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onPossessionEnd:
     m_PersistentCalls:
       m_Calls:
@@ -1190,6 +1203,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onSoundEmit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNewSceneLoaded:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1420155408
