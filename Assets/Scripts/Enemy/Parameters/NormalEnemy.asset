@@ -18,5 +18,5 @@ MonoBehaviour:
   atkAngle: 30
   stunDuration: 2
   knockbackMagnitude: 5
-  viewAngle: 150
+  viewAngle: 180
   hearDistance: 10
