@@ -146,7 +146,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1920
         width: 480
         height: 480
       alignment: 0
@@ -167,8 +167,8 @@ TextureImporter:
       name: saber-blade-atk-Sheet_1
       rect:
         serializedVersion: 2
-        x: 480
-        y: 0
+        x: 0
+        y: 1440
         width: 480
         height: 480
       alignment: 0
@@ -189,8 +189,8 @@ TextureImporter:
       name: saber-blade-atk-Sheet_2
       rect:
         serializedVersion: 2
-        x: 960
-        y: 0
+        x: 0
+        y: 960
         width: 480
         height: 480
       alignment: 0
@@ -211,8 +211,8 @@ TextureImporter:
       name: saber-blade-atk-Sheet_3
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 0
+        x: 0
+        y: 480
         width: 480
         height: 480
       alignment: 0
@@ -233,7 +233,7 @@ TextureImporter:
       name: saber-blade-atk-Sheet_4
       rect:
         serializedVersion: 2
-        x: 1920
+        x: 0
         y: 0
         width: 480
         height: 480
