@@ -23,8 +23,6 @@ public abstract class AbilityBase : MonoBehaviour
     protected void ExecuteEnemy(GameObject enemy)
     {
         if (enemy == null) return;
-        
-        Debug.Log($"对敌人 {enemy.name} 执行了特殊操作");
         GameEventManager.Instance.onPossessionTrigger.Invoke(enemy, playerObj);
         
         // 执行完后的清理工作（如恢复时间、重置状态）

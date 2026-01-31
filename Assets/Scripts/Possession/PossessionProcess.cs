@@ -146,7 +146,6 @@ namespace Possession
 
         private void PerformPossessionLogic(GameObject oldPlayer, GameObject newBody)
         {
-            Debug.Log("2D 附身完成");
             Destroy(oldPlayer);
             newBody.tag = "Player";
         

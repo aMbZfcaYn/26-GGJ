@@ -1,20 +1,22 @@
+using Management;
 using UnityEngine;
 
 public class AutoSelectAbility : AbilityBase
 {
     [Header("能力2设置")]
-    public float searchRadius = 15f;
-    public LayerMask enemyLayer;
+    public float searchRadius = 150f;
+    public LayerMask enemyLayer = 3;
 
     public override void TriggerAbility()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(playerObj.transform.position, searchRadius, enemyLayer);
+        var enemies = GameManager.Instance.EnemyList;
 
         GameObject nearestEnemy = null;
         float minDistance = Mathf.Infinity;
 
-        foreach (Collider2D col in enemies)
+        foreach (GameObject obj in enemies)
         {
+            Collider2D col = obj.GetComponent<Collider2D>();
             float dist = Vector2.Distance(playerObj.transform.position, col.transform.position);
             if (dist < minDistance)
             {

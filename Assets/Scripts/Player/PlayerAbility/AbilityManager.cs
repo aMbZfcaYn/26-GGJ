@@ -6,7 +6,7 @@ public class AbilityManager : MonoBehaviour
     // 或者用代码AddComponent动态添加
     private AbilityBase currentAbility;
     public bool needSwitcher = false;
-
+    
     private void Start()
     {
         SelectAbility(3);

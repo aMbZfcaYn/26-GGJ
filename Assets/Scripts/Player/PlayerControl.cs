@@ -5,6 +5,8 @@ namespace Player
 {
     public class PlayerControl : MonoBehaviour
     {
+        public bool blocked = false;
+        
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private Actions actions;
 
@@ -20,6 +22,9 @@ namespace Player
 
         void Start()
         {
+            var camScript = Camera.main.GetComponent<CameraControl>();
+            camScript.target = transform;
+            
             rb = GetComponent<Rigidbody2D>();
             ability = GetComponent<AbilityManager>();
         }
@@ -47,6 +52,11 @@ namespace Player
         
         void FixedUpdate()
         {
+            if (blocked)
+            {
+                rb.linearVelocity = Vector3.zero;
+                return;
+            }
             Vector2 movement = InputManager.Movement;
             rb.linearVelocity = movement * moveSpeed;
         }

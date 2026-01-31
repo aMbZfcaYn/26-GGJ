@@ -4,10 +4,12 @@ using UnityEngine;
 // 挂在生成的飞行物Prefab上
 public class ControlledProjectile : MonoBehaviour
 {
-    private AbilityBase ownerAbility;
+    public Transform initialTransform;
+    
+    private RemoteControlAbility ownerAbility;
     private float speed;
 
-    public void Setup(AbilityBase owner, float moveSpeed)
+    public void Setup(RemoteControlAbility owner, float moveSpeed)
     {
         ownerAbility = owner;
         speed = moveSpeed;
@@ -20,11 +22,12 @@ public class ControlledProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.name);
         // 假设敌人的Tag是Enemy
         if (collision.CompareTag("TestEnemy"))
         {
             // 通知能力脚本处理结果
-            ownerAbility.SendMessage("OnProjectileHit", collision.gameObject);
+            ownerAbility.OnProjectileHit(collision.gameObject);
             Destroy(gameObject);
         }
     }
