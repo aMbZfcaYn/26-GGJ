@@ -71,13 +71,13 @@ public class PlayerControl : MonoBehaviour
         if (BodyAnimator.GetBool("Attack"))
         {
             currentAnimState = BodyAnimator.GetCurrentAnimatorStateInfo(0);
-            if (currentAnimState.normalizedTime >= 0.5f)
+            if (currentAnimState.normalizedTime >= 1f)
                 BodyAnimator.SetBool("Attack", false);
         }
         if (BodyAnimator.GetBool("Attack2"))
         {
             currentAnimState = BodyAnimator.GetCurrentAnimatorStateInfo(0);
-            if (currentAnimState.normalizedTime >= 0.5f)
+            if (currentAnimState.normalizedTime >= 1f)
                 BodyAnimator.SetBool("Attack2", false);
         }
 
@@ -138,13 +138,14 @@ public class PlayerControl : MonoBehaviour
 
         if (InputManager.DefaultAttackIsHeld)
         {
-            BodyAnimator.SetBool("Attack", true);
-            BodyAnimator.SetBool("Attack", true);
+
+
             if (currentWeaponType == WeaponType.magic_riffle)
             {
+                BodyAnimator.SetBool("Attack", true);
                 PerformRiffleShot();
             }
-            //BodyAnimator.SetBool("Attack",false);
+            // BodyAnimator.SetBool("Attack", false);
         }
 
         if (InputManager.SpecialAttackWasPressed)
@@ -156,7 +157,7 @@ public class PlayerControl : MonoBehaviour
                 currentWeaponType == WeaponType.magic_single)
             {
                 actions.PerformMeleeAttack_magic(transform);
-                actions.PerformMeleeAttack_magic(transform);
+
             }
             BodyAnimator.SetBool("Attack2", false);
         }

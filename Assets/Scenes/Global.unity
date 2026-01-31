@@ -195,6 +195,7 @@ MonoBehaviour:
   possessionEnergy: 0
   possessionMaxEnergy: 0
   possessionReduceRate: 1
+  possessionGain: 0
   isEnergyFilled: 0
   sceneIndex: 0
   scenes:
