@@ -178,7 +178,7 @@ public class PlayerControl : MonoBehaviour
     private void RotateTowardsMouse()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        
         mouseWorldPos.z = 0;
 
         Vector2 directionToMouse = new Vector2(

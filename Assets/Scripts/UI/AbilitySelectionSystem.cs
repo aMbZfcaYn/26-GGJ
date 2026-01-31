@@ -2,19 +2,22 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using System.Collections.Generic;
+using InputNamespace;
 using Management;
+using UnityEngine.UI;
 
 public class AbilitySelectionSystem : MonoBehaviour
 {
     [Header("配置")]
     [SerializeField] private List<AbilityData> abilities; // 拖入你的数据
-    [SerializeField] private AbilityCard cardPrefab;      // 拖入制作好的Prefab
+    [SerializeField] private GameObject cardPrefab;      // 拖入制作好的Prefab
     [SerializeField] private Transform cardContainer;     // 放置卡片的父物体
 
     [Header("UI 引用")]
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private CanvasGroup mainCanvasGroup; // 整个面板的CanvasGroup
-
+    [SerializeField] private HorizontalLayoutGroup layoutGroup; 
+    
     private List<AbilityCard> _spawnedCards = new List<AbilityCard>();
     private int _currentSelectedIndex = -1;
     private bool _isLocked = true; // 锁定操作防止连点
@@ -23,6 +26,8 @@ public class AbilitySelectionSystem : MonoBehaviour
     {
         descriptionText.alpha = 0; // 初始隐藏描述
         SpawnCards();
+        
+        LayoutRebuilder.ForceRebuildLayoutImmediate(cardContainer as RectTransform);
         
         // 播放入场动画
         float delay = 0.1f;
@@ -37,6 +42,9 @@ public class AbilitySelectionSystem : MonoBehaviour
 
     private void SpawnCards()
     {
+        if(layoutGroup != null) 
+            layoutGroup.enabled = true;
+        
         // 清理旧的
         foreach (Transform child in cardContainer) Destroy(child.gameObject);
         _spawnedCards.Clear();
@@ -44,10 +52,11 @@ public class AbilitySelectionSystem : MonoBehaviour
         // 生成新的
         for (int i = 0; i < abilities.Count; i++)
         {
-            AbilityCard card = Instantiate(cardPrefab, cardContainer);
+            AbilityCard card = Instantiate(cardPrefab, cardContainer).GetComponent<AbilityCard>();
             card.Setup(abilities[i], i, OnCardClicked);
             _spawnedCards.Add(card);
         }
+        
     }
 
     private void OnCardClicked(int index)
@@ -95,7 +104,9 @@ public class AbilitySelectionSystem : MonoBehaviour
             // 2. 动画结束，通知 GameManager
             //GameManager.Instance.StartGameWithAbility(abilities[index].id);
 
-            Debug.LogWarning("通知 GameManager 开始游戏！！");
+            GameManager.Instance.playerAbilityIndex = index + 1;
+            GameEventManager.Instance.onLevelStart.Invoke();
+            InputManager.SetGameInputState(true);
             
             // 3. 整个 UI 淡出消失
             mainCanvasGroup.DOFade(0, 0.5f).OnComplete(() =>

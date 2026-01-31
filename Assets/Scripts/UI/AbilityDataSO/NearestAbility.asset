@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b22fb058aa06549b57b48831a36e06, type: 3}
   m_Name: NearestAbility
   m_EditorClassIdentifier: 
-  id: 1
+  id: 2
   abilityName: 
   icon: {fileID: 0}
   description: 

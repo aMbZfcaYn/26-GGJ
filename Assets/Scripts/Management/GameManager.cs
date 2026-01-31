@@ -9,6 +9,9 @@ namespace Management
 {
     public class GameManager : GenericSingleton<GameManager>
     {
+        [Header("UI")]
+        public GameObject abilityCanvas;
+        
         [Header("Possession")] [SerializeField]
         private float possessionEnergy;
 
@@ -107,8 +110,8 @@ namespace Management
         /// </summary>
         public void LevelEnter()
         {
-            GameEventManager.Instance.onLevelStart.Invoke();
             // TODO: choose ability
+            abilityCanvas.SetActive(true);
         }
 
         /// <summary>
@@ -128,7 +131,7 @@ namespace Management
         {
             // May change: reload after input
             // restart level
-            GameEventManager.Instance.onLevelStart.Invoke();
+            GameEventManager.Instance.onLevelEnter.Invoke();
         }
 
         /// <summary>

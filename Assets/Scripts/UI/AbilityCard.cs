@@ -36,12 +36,12 @@ public class AbilityCard : MonoBehaviour
 
         if (data != null)
         {
-            iconImage.sprite = data.icon;
+            //iconImage.sprite = data.icon;
             nameText.text = data.abilityName;
         }
 
         // 初始化状态：隐藏边框，透明度设为0（为了入场动画）
-        highlightBorder.SetActive(false);
+        //highlightBorder.SetActive(false);
         _canvasGroup.alpha = 0f;
     }
 
@@ -56,19 +56,25 @@ public class AbilityCard : MonoBehaviour
     // 1. 入场动画
     public void PlayEntrance(float delay)
     {
-        // 初始位置往下移 150
-        _rectTransform.anchoredPosition += Vector2.down * 150f;
+        // 此时卡片已经在正确的位置了（因为我们在System里强制刷新了布局）
+        // 先记录这个“终点位置”
+        Vector2 finalPos = _rectTransform.anchoredPosition;
 
+        // 手动把卡片往下移 150 (作为起点)
+        _rectTransform.anchoredPosition = finalPos + Vector2.down * 150f;
+
+        // 动画：移动回 finalPos
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
-        seq.Append(_rectTransform.DOAnchorPos(Vector2.zero, 0.5f).SetRelative().SetEase(Ease.OutBack));
+        // 这里不要用 SetRelative，直接移动到终点最稳
+        seq.Append(_rectTransform.DOAnchorPos(finalPos, 0.5f).SetEase(Ease.OutBack)); 
         seq.Join(_canvasGroup.DOFade(1f, 0.5f));
     }
 
     // 2. 状态更新（我是被选中的那个吗？还是陪跑的？）
     public void UpdateVisualState(bool isSelected, bool hasSelectionMade)
     {
-        highlightBorder.SetActive(isSelected);
+        //highlightBorder.SetActive(isSelected);
 
         if (isSelected)
         {

@@ -157,7 +157,7 @@ namespace Possession
             var ability = newBody.AddComponent<AbilityManager>();
             
             playerControl.Init();
-            ability.SelectAbility(GameManager.Instance.playerAbilityIndex);
+            ability.SelectAbility();
             
             Destroy(oldPlayer);
         }

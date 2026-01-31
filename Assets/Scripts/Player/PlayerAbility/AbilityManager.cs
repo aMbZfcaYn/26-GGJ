@@ -10,12 +10,14 @@ public class AbilityManager : MonoBehaviour
     
     private void Start()
     {
-        SelectAbility(GameManager.Instance.playerAbilityIndex);
+         GameEventManager.Instance.onLevelStart.AddListener(SelectAbility);
     }
 
     // 供UI界面调用：传入 1, 2, 3 来选择
-    public void SelectAbility(int abilityIndex)
+    public void SelectAbility()
     {
+        Debug.Log("Set ability" + GameManager.Instance.playerAbilityIndex);
+        int abilityIndex = GameManager.Instance.playerAbilityIndex;
         // 先移除旧能力（如果有）
         if (currentAbility != null) Destroy(currentAbility);
 
