@@ -6,15 +6,16 @@ public class EnemyFSM : MonoBehaviour
     [SerializeField] private EnemyParameter parameters;
     [SerializeField] private AStarAgent agent;
     [SerializeField] private Animator animator;
+    [SerializeField] private Transform soundSource;
     [SerializeField] private Transform player;
 
     public EnemyParameter Parameters => parameters;
     public AStarAgent Agent => agent;
     public Animator Animator => animator;
+    public Transform SoundSource => soundSource;
     public Transform Player => player;
 
     private StateBase currentState;
-    private Transform soundSource;
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class EnemyFSM : MonoBehaviour
         throw new System.NotImplementedException();
     }
 
-    public void Listen()
+    public bool HeardSound()
     {
         throw new System.NotImplementedException();
     }

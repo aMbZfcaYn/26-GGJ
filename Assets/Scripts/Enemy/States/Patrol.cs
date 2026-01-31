@@ -16,8 +16,8 @@ public class Patrol : StateBase
 
         if (_fsm.CanSeePlayer())
             _fsm.TransitionState(new Hunt(_fsm));
-        else
-            _fsm.Listen();
+        else if (_fsm.HeardSound())
+            _fsm.TransitionState(new Trace(_fsm, _fsm.SoundSource));
     }
 
     public override void OnExit()
