@@ -1,5 +1,6 @@
 using InputNamespace;
 using Management;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -15,10 +16,12 @@ public class PlayerControl : MonoBehaviour
     private AnimatorStateInfo currentAnimState;
 
 
-    [SerializeField] private GameObject leg;
+    public GameObject leg;
     public Animator LegAnimator;
     public Animator BodyAnimator;
-
+    public AnimatorController PlayerBodyAC;
+    public AnimatorController PlayerLegAC;
+    
     private bool inAbility = false;
 
     void Start()
@@ -41,6 +44,12 @@ public class PlayerControl : MonoBehaviour
         {
             actions.SetCurrentWeapon(currentWeaponType);
         }
+
+        BodyAnimator = GetComponentsInChildren<Animator>()[0];
+        LegAnimator = GetComponentsInChildren<Animator>()[1];
+
+        BodyAnimator.runtimeAnimatorController = PlayerBodyAC;
+        LegAnimator.runtimeAnimatorController = PlayerLegAC;
     }
 
     void FixedUpdate()

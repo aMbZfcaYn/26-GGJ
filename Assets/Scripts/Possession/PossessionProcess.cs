@@ -141,6 +141,9 @@ namespace Possession
                 camScript.enabled = true;
 
                 // 逻辑交接
+                var enemyFsm = enemy.GetComponent<EnemyFSM>();
+                enemyFsm.TransitionState(new Dead(enemyFsm));
+                
                 PerformPossessionLogic(player, enemy);
                 GameEventManager.Instance.onPossessionEnd.Invoke();
             });
@@ -148,15 +151,17 @@ namespace Possession
 
         private void PerformPossessionLogic(GameObject oldPlayer, GameObject newBody)
         {
-            Taggable taggable = newBody.GetComponent<Taggable>();
-            taggable.TryRemoveTag(TagManager.GetTag("Enemy"));
-            taggable.TryAddTag(TagManager.GetTag("Player"));
-
+            var oldPlayerControl = oldPlayer.GetComponent<PlayerControl>();
             var playerControl = newBody.AddComponent<PlayerControl>();
             var ability = newBody.AddComponent<AbilityManager>();
 
             playerControl.Init();
-            ability.SelectAbility();
+            playerControl.PlayerBodyAC = oldPlayerControl.PlayerBodyAC;
+            playerControl.PlayerLegAC = oldPlayerControl.PlayerLegAC;
+            playerControl.leg = newBody.transform.Find("Leg").gameObject;
+            playerControl.
+            
+            ability.ApplySelectAbility();
 
             Destroy(oldPlayer);
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Utilities;
 
@@ -10,7 +11,6 @@ namespace Management.SceneManage
     public class SceneController : GenericSingleton<SceneController>
     {
         public event Action BeforeOldSceneUnload;
-        public event Action AfterNewSceneLoaded;
 
         public Scene CurrentScene => SceneManager.GetActiveScene();
 
@@ -36,7 +36,7 @@ namespace Management.SceneManage
 
         private void Start()
         {
-            StartCoroutine(SwitchScene(string.Empty, startSceneName));
+            //StartCoroutine(SwitchScene(string.Empty, startSceneName));
         }
 
         private IEnumerator SwitchScene(string oldSceneName, string newSceneName)
@@ -61,7 +61,8 @@ namespace Management.SceneManage
 
             astarPath.Scan();
 
-            AfterNewSceneLoaded?.Invoke();
+            Debug.Log(SceneManager.GetActiveScene().name);
+            GameEventManager.Instance.OnNewSceneLoaded?.Invoke();
 
             //yield return FadeTransition(0);
         }
