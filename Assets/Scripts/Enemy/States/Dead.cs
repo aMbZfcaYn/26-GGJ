@@ -8,13 +8,14 @@ public class Dead : StateBase, IState
 
     public void OnEnter()
     {
-        _fsm.Animator.SetTrigger("HitByOtherAttack");
+        _fsm.HeadAnimator.SetTrigger("HitByOtherAttack");
+        _fsm.LegAnimator.SetTrigger("HitByOtherAttack");
         _fsm.Agent.SetSpeed(0f);
     }
 
     public void OnUpdate()
     {
-        currentAnimState = _fsm.Animator.GetCurrentAnimatorStateInfo(0);
+        currentAnimState = _fsm.HeadAnimator.GetCurrentAnimatorStateInfo(0);
         if (currentAnimState.normalizedTime >= 1.0f)
             _fsm.enabled = false;
     }

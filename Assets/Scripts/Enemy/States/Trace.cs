@@ -16,7 +16,7 @@ public class Trace : StateBase, IState
 
     public void OnUpdate()
     {
-        _fsm.Animator.SetFloat("MoveSpeed", _fsm.Agent.CurrentSpeed);
+        _fsm.LegAnimator.SetFloat("MoveSpeed", _fsm.Agent.CurrentSpeed);
 
         if (_fsm.CanSeePlayer())
             _fsm.TransitionState(new Hunt(_fsm));

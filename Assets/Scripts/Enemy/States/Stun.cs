@@ -13,7 +13,8 @@ public class Stun : StateBase, IState
     public void OnEnter()
     {
         _stunTimer = 0f;
-        _fsm.Animator.SetBool("Stun", true);
+        _fsm.HeadAnimator.SetBool("Stun", true);
+        _fsm.LegAnimator.SetBool("Stun", true);
 
         Vector3 lookPosition = new(_hitFrom.position.x, _fsm.transform.position.y, _hitFrom.position.z);
         _fsm.transform.LookAt(lookPosition);
@@ -34,6 +35,7 @@ public class Stun : StateBase, IState
 
     public void OnExit()
     {
-        _fsm.Animator.SetBool("Stun", false);
+        _fsm.HeadAnimator.SetBool("Stun", false);
+        _fsm.LegAnimator.SetBool("Stun", false);
     }
 }

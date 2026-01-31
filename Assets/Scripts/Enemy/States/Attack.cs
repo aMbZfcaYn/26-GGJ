@@ -9,18 +9,18 @@ public class Attack : StateBase, IState
     public void OnEnter()
     {
         _fsm.Agent.SetSpeed(0f);
-        _fsm.Animator.SetBool("Attack", true);
+        _fsm.HeadAnimator.SetBool("Attack", true);
     }
 
     public void OnUpdate()
     {
-        currentAnimState = _fsm.Animator.GetCurrentAnimatorStateInfo(0);
+        currentAnimState = _fsm.HeadAnimator.GetCurrentAnimatorStateInfo(0);
         if (currentAnimState.normalizedTime >= 1.0f)
             _fsm.TransitionState(new Hunt(_fsm));
     }
 
     public void OnExit()
     {
-        _fsm.Animator.SetBool("Attack", false);
+        _fsm.HeadAnimator.SetBool("Attack", false);
     }
 }

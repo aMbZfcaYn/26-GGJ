@@ -34,11 +34,11 @@ public class AStarAgent : MonoBehaviour
 
     [SerializeField] private List<Transform> _patrolWaypoints = new();
     [SerializeField] private int _currentPatrolIndex = 0;
-    [SerializeField] private Transform _temporaryWaypoint;
 
 
     [SerializeField] private float _showRouteDuration = 1.5f;
 
+    private Transform _temporaryWaypoint;
     private bool _hasReachedCurrentWaypoint = false;
 
     public void ClearWaypoints()
@@ -89,10 +89,10 @@ public class AStarAgent : MonoBehaviour
 
     // Follow Mode -------------------------------------------------------
 
-    [SerializeField] private Transform _movingTarget;
     public Transform MovingTarget => _movingTarget;
     public bool IsFollowing => _isFollowing;
     private bool _isFollowing = false;
+    private Transform _movingTarget;
 
     public void EnableFollow(Transform movingTarget)
     {

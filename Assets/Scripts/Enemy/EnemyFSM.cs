@@ -9,12 +9,13 @@ public class EnemyFSM : MonoBehaviour
 {
     [SerializeField] private EnemyParameter parameters;
     [SerializeField] private AStarAgent agent;
-    [SerializeField] private Animator animator;
-    [SerializeField] private Transform player;
+    [SerializeField] private Animator headAnimator;
+    [SerializeField] private Animator legAnimator;
 
     public EnemyParameter Parameters => parameters;
     public AStarAgent Agent => agent;
-    public Animator Animator => animator;
+    public Animator HeadAnimator => headAnimator;
+    public Animator LegAnimator => legAnimator;
     public Transform Player => GameManager.Instance.player.transform;
 
     private IState currentState;
@@ -23,7 +24,8 @@ public class EnemyFSM : MonoBehaviour
     private void Awake()
     {
         if (!agent) agent = GetComponent<AStarAgent>();
-        if (!animator) animator = GetComponentInChildren<Animator>();
+        if (!headAnimator) headAnimator = GetComponentsInChildren<Animator>()[0];
+        if (!legAnimator) legAnimator = GetComponentsInChildren<Animator>()[1];
         if (!taggable) taggable = GetComponent<Taggable>();
     }
 

@@ -4830,10 +4830,6 @@ PrefabInstance:
       value: Enemy_Knife
       objectReference: {fileID: 0}
     - target: {fileID: 6262375777219128700, guid: 8464efa22cfaa4e42b93b5c92f52153d, type: 3}
-      propertyPath: _patrolWaypoints.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6262375777219128700, guid: 8464efa22cfaa4e42b93b5c92f52153d, type: 3}
       propertyPath: '_patrolWaypoints.Array.data[0]'
       value: 
       objectReference: {fileID: 741339839}
