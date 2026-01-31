@@ -1481,6 +1481,9 @@ MonoBehaviour:
   moveSpeed: 5
   actions: {fileID: 1808595258}
   currentWeaponType: 3
+  leg: {fileID: 2129678063}
+  LegAnimator: {fileID: 0}
+  BodyAnimator: {fileID: 0}
 --- !u!114 &1808595258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,7 +1543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af68a439da808be46bce19535cb92639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
 --- !u!114 &1808595260
 MonoBehaviour:
   m_ObjectHideFlags: 0

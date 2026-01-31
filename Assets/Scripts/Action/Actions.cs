@@ -16,55 +16,64 @@ public enum WeaponType
 
 public class Actions : MonoBehaviour
 {
-    [Header("Melee Attack Settings")] [SerializeField]
+    [Header("Melee Attack Settings")]
+    [SerializeField]
     private float attackDuration = 0.2f;
 
     [SerializeField] private GameObject attackColliderPrefab;
 
-    [Header("Shooting Settings")] [SerializeField]
+    [Header("Shooting Settings")]
+    [SerializeField]
     private GameObject bulletPrefab;
 
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private Transform bulletSpawnPoint;
 
-    [Header("Knife Settings")] [SerializeField]
+    [Header("Knife Settings")]
+    [SerializeField]
     private float attackRadius_knife = 0.5f;
 
     [SerializeField] private float attackWidth_knife = 0.3f;
     [SerializeField] private float attackAngle_knife = 90f;
     [SerializeField] private float attackDuration_knife = 0.2f;
 
-    [Header("Sword Settings")] [SerializeField]
+    [Header("Sword Settings")]
+    [SerializeField]
     private float attackRadius_sword = 1f;
 
     [SerializeField] private float attackWidth_sword = 0.3f;
     [SerializeField] private float attackAngle_sword = 90f;
     [SerializeField] private float attackDuration_sword = 0.2f;
 
-    [Header("Hammer Settings")] [SerializeField]
+    [Header("Hammer Settings")]
+    [SerializeField]
     private float attackRadius_hammer = 1.5f;
 
     [SerializeField] private float attackWidth_hammer = 0.3f;
     [SerializeField] private float attackAngle_hammer = 90f;
     [SerializeField] private float attackDuration_hammer = 0.2f;
 
-    [Header("Spear Settings")] [SerializeField]
+    [Header("Spear Settings")]
+    [SerializeField]
     private float attackRadius_spear = 2f;
 
     [SerializeField] private float attackWidth_spear = 0.3f;
     [SerializeField] private float attackDuration_spear = 0.2f;
 
-    [Header("Magic Melee Settings")] [SerializeField]
+    [Header("Magic Melee Settings")]
+    [SerializeField]
     private float attackRadius_magic = 0.5f;
 
     [SerializeField] private float attackWidth_magic = 0.3f;
     [SerializeField] private float attackAngle_magic = 90f;
     [SerializeField] private float attackDuration_magic = 0.2f;
 
-    [Header("Magic Single Shot Settings")] [SerializeField]
+    [Header("Magic Single Shot Settings")]
+    [SerializeField]
     private float shootCooldown_single = 0.5f;
 
-    [Header("Magic Spread Shot Settings")] [SerializeField]
+    [Header("Magic Spread Shot Settings")]
+    [SerializeField]
     private float shootCooldown_spread = 1f;
 
     [SerializeField] private int spreadBulletsCount = 10;
@@ -72,7 +81,8 @@ public class Actions : MonoBehaviour
     [SerializeField] private float spreadFireRate = 0.02f;
     [SerializeField] private float spreadDistance = 0.8f;
 
-    [Header("Magic Rifle Settings")] [SerializeField]
+    [Header("Magic Rifle Settings")]
+    [SerializeField]
     private float shootCooldown_rifle = 0.2f;
 
     [SerializeField] private float rifleAngleRange = 10f;
@@ -137,37 +147,43 @@ public class Actions : MonoBehaviour
         if (isAttacking) return;
 
 
+
+
         StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_knife, attackWidth_knife,
             attackAngle_knife, attackDuration_knife, enemyLayer, false));
     }
-
     public void PerformMeleeAttack_sword(Transform attacker, bool isBlunk = false)
     {
         if (isAttacking) return;
 
 
+
+
         StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_sword, attackWidth_sword,
             attackAngle_sword, attackDuration_sword, enemyLayer, false));
     }
-
     public void PerformMeleeAttack_hammer(Transform attacker, bool isBlunk = false)
     {
         if (isAttacking) return;
 
 
+
+
         StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_hammer, attackWidth_hammer,
             attackAngle_hammer, attackDuration_hammer, enemyLayer, false));
     }
-
     public void PerformMeleeAttack_magic(Transform attacker, bool isBlunk = false)
     {
         if (isAttacking) return;
 
 
+
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_magic, attackWidth_magic,
+            attackAngle_magic, attackDuration_magic, enemyLayer, true));
         StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_magic, attackWidth_magic,
             attackAngle_magic, attackDuration_magic, enemyLayer, true));
     }
-
     public void PerformSpearAttack(Transform attacker)
     {
         if (isAttacking) return;
