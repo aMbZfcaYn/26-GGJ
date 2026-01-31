@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public static Vector2 Movement;
 
     public static bool DefaultAttackWasPressed;
+    public static bool DefaultAttackIsHeld;
     public static bool SpecialAttackWasPressed;
     public static bool SkillWasPressed;
 
@@ -37,6 +38,8 @@ public class InputManager : MonoBehaviour
         Movement = _moveAction.ReadValue<Vector2>();
 
         DefaultAttackWasPressed = _defaultAttackAction.WasPressedThisFrame();
+
+        DefaultAttackIsHeld = _defaultAttackAction.IsPressed();
 
         SpecialAttackWasPressed = _specialAttackAction.WasPressedThisFrame();
 

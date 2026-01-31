@@ -5,11 +5,12 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Actions actions;
 
-    [SerializeField] private float attackRadius = 1.5f;
-    [SerializeField] private float attackWidth = 0.3f;
-    [SerializeField] private float attackAngle = 90f;
-    [SerializeField] private float attackDuration = 0.2f;
+    // [SerializeField] private float attackRadius = 1.5f;
+    // [SerializeField] private float attackWidth = 0.3f;
+    // [SerializeField] private float attackAngle = 90f;
+    // [SerializeField] private float attackDuration = 0.2f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
     private Rigidbody2D rb;
 
     void Start()
@@ -23,18 +24,52 @@ public class PlayerControl : MonoBehaviour
         rb.linearVelocity = movement * moveSpeed;
 
         RotateTowardsMouse();
+    }
+
+    void Update()
+    {
+
         if (InputManager.DefaultAttackWasPressed)
         {
-            PerformMeleeAttack();
+
+            switch (currentWeaponType)
+            {
+                case WeaponType.knife:
+                    PerformMeleeAttack(1.5f, 0.3f, 90f, 0.2f, enemyLayer, false);
+                    break;
+                case WeaponType.magic_single:
+                    PerformShoot();
+                    break;
+                case WeaponType.magic_spread:
+                    PerformSpreadShot();
+                    break;
+
+            }
+        }
+        if (InputManager.DefaultAttackIsHeld)
+        {
+            if (currentWeaponType == WeaponType.magic_riffle)
+            {
+                PerformRiffleShot();
+            }
+        }
+
+        if (InputManager.SpecialAttackWasPressed)
+        {
+            if (currentWeaponType == WeaponType.magic_riffle || currentWeaponType == WeaponType.magic_spread || currentWeaponType == WeaponType.magic_single)
+            {
+                PerformMeleeAttack(1f, 0.3f, 90f, 0.2f, enemyLayer, true);
+            }
         }
     }
-    private void PerformMeleeAttack()
+    private void PerformMeleeAttack(float attackRadius, float attackWidth,
+                float attackAngle, float attackDuration, LayerMask enemyLayer, bool isblunk)
     {
         if (actions != null)
         {
 
             actions.PerformMeleeAttack(transform, attackRadius, attackWidth,
-                attackAngle, attackDuration, enemyLayer);
+                attackAngle, attackDuration, enemyLayer, isblunk);
 
         }
         else
@@ -42,6 +77,49 @@ public class PlayerControl : MonoBehaviour
             Debug.LogError("Actions组件未分配！");
         }
     }
+
+    private void PerformShoot()
+    {
+        if (actions != null)
+        {
+
+            actions.PerformShoot(transform);
+
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void PerformSpreadShot()
+    {
+        if (actions != null)
+        {
+
+            actions.PerformSpreadShot(transform);
+
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void PerformRiffleShot()
+    {
+        if (actions != null)
+        {
+
+            actions.PerformRiffleShot(transform);
+
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
     private void RotateTowardsMouse()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

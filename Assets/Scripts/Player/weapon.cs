@@ -3,7 +3,9 @@ using UnityEngine;
 public enum WeaponType
 {
     knife,
-    magic
+    magic_single,
+    magic_spread,
+    magic_riffle,
 }
 
 public class weapon : MonoBehaviour
