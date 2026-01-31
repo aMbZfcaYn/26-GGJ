@@ -4,11 +4,11 @@ public class PlayerControl : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Actions actions;
-
-    // [SerializeField] private float attackRadius = 1.5f;
-    // [SerializeField] private float attackWidth = 0.3f;
-    // [SerializeField] private float attackAngle = 90f;
-    // [SerializeField] private float attackDuration = 0.2f;
+    [Header("小刀设置")]
+    [SerializeField] private float attackRadius_knife = 1.5f;
+    [SerializeField] private float attackWidth_knife = 0.3f;
+    [SerializeField] private float attackAngle_knife = 90f;
+    [SerializeField] private float attackDuration_knife = 0.2f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
     private Rigidbody2D rb;
@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour
             switch (currentWeaponType)
             {
                 case WeaponType.knife:
-                    PerformMeleeAttack(1.5f, 0.3f, 90f, 0.2f, enemyLayer, false);
+                    PerformMeleeAttack(attackRadius_knife, attackWidth_knife, attackAngle_knife, attackDuration_knife, enemyLayer, false);
                     break;
                 case WeaponType.magic_single:
                     PerformShoot();
