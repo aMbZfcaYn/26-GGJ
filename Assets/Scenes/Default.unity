@@ -507,6 +507,124 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1809182920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809182921}
+  - component: {fileID: 1809182922}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1809182921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809182920}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1809182922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809182920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1073741824
+  data:
+    dataString: UEsDBBQAAAgIAABAIezCvNXIrgIAAOoFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1v2kAQ/Stoz02FIU1Kby0kpIckKKTKoeSweMd4xbJr7UeARPz3zqzX2NBWQrJ582bmzZc/mNSugtwbO7VS3BsB7FuP0Tv71GuNd7DjK6Pn8h0azosUviQSj5wn7qVBPCM3Zzbgrcy/65Uich/BoGVh7OZGrGBsnHcIF1w5QJM1nrw1Qh89tsPH4Jpc9sn1nZ69A77loD3YlvdvVtC54psKBOltycOGPahpGitJDFKdG6WkSzKY31exzHlVggWqU0iOVcXsRC9BrkpP0bq+j0XhwCdFlu8n0mJz6qDsh6k7tuFuXct64ypQmq9RUB3y/i/rRRbNhTWbuyZr1qcMvpT5+onvc+58p6FdeHIqO+gtV2u+VPBSgn4wU2uCFmj0NpBrcDCYtH+PhY1LyNctXks9A0P1/8lQDYdY+27uoTrW0f982aK/HLi5MrHzKSZZEjKiWGBxaj+xnrgxLmVAlESi/zNfdVcrGW6ldR5NqQkJJe4M5wMCdA6p7xdE0CRvaYKlWOwWX2huefBjYzVENOmrQHPl9zMM6M/nf2bryDqz3HI6siQu2ZrbOXOJcMvv989MM7M9ztoGBS5uc/P2+5Vm4EqzvQdXPgavpO40mwwP2N+x0bpe224vG7d5sAXPO24edj5YmHDPYzaUg/sluq7Yweihg1K0yrGAqAgLoN8r9bfkmFdFmD0YHc/u5Bnlr4IUpwfChnBZZMv+1Shf9r+MrkcX18XyasCzIQyygcg4Z/GCpMZ2czWr+5WmhMul21o0XkvzCexNLa/ixQrLt1P5vjGdyUtdmHluAfRjHeFYLFhMgh8WcSMkljkH76WOa8k+FkyZfA1icQy0iI292XnLF22UBavkm/GELNg4fvYWjODjReLmvknYUvKTYKBwdCCepYINr8iUHdjhD1BLAwQUAAAICAAAQCHsZqMUsmwAAAB3AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDVM9az0FFQSi9KLMgoBgoYgjilmSkgdrSScapJmmGSgZllcpKBqaW5pa55WpKZUaKhcaqRoVGKYWKiUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAABAIezCvNXIrgIAAOoFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABAIexmoxSybAAAAHcAAAAJACQAAAAAAAAAAAAAAPsCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAsgMAAAAA
+    file_cachedStartup: {fileID: 0}
+    cacheStartup: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 1
+  manualDebugFloorRoof: 0
+  showSearchTree: 0
+  unwalkableNodeDebugSize: 0.3
+  logPathResults: 1
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
+    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
+    _AreaColors: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: -2
+  maxFrameTime: 10
+  batchGraphUpdates: 0
+  graphUpdateBatchingInterval: 0.2
+  navmeshUpdates:
+    updateInterval: 0
+  euclideanEmbedding:
+    mode: 0
+    seed: 0
+    pivotPointRoot: {fileID: 0}
+    spreadOutCount: 10
+  showGraphs: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -516,3 +634,4 @@ SceneRoots:
   - {fileID: 1107914984}
   - {fileID: 1420155408}
   - {fileID: 1292770375}
+  - {fileID: 1809182921}
