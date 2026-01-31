@@ -3,9 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyParameter", menuName = "Scriptable Objects/EnemyParameter")]
 public class EnemyParameter : ScriptableObject
 {
-    public float moveSpeed;
+    [SerializeField] private float patrolSpeed;
+    [SerializeField] private float huntSpeed;
 
-    public int atkRange;
+    [SerializeField] private int atkRange;
 
-    public Animator animator;
+    [SerializeField] private float stunDuration;
+
+    public float PatrolSpeed => patrolSpeed;
+    public float HuntSpeed => huntSpeed;
+    public int AtkRange => atkRange;
+    public float StunDuration => stunDuration;
+
 }
