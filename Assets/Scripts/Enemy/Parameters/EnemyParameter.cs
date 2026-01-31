@@ -14,6 +14,8 @@ public class EnemyParameter : ScriptableObject
     
     [SerializeField] private float viewAngle;
 
+    [SerializeField] private float hearDistance;
+
     public float PatrolSpeed => patrolSpeed;
     public float HuntSpeed => huntSpeed;
     public float AtkRange => atkRange;
@@ -21,4 +23,5 @@ public class EnemyParameter : ScriptableObject
     public float StunDuration => stunDuration;
     public float KnockbackMagnitude => knockbackMagnitude;
     public float ViewAngle => viewAngle;
+    public float HearDistance => hearDistance;
 }

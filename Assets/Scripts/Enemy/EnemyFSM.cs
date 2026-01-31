@@ -22,9 +22,6 @@ public class EnemyFSM : MonoBehaviour
     private IState currentState;
     private Taggable taggable;
 
-    // Tips: 50 may cause bug if we have some unexpected small entities.
-    private RaycastHit[] _hits = new RaycastHit[50];
-
     private void Awake()
     {
         if (agent == null) agent = GetComponent<AStarAgent>();
@@ -96,9 +93,17 @@ public class EnemyFSM : MonoBehaviour
 
         return true;
     }
-
-    public bool HeardSound()
+    /// <summary>
+    /// Event func of event: onSoundEmit
+    /// </summary>
+    /// <param name="soundEmitter">Entity that make the sound</param>
+    public void HeardSound(Transform soundEmitter)
     {
-        throw new System.NotImplementedException();
+        if (currentState is not (Patrol or Trace)) return;
+        Vector3 directionToEmitter = soundEmitter.position - transform.position;
+        if (directionToEmitter.sqrMagnitude > parameters.HearDistance * parameters.HearDistance)
+        {
+            TransitionState(new Trace(this, soundEmitter));
+        }
     }
 }

@@ -19,8 +19,6 @@ public class Trace : StateBase,IState
 
         if (_fsm.CanSeePlayer())
             _fsm.TransitionState(new Hunt(_fsm));
-        else if(_fsm.HeardSound())
-            _fsm.TransitionState(new Trace(_fsm, _fsm.SoundSource));
         else if (_fsm.Agent.HasReachedCurrentWaypoint)
             _fsm.TransitionState(new Patrol(_fsm));
     }
