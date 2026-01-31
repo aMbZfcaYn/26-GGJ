@@ -5,8 +5,8 @@ using UnityEngine.Events;
 public class GameEventManager : MonoBehaviour
 {
     public static GameEventManager Instance { get; private set; }
-    
-    public PossessionEvent onPossessionTrigger = new  PossessionEvent();
+
+    public PossessionEvent onPossessionTrigger = new PossessionEvent();
 
 
     private void Awake()
@@ -23,4 +23,6 @@ public class GameEventManager : MonoBehaviour
 }
 
 [System.Serializable]
-public class PossessionEvent : UnityEvent<GameObject, GameObject> {} // Target, Player
+public class PossessionEvent : UnityEvent<GameObject, GameObject>
+{
+} // Target, Player
