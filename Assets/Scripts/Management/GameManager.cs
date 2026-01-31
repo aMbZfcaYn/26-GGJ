@@ -89,15 +89,15 @@ namespace Management
             if (player == newPlayer) return;
             Taggable taggable = newPlayer.GetComponent<Taggable>();
             if (taggable is null) return;
-            if (taggable.HasTag(TagManager.GetTag("Player")) || !taggable.HasTag(TagManager.GetTag("Enemy")))
+            if (taggable.HasTag(TagUtils.Type_Player) || !taggable.HasTag(TagUtils.Type_Enemy))
             {
                 Debug.LogError($"Unexpected possession to {newPlayer.name}");
                 return;
             }
 
             player = newPlayer;
-            taggable.TryAddTag(TagManager.GetTag("Player"));
-            taggable.TryRemoveTag(TagManager.GetTag("Enemy"));
+            taggable.TryAddTag(TagUtils.Type_Player);
+            taggable.TryRemoveTag(TagUtils.Type_Enemy);
         }
 
         /// <summary>
