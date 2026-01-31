@@ -98,51 +98,92 @@ public class Actions : MonoBehaviour
         currentWeaponType = weaponType;
     }
 
-    public void PerformMeleeAttack(Transform attacker, WeaponType currentWeaponType, bool isBlunk = false)
+    // public void PerformMeleeAttack(Transform attacker, WeaponType currentWeaponType, bool isBlunk = false)
+    // {
+    //     if (isAttacking) return;
+
+    //     float attackRadius, attackWidth, attackAngle, attackDurationValue;
+
+    //     switch (currentWeaponType)
+    //     {
+    //         case WeaponType.knife:
+    //             attackRadius = attackRadius_knife;
+    //             attackWidth = attackWidth_knife;
+    //             attackAngle = attackAngle_knife;
+    //             attackDurationValue = attackDuration_knife;
+    //             break;
+    //         case WeaponType.sword:
+    //             attackRadius = attackRadius_sword;
+    //             attackWidth = attackWidth_sword;
+    //             attackAngle = attackAngle_sword;
+    //             attackDurationValue = attackDuration_sword;
+    //             break;
+    //         case WeaponType.hammer:
+    //             attackRadius = attackRadius_hammer;
+    //             attackWidth = attackWidth_hammer;
+    //             attackAngle = attackAngle_hammer;
+    //             attackDurationValue = attackDuration_hammer;
+    //             break;
+    //         case WeaponType.magic_melee:
+    //             attackRadius = attackRadius_magic;
+    //             attackWidth = attackWidth_magic;
+    //             attackAngle = attackAngle_magic;
+    //             attackDurationValue = attackDuration_magic;
+    //             isBlunk = true; // Magic melee defaults to blunt
+    //             break;
+    //         default:
+    //             attackRadius = 0.5f;
+    //             attackWidth = 0.3f;
+    //             attackAngle = 90f;
+    //             attackDurationValue = 0.2f;
+    //             break;
+    //     }
+
+    //     StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius, attackWidth,
+    //         attackAngle, attackDurationValue, enemyLayer, isBlunk));
+    // }
+    public void PerformMeleeAttack_knife(Transform attacker, bool isBlunk = false)
     {
         if (isAttacking) return;
 
-        float attackRadius, attackWidth, attackAngle, attackDurationValue;
 
-        switch (currentWeaponType)
-        {
-            case WeaponType.knife:
-                attackRadius = attackRadius_knife;
-                attackWidth = attackWidth_knife;
-                attackAngle = attackAngle_knife;
-                attackDurationValue = attackDuration_knife;
-                break;
-            case WeaponType.sword:
-                attackRadius = attackRadius_sword;
-                attackWidth = attackWidth_sword;
-                attackAngle = attackAngle_sword;
-                attackDurationValue = attackDuration_sword;
-                break;
-            case WeaponType.hammer:
-                attackRadius = attackRadius_hammer;
-                attackWidth = attackWidth_hammer;
-                attackAngle = attackAngle_hammer;
-                attackDurationValue = attackDuration_hammer;
-                break;
-            case WeaponType.magic_melee:
-                attackRadius = attackRadius_magic;
-                attackWidth = attackWidth_magic;
-                attackAngle = attackAngle_magic;
-                attackDurationValue = attackDuration_magic;
-                isBlunk = true; // Magic melee defaults to blunt
-                break;
-            default:
-                attackRadius = 0.5f;
-                attackWidth = 0.3f;
-                attackAngle = 90f;
-                attackDurationValue = 0.2f;
-                break;
-        }
 
-        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius, attackWidth,
-            attackAngle, attackDurationValue, enemyLayer, isBlunk));
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_knife, attackWidth_knife,
+            attackAngle_knife, attackDuration_knife, enemyLayer, false));
     }
+    public void PerformMeleeAttack_sword(Transform attacker, bool isBlunk = false)
+    {
+        if (isAttacking) return;
 
+
+
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_sword, attackWidth_sword,
+            attackAngle_sword, attackDuration_sword, enemyLayer, false));
+    }
+    public void PerformMeleeAttack_hammer(Transform attacker, bool isBlunk = false)
+    {
+        if (isAttacking) return;
+
+
+
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_hammer, attackWidth_hammer,
+            attackAngle_hammer, attackDuration_hammer, enemyLayer, false));
+    }
+    public void PerformMeleeAttack_magic(Transform attacker, bool isBlunk = false)
+    {
+        if (isAttacking) return;
+
+
+
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_magic, attackWidth_magic,
+            attackAngle_magic, attackDuration_magic, enemyLayer, true));
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_magic, attackWidth_magic,
+            attackAngle_magic, attackDuration_magic, enemyLayer, true));
+    }
     public void PerformSpearAttack(Transform attacker)
     {
         if (isAttacking) return;
@@ -193,7 +234,8 @@ public class Actions : MonoBehaviour
         Vector3 attackPosition = attacker.position + (Vector3)(startDirection * attackRadius / 2);
 
         GameObject attackCollider =
-            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk, attacker.gameObject);
+            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk,
+                attacker.gameObject);
 
         float progress = 0f;
         float totalRotationTime = attackDurationValue;
@@ -366,7 +408,8 @@ public class Actions : MonoBehaviour
         canShoot = true;
     }
 
-    private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, GameObject shooter, float disableTime = 0.1f)
+    private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, GameObject shooter,
+        float disableTime = 0.1f)
     {
         if (bulletPrefab)
         {
@@ -377,6 +420,7 @@ public class Actions : MonoBehaviour
             {
                 bulletScript.SetDisableTime(disableTime);
             }
+
             bulletScript.changeShooter(shooter);
             return bullet;
         }

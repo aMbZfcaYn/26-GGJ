@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 1788040500161580604}
   - component: {fileID: 6732475309535816849}
   - component: {fileID: 6441658398641733142}
+  - component: {fileID: 8888288921728456722}
   m_Layer: 0
   m_Name: Enemy_Knife
   m_TagString: Untagged
@@ -323,6 +324,7 @@ Transform:
   m_Children:
   - {fileID: 4188385680867383978}
   - {fileID: 4433405594827020652}
+  - {fileID: 6296161128361675402}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5508289728785591082
@@ -452,6 +454,7 @@ MonoBehaviour:
   agent: {fileID: 6262375777219128700}
   headAnimator: {fileID: 536479939960533264}
   legAnimator: {fileID: 7273171126615922613}
+  actions: {fileID: 0}
 --- !u!50 &1788040500161580604
 Rigidbody2D:
   serializedVersion: 5
@@ -539,3 +542,81 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.4348234, y: 1.2746248}
   m_EdgeRadius: 0
+--- !u!114 &8888288921728456722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186928883845803440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9486271235457ee44b7492cadbee365f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDuration: 0.2
+  attackColliderPrefab: {fileID: 4888175325205742111, guid: a3420afab25af41468e57eed63f0ae21, type: 3}
+  bulletPrefab: {fileID: 8886831872000260163, guid: dcafaf5fd60fcab4189330e2a6591ccf, type: 3}
+  bulletSpeed: 10
+  bulletSpawnPoint: {fileID: 6296161128361675402}
+  attackRadius_knife: 0.5
+  attackWidth_knife: 0.3
+  attackAngle_knife: 90
+  attackDuration_knife: 0.2
+  attackRadius_sword: 1
+  attackWidth_sword: 0.3
+  attackAngle_sword: 90
+  attackDuration_sword: 0.2
+  attackRadius_hammer: 1.5
+  attackWidth_hammer: 0.3
+  attackAngle_hammer: 90
+  attackDuration_hammer: 0.2
+  attackRadius_spear: 2
+  attackWidth_spear: 0.3
+  attackDuration_spear: 0.2
+  attackRadius_magic: 0.5
+  attackWidth_magic: 0.3
+  attackAngle_magic: 90
+  attackDuration_magic: 0.2
+  shootCooldown_single: 0.5
+  shootCooldown_spread: 1
+  spreadBulletsCount: 10
+  spreadAngleRange: 15
+  spreadFireRate: 0.02
+  spreadDistance: 0.8
+  shootCooldown_rifle: 0.2
+  rifleAngleRange: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!1 &9196674189499156031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6296161128361675402}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6296161128361675402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9196674189499156031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 703907246806731207}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
