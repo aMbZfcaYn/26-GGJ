@@ -11,12 +11,14 @@ public class EnemyFSM : MonoBehaviour
     [SerializeField] private AStarAgent agent;
     [SerializeField] private Animator headAnimator;
     [SerializeField] private Animator legAnimator;
+    [SerializeField] private Actions actions;
 
     public EnemyParameter Parameters => parameters;
     public AStarAgent Agent => agent;
     public Animator HeadAnimator => headAnimator;
     public Animator LegAnimator => legAnimator;
     public Transform Player => GameManager.Instance.player.transform;
+    public Actions Actions => actions;
 
     private IState currentState;
     private Taggable taggable;
@@ -27,6 +29,7 @@ public class EnemyFSM : MonoBehaviour
         if (!headAnimator) headAnimator = GetComponentsInChildren<Animator>()[0];
         if (!legAnimator) legAnimator = GetComponentsInChildren<Animator>()[1];
         if (!taggable) taggable = GetComponent<Taggable>();
+        if (!actions) actions = GetComponent<Actions>();
     }
 
     private void Start()
@@ -41,6 +44,7 @@ public class EnemyFSM : MonoBehaviour
     {
         currentState?.OnUpdate();
     }
+
     private void OnDisable()
     {
         headAnimator.enabled = false;

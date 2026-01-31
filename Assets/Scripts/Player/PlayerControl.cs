@@ -68,13 +68,14 @@ public class PlayerControl : MonoBehaviour
         if (BodyAnimator.GetBool("Attack"))
         {
             currentAnimState = BodyAnimator.GetCurrentAnimatorStateInfo(0);
-            if (currentAnimState.normalizedTime >= 1.0f)
+            if (currentAnimState.normalizedTime >= 0.5f)
                 BodyAnimator.SetBool("Attack", false);
         }
+
         if (BodyAnimator.GetBool("Attack2"))
         {
             currentAnimState = BodyAnimator.GetCurrentAnimatorStateInfo(0);
-            if (currentAnimState.normalizedTime >= 1.0f)
+            if (currentAnimState.normalizedTime >= 0.5f)
                 BodyAnimator.SetBool("Attack2", false);
         }
 
@@ -93,36 +94,33 @@ public class PlayerControl : MonoBehaviour
 
         if (InputManager.DefaultAttackWasPressed)
         {
-
             BodyAnimator.SetBool("Attack", true);
             Debug.Log(BodyAnimator.GetBool("Attack"));
 
             switch (currentWeaponType)
             {
-
                 case WeaponType.knife:
-                    PerformMeleeAttack(currentWeaponType);
+                    actions.PerformMeleeAttack_knife(transform);
 
                     break;
                 case WeaponType.sword:
-                    PerformMeleeAttack(currentWeaponType);
-                    BodyAnimator.SetBool("Attack", false);
+                    actions.PerformMeleeAttack_sword(transform);
+
                     break;
                 case WeaponType.hammer:
-                    PerformMeleeAttack(currentWeaponType);
-                    BodyAnimator.SetBool("Attack", false);
+                    actions.PerformMeleeAttack_hammer(transform);
+
                     break;
                 case WeaponType.Spear:
                     PerformSpearAttack();
-                    BodyAnimator.SetBool("Attack", false);
                     break;
                 case WeaponType.magic_single:
                     PerformShoot();
-                    BodyAnimator.SetBool("Attack", false);
+
                     break;
                 case WeaponType.magic_spread:
                     PerformSpreadShot();
-                    BodyAnimator.SetBool("Attack", false);
+
                     break;
             }
         }
@@ -144,23 +142,24 @@ public class PlayerControl : MonoBehaviour
                 currentWeaponType == WeaponType.magic_spread ||
                 currentWeaponType == WeaponType.magic_single)
             {
-                PerformMeleeAttack(currentWeaponType);
+                actions.PerformMeleeAttack_magic(transform);
             }
+
             BodyAnimator.SetBool("Attack2", false);
         }
     }
 
-    private void PerformMeleeAttack(WeaponType weaponType)
-    {
-        if (actions)
-        {
-            actions.PerformMeleeAttack(transform, weaponType);
-        }
-        else
-        {
-            Debug.LogError("Actions组件未分配！");
-        }
-    }
+    // private void PerformMeleeAttack(WeaponType weaponType)
+    // {
+    //     if (actions)
+    //     {
+    //         actions.PerformMeleeAttack(transform, weaponType);
+    //     }
+    //     else
+    //     {
+    //         Debug.LogError("Actions组件未分配！");
+    //     }
+    // }
 
 
     private void PerformSpearAttack()
@@ -222,5 +221,4 @@ public class PlayerControl : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
 }

@@ -16,64 +16,55 @@ public enum WeaponType
 
 public class Actions : MonoBehaviour
 {
-    [Header("Melee Attack Settings")]
-    [SerializeField]
+    [Header("Melee Attack Settings")] [SerializeField]
     private float attackDuration = 0.2f;
 
     [SerializeField] private GameObject attackColliderPrefab;
 
-    [Header("Shooting Settings")]
-    [SerializeField]
+    [Header("Shooting Settings")] [SerializeField]
     private GameObject bulletPrefab;
 
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private Transform bulletSpawnPoint;
 
-    [Header("Knife Settings")]
-    [SerializeField]
+    [Header("Knife Settings")] [SerializeField]
     private float attackRadius_knife = 0.5f;
 
     [SerializeField] private float attackWidth_knife = 0.3f;
     [SerializeField] private float attackAngle_knife = 90f;
     [SerializeField] private float attackDuration_knife = 0.2f;
 
-    [Header("Sword Settings")]
-    [SerializeField]
+    [Header("Sword Settings")] [SerializeField]
     private float attackRadius_sword = 1f;
 
     [SerializeField] private float attackWidth_sword = 0.3f;
     [SerializeField] private float attackAngle_sword = 90f;
     [SerializeField] private float attackDuration_sword = 0.2f;
 
-    [Header("Hammer Settings")]
-    [SerializeField]
+    [Header("Hammer Settings")] [SerializeField]
     private float attackRadius_hammer = 1.5f;
 
     [SerializeField] private float attackWidth_hammer = 0.3f;
     [SerializeField] private float attackAngle_hammer = 90f;
     [SerializeField] private float attackDuration_hammer = 0.2f;
 
-    [Header("Spear Settings")]
-    [SerializeField]
+    [Header("Spear Settings")] [SerializeField]
     private float attackRadius_spear = 2f;
 
     [SerializeField] private float attackWidth_spear = 0.3f;
     [SerializeField] private float attackDuration_spear = 0.2f;
 
-    [Header("Magic Melee Settings")]
-    [SerializeField]
+    [Header("Magic Melee Settings")] [SerializeField]
     private float attackRadius_magic = 0.5f;
 
     [SerializeField] private float attackWidth_magic = 0.3f;
     [SerializeField] private float attackAngle_magic = 90f;
     [SerializeField] private float attackDuration_magic = 0.2f;
 
-    [Header("Magic Single Shot Settings")]
-    [SerializeField]
+    [Header("Magic Single Shot Settings")] [SerializeField]
     private float shootCooldown_single = 0.5f;
 
-    [Header("Magic Spread Shot Settings")]
-    [SerializeField]
+    [Header("Magic Spread Shot Settings")] [SerializeField]
     private float shootCooldown_spread = 1f;
 
     [SerializeField] private int spreadBulletsCount = 10;
@@ -81,8 +72,7 @@ public class Actions : MonoBehaviour
     [SerializeField] private float spreadFireRate = 0.02f;
     [SerializeField] private float spreadDistance = 0.8f;
 
-    [Header("Magic Rifle Settings")]
-    [SerializeField]
+    [Header("Magic Rifle Settings")] [SerializeField]
     private float shootCooldown_rifle = 0.2f;
 
     [SerializeField] private float rifleAngleRange = 10f;
@@ -98,49 +88,84 @@ public class Actions : MonoBehaviour
         currentWeaponType = weaponType;
     }
 
-    public void PerformMeleeAttack(Transform attacker, WeaponType currentWeaponType, bool isBlunk = false)
+    // public void PerformMeleeAttack(Transform attacker, WeaponType currentWeaponType, bool isBlunk = false)
+    // {
+    //     if (isAttacking) return;
+
+    //     float attackRadius, attackWidth, attackAngle, attackDurationValue;
+
+    //     switch (currentWeaponType)
+    //     {
+    //         case WeaponType.knife:
+    //             attackRadius = attackRadius_knife;
+    //             attackWidth = attackWidth_knife;
+    //             attackAngle = attackAngle_knife;
+    //             attackDurationValue = attackDuration_knife;
+    //             break;
+    //         case WeaponType.sword:
+    //             attackRadius = attackRadius_sword;
+    //             attackWidth = attackWidth_sword;
+    //             attackAngle = attackAngle_sword;
+    //             attackDurationValue = attackDuration_sword;
+    //             break;
+    //         case WeaponType.hammer:
+    //             attackRadius = attackRadius_hammer;
+    //             attackWidth = attackWidth_hammer;
+    //             attackAngle = attackAngle_hammer;
+    //             attackDurationValue = attackDuration_hammer;
+    //             break;
+    //         case WeaponType.magic_melee:
+    //             attackRadius = attackRadius_magic;
+    //             attackWidth = attackWidth_magic;
+    //             attackAngle = attackAngle_magic;
+    //             attackDurationValue = attackDuration_magic;
+    //             isBlunk = true; // Magic melee defaults to blunt
+    //             break;
+    //         default:
+    //             attackRadius = 0.5f;
+    //             attackWidth = 0.3f;
+    //             attackAngle = 90f;
+    //             attackDurationValue = 0.2f;
+    //             break;
+    //     }
+
+    //     StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius, attackWidth,
+    //         attackAngle, attackDurationValue, enemyLayer, isBlunk));
+    // }
+    public void PerformMeleeAttack_knife(Transform attacker, bool isBlunk = false)
     {
         if (isAttacking) return;
 
-        float attackRadius, attackWidth, attackAngle, attackDurationValue;
 
-        switch (currentWeaponType)
-        {
-            case WeaponType.knife:
-                attackRadius = attackRadius_knife;
-                attackWidth = attackWidth_knife;
-                attackAngle = attackAngle_knife;
-                attackDurationValue = attackDuration_knife;
-                break;
-            case WeaponType.sword:
-                attackRadius = attackRadius_sword;
-                attackWidth = attackWidth_sword;
-                attackAngle = attackAngle_sword;
-                attackDurationValue = attackDuration_sword;
-                break;
-            case WeaponType.hammer:
-                attackRadius = attackRadius_hammer;
-                attackWidth = attackWidth_hammer;
-                attackAngle = attackAngle_hammer;
-                attackDurationValue = attackDuration_hammer;
-                break;
-            case WeaponType.magic_melee:
-                attackRadius = attackRadius_magic;
-                attackWidth = attackWidth_magic;
-                attackAngle = attackAngle_magic;
-                attackDurationValue = attackDuration_magic;
-                isBlunk = true; // Magic melee defaults to blunt
-                break;
-            default:
-                attackRadius = 0.5f;
-                attackWidth = 0.3f;
-                attackAngle = 90f;
-                attackDurationValue = 0.2f;
-                break;
-        }
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_knife, attackWidth_knife,
+            attackAngle_knife, attackDuration_knife, enemyLayer, false));
+    }
 
-        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius, attackWidth,
-            attackAngle, attackDurationValue, enemyLayer, isBlunk));
+    public void PerformMeleeAttack_sword(Transform attacker, bool isBlunk = false)
+    {
+        if (isAttacking) return;
+
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_sword, attackWidth_sword,
+            attackAngle_sword, attackDuration_sword, enemyLayer, false));
+    }
+
+    public void PerformMeleeAttack_hammer(Transform attacker, bool isBlunk = false)
+    {
+        if (isAttacking) return;
+
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_hammer, attackWidth_hammer,
+            attackAngle_hammer, attackDuration_hammer, enemyLayer, false));
+    }
+
+    public void PerformMeleeAttack_magic(Transform attacker, bool isBlunk = false)
+    {
+        if (isAttacking) return;
+
+
+        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_magic, attackWidth_magic,
+            attackAngle_magic, attackDuration_magic, enemyLayer, true));
     }
 
     public void PerformSpearAttack(Transform attacker)
@@ -193,7 +218,8 @@ public class Actions : MonoBehaviour
         Vector3 attackPosition = attacker.position + (Vector3)(startDirection * attackRadius / 2);
 
         GameObject attackCollider =
-            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk, attacker.gameObject);
+            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk,
+                attacker.gameObject);
 
         float progress = 0f;
         float totalRotationTime = attackDurationValue;
@@ -366,7 +392,8 @@ public class Actions : MonoBehaviour
         canShoot = true;
     }
 
-    private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, GameObject shooter, float disableTime = 0.1f)
+    private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, GameObject shooter,
+        float disableTime = 0.1f)
     {
         if (bulletPrefab)
         {
@@ -377,6 +404,7 @@ public class Actions : MonoBehaviour
             {
                 bulletScript.SetDisableTime(disableTime);
             }
+
             bulletScript.changeShooter(shooter);
             return bullet;
         }

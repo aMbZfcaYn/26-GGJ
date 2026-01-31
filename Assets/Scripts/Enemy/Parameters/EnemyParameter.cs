@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyParameter", menuName = "Scriptable Objects/EnemyParameter")]
 public class EnemyParameter : ScriptableObject
 {
+    public WeaponType weaponType; 
+    
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float huntSpeed;
 
