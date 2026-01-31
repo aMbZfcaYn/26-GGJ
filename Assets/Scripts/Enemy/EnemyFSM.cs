@@ -28,7 +28,7 @@ public class EnemyFSM : MonoBehaviour
         if (agent == null) agent = GetComponent<AStarAgent>();
         if (animator == null) animator = GetComponent<Animator>();
 
-        states.Add(StateType.Idle, new Idle(this));
+        // states.Add(StateType.Idle, new Idle(this));
     }
     private void Start()
     {

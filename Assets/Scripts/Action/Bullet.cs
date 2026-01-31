@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour
             Taggable taggable = enemyObject.GetComponent<Taggable>();
             if (taggable != null && taggable.HasTag(TagManager.GetTag("Enemy")))
             {
-                Debug.Log("子弹击中敌人: " + other.name);
+                // Debug.Log("子弹击中敌人: " + other.name);
                 DestroyBullet();
             }
         }
