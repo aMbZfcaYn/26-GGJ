@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class TestInput : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private float moveSpeed = 5f;
+    private Rigidbody2D rb;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        Vector2 movement = InputManager.Movement;
+        rb.linearVelocity = movement * moveSpeed;
     }
 }
