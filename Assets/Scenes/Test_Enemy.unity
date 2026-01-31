@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 47917168}
   m_Layer: 0
   m_Name: HeroSample
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 47917167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.41, y: 0, z: 0}
+  m_LocalPosition: {x: 6.23, y: -0.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4447,6 +4447,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4418774659324286204, guid: 18fbdf55a10a1dc4b93fc663f7a4acf1, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4575222091305553792, guid: 18fbdf55a10a1dc4b93fc663f7a4acf1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4487,6 +4491,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4934398412803268401, guid: 18fbdf55a10a1dc4b93fc663f7a4acf1, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 47917169}
     - target: {fileID: 6343711261204419879, guid: 18fbdf55a10a1dc4b93fc663f7a4acf1, type: 3}
       propertyPath: m_Name
       value: EnemySamle

@@ -17,7 +17,7 @@ public class EnemyFSM : MonoBehaviour
     public AStarAgent Agent => agent;
     public Animator Animator => animator;
     public Transform SoundSource => soundSource;
-    public Transform Player => player;
+    public Transform Player => GameManager.Instance.player.transform;
 
     private IState currentState;
     private Taggable taggable;
@@ -54,20 +54,21 @@ public class EnemyFSM : MonoBehaviour
     public bool CanSeePlayer()
     {
         // Do not check player is null, since it just should crack when happen rather than consume an "if"
-        player = GameManager.Instance.player.transform;
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector2 directionToPlayer = Player.position - transform.position;
 
         // Check if player in angle
-        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+        float angleToPlayer = Vector2.Angle(transform.forward, directionToPlayer);
         if (angleToPlayer > parameters.ViewAngle / 2)
         {
             return false;
         }
 
         // Check if there is an obstacle in ray path.
-        if (Physics.Raycast(transform.position, directionToPlayer.normalized, out RaycastHit hit, 100000f))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer.normalized);
+        Debug.Log("Raycast hit: " + (hit ? hit.transform.name : "Nothing"));
+        if (hit)
         {
-            return hit.transform == player;
+            return hit.transform == Player;
         }
 
         // hit and hit player
@@ -77,8 +78,7 @@ public class EnemyFSM : MonoBehaviour
     public bool CanAttackPlayer()
     {
         if (!CanSeePlayer()) return false;
-        player = GameManager.Instance.player.transform;
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector2 directionToPlayer = Player.position - transform.position;
         // In half of atkRange
         if (directionToPlayer.sqrMagnitude > parameters.AtkRange * parameters.AtkRange / 4)
         {
@@ -86,7 +86,7 @@ public class EnemyFSM : MonoBehaviour
         }
 
         // In half of atkAngle
-        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+        float angleToPlayer = Vector2.Angle(transform.forward, directionToPlayer);
         if (angleToPlayer > parameters.AtkAngle / 3)
         {
             return false;
@@ -101,7 +101,7 @@ public class EnemyFSM : MonoBehaviour
     public void HeardSound(Transform soundEmitter)
     {
         if (currentState is not (Patrol or Trace)) return;
-        Vector3 directionToEmitter = soundEmitter.position - transform.position;
+        Vector2 directionToEmitter = soundEmitter.position - transform.position;
         if (directionToEmitter.sqrMagnitude > parameters.HearDistance * parameters.HearDistance)
         {
             TransitionState(new Trace(this, soundEmitter));
