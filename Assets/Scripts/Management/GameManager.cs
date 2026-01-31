@@ -92,14 +92,21 @@ namespace Management
         /// Public func for change player
         /// </summary>
         /// <param name="newPlayer"></param>
-        public void RegisterPlayer(GameObject newPlayer)
+        public void RegisterPlayer(GameObject newPlayer, bool first = false)
         {
             if (player == newPlayer) return;
             Taggable taggable = newPlayer.GetComponent<Taggable>();
             if (!taggable) return;
+            // Special check for init register
+            if (first)
+            {
+                player = newPlayer;
+                taggable.TryAddTag(TagUtils.Type_Player);
+                taggable.TryRemoveTag(TagUtils.Type_Enemy);
+            }
             if (taggable.HasTag(TagUtils.Type_Player) || !taggable.HasTag(TagUtils.Type_Enemy))
             {
-                Debug.LogError($"Unexpected possession to {newPlayer.name}");
+                Debug.LogError($"Unexpected Register to {newPlayer.name}");
                 return;
             }
 

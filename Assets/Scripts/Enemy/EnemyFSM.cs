@@ -25,7 +25,7 @@ public class EnemyFSM : MonoBehaviour
     private void Awake()
     {
         if (agent == null) agent = GetComponent<AStarAgent>();
-        if (animator == null) animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
         if (taggable == null) taggable = GetComponent<Taggable>();
     }
 

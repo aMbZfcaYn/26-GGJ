@@ -1,18 +1,15 @@
-
+using Management.Tag;
 using UnityEngine;
 
 public class RotateAroundPoint : MonoBehaviour
 {
-    [Header("旋转设置")]
-    [SerializeField] private Transform rotationTarget;
+    [Header("旋转设置")] [SerializeField] private Transform rotationTarget;
     [SerializeField] private float rotationSpeed = 90f;
 
-    [Header("旋转方向")]
-    [SerializeField] private bool useCollisionDirection = true;
+    [Header("旋转方向")] [SerializeField] private bool useCollisionDirection = true;
     [SerializeField] private bool defaultClockwise = true;
 
-    [Header("旋转限制")]
-    [SerializeField] private float maxRotationAngle = 180f;
+    [Header("旋转限制")] [SerializeField] private float maxRotationAngle = 180f;
     private bool hasStartedRotating = false;
     private bool hasReachedMax = false;
     private bool rotateClockwise = true;
@@ -22,23 +19,23 @@ public class RotateAroundPoint : MonoBehaviour
     private int rotator;
 
 
-    [Header("碰撞检测")]
-    [SerializeField] private LayerMask enemyLayerMask;
+    [Header("碰撞检测")] [SerializeField] private LayerMask enemyLayerMask;
     [SerializeField] private float detectionRadius = 0.5f;
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.GetComponent<Taggable>().HasTag(TagUtils.Type_Enemy))
         {
             rotator = 1;
         }
-        else if (other.gameObject.CompareTag("Player"))
+        else if (other.gameObject.GetComponent<Taggable>().HasTag(TagUtils.Type_Player))
         {
             rotator = 0;
         }
 
-        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy")) &&
+        if ((other.gameObject.GetComponent<Taggable>().HasTag(TagUtils.Type_Player) ||
+             other.gameObject.GetComponent<Taggable>().HasTag(TagUtils.Type_Enemy)) &&
             !hasStartedRotating && !hasReachedMax)
         {
             if (useCollisionDirection)
@@ -72,9 +69,7 @@ public class RotateAroundPoint : MonoBehaviour
                 CheckForEnemiesDuringRotation();
             }
 
-
             RotateDoor();
-
         }
     }
 
@@ -119,10 +114,10 @@ public class RotateAroundPoint : MonoBehaviour
         foreach (Collider2D collider in colliders)
         {
             Debug.Log("Name" + collider.gameObject.name);
-            if (collider.CompareTag("Enemy") && collider.gameObject != gameObject)
+            if (collider.gameObject.GetComponent<Taggable>().HasTag(TagUtils.Type_Enemy) &&
+                collider.gameObject != gameObject)
             {
                 Debug.Log("Door hit an enemy!");
-
             }
         }
 
@@ -132,17 +127,17 @@ public class RotateAroundPoint : MonoBehaviour
 
         Vector3 predictedPosition = RotatePointAroundPivot(transform.position, rotationCenter, testAngle);
 
-        Collider2D[] predictedColliders = Physics2D.OverlapCircleAll(predictedPosition, detectionRadius, enemyLayerMask);
+        Collider2D[] predictedColliders =
+            Physics2D.OverlapCircleAll(predictedPosition, detectionRadius, enemyLayerMask);
 
         foreach (Collider2D collider in predictedColliders)
         {
-            if (collider.CompareTag("Enemy") && collider.gameObject != gameObject)
+            if (collider.gameObject.GetComponent<Taggable>().HasTag(TagUtils.Type_Enemy) &&
+                collider.gameObject != gameObject)
             {
                 Debug.Log("Door hit an enemy!");
             }
         }
-
-
     }
 
 
@@ -158,7 +153,6 @@ public class RotateAroundPoint : MonoBehaviour
         currentRotationAngle = 0f;
         hasStartedRotating = false;
         hasReachedMax = false;
-
     }
 
     private bool hasReachedMaxAngle()

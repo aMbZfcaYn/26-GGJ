@@ -1,4 +1,5 @@
 using InputNamespace;
+using Management;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -16,16 +17,18 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        Init();
+        Init(true);
     }
 
-    public void Init()
+    public void Init(bool first = false)
     {
         var camScript = Camera.main.GetComponent<CameraControl>();
         camScript.target = transform;
         
         rb = GetComponent<Rigidbody2D>();
         ability = GetComponent<AbilityManager>();
+        
+        GameManager.Instance.RegisterPlayer(gameObject, first);
 
         // 设置当前武器类型
         if (actions != null)
