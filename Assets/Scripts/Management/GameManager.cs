@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Management.SceneManage;
+using Management.Tag;
 using Unity.Collections;
 using UnityEngine;
 using Utilities;
@@ -77,6 +78,26 @@ namespace Management
         public void RegisterEnemy(GameObject enemy)
         {
             EnemyList.Add(enemy);
+        }
+
+        /// <summary>
+        /// Public func for change player
+        /// </summary>
+        /// <param name="newPlayer"></param>
+        public void RegisterPlayer(GameObject newPlayer)
+        {
+            if (player == newPlayer) return;
+            Taggable taggable = newPlayer.GetComponent<Taggable>();
+            if (taggable is null) return;
+            if (taggable.HasTag(TagManager.GetTag("Player")) || !taggable.HasTag(TagManager.GetTag("Enemy")))
+            {
+                Debug.LogError($"Unexpected possession to {newPlayer.name}");
+                return;
+            }
+
+            player = newPlayer;
+            taggable.TryAddTag(TagManager.GetTag("Player"));
+            taggable.TryRemoveTag(TagManager.GetTag("Enemy"));
         }
 
         /// <summary>
