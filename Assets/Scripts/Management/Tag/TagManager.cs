@@ -1,25 +1,11 @@
 using UnityEngine;
+using Utilities;
 
 namespace Management.Tag
 {
-    public class TagManager : MonoBehaviour
+    public class TagManager : GenericSingleton<TagManager>
     {
-        public static TagManager Instance { get; private set; }
-
         public TagLibrary tagLibrary;
-
-        private void Awake()
-        {
-            if (Instance is not null && Instance != this)
-            {
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                Instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-        }
 
         public static GameTag GetTag(string tagName)
         {

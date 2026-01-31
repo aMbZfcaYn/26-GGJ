@@ -1,28 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Utilities;
 
 namespace Management
 {
-    public class GameEventManager : MonoBehaviour
+    public class GameEventManager : GenericSingleton<GameEventManager>
     {
-        public static GameEventManager Instance { get; private set; }
-
         public PossessionEvent onPossessionTrigger = new PossessionEvent();
         public LevelFailEvent onLevelFail = new LevelFailEvent();
         public LevelClearEvent onLevelClear = new LevelClearEvent();
-
-        private void Awake()
-        {
-            if (Instance is not null && Instance != this)
-            {
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                Instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-        }
     }
 
     /// <summary>
