@@ -16,55 +16,64 @@ public enum WeaponType
 
 public class Actions : MonoBehaviour
 {
-    [Header("Melee Attack Settings")] [SerializeField]
+    [Header("Melee Attack Settings")]
+    [SerializeField]
     private float attackDuration = 0.2f;
 
     [SerializeField] private GameObject attackColliderPrefab;
 
-    [Header("Shooting Settings")] [SerializeField]
+    [Header("Shooting Settings")]
+    [SerializeField]
     private GameObject bulletPrefab;
 
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private Transform bulletSpawnPoint;
 
-    [Header("Knife Settings")] [SerializeField]
+    [Header("Knife Settings")]
+    [SerializeField]
     private float attackRadius_knife = 0.5f;
 
     [SerializeField] private float attackWidth_knife = 0.3f;
     [SerializeField] private float attackAngle_knife = 90f;
     [SerializeField] private float attackDuration_knife = 0.2f;
 
-    [Header("Sword Settings")] [SerializeField]
+    [Header("Sword Settings")]
+    [SerializeField]
     private float attackRadius_sword = 1f;
 
     [SerializeField] private float attackWidth_sword = 0.3f;
     [SerializeField] private float attackAngle_sword = 90f;
     [SerializeField] private float attackDuration_sword = 0.2f;
 
-    [Header("Hammer Settings")] [SerializeField]
+    [Header("Hammer Settings")]
+    [SerializeField]
     private float attackRadius_hammer = 1.5f;
 
     [SerializeField] private float attackWidth_hammer = 0.3f;
     [SerializeField] private float attackAngle_hammer = 90f;
     [SerializeField] private float attackDuration_hammer = 0.2f;
 
-    [Header("Spear Settings")] [SerializeField]
+    [Header("Spear Settings")]
+    [SerializeField]
     private float attackRadius_spear = 2f;
 
     [SerializeField] private float attackWidth_spear = 0.3f;
     [SerializeField] private float attackDuration_spear = 0.2f;
 
-    [Header("Magic Melee Settings")] [SerializeField]
+    [Header("Magic Melee Settings")]
+    [SerializeField]
     private float attackRadius_magic = 0.5f;
 
     [SerializeField] private float attackWidth_magic = 0.3f;
     [SerializeField] private float attackAngle_magic = 90f;
     [SerializeField] private float attackDuration_magic = 0.2f;
 
-    [Header("Magic Single Shot Settings")] [SerializeField]
+    [Header("Magic Single Shot Settings")]
+    [SerializeField]
     private float shootCooldown_single = 0.5f;
 
-    [Header("Magic Spread Shot Settings")] [SerializeField]
+    [Header("Magic Spread Shot Settings")]
+    [SerializeField]
     private float shootCooldown_spread = 1f;
 
     [SerializeField] private int spreadBulletsCount = 10;
@@ -72,7 +81,8 @@ public class Actions : MonoBehaviour
     [SerializeField] private float spreadFireRate = 0.02f;
     [SerializeField] private float spreadDistance = 0.8f;
 
-    [Header("Magic Rifle Settings")] [SerializeField]
+    [Header("Magic Rifle Settings")]
+    [SerializeField]
     private float shootCooldown_rifle = 0.2f;
 
     [SerializeField] private float rifleAngleRange = 10f;
@@ -183,7 +193,7 @@ public class Actions : MonoBehaviour
         Vector3 attackPosition = attacker.position + (Vector3)(startDirection * attackRadius / 2);
 
         GameObject attackCollider =
-            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk);
+            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk, attacker.gameObject);
 
         float progress = 0f;
         float totalRotationTime = attackDurationValue;
@@ -216,7 +226,7 @@ public class Actions : MonoBehaviour
     }
 
     private GameObject CreateAttackCollider(Vector3 position, Quaternion rotation, float attackRadius,
-        float attackWidth, bool isBlunk)
+        float attackWidth, bool isBlunk, GameObject attacker)
     {
         GameObject colliderObj = Instantiate(attackColliderPrefab, position, rotation);
         BoxCollider2D boxCollider = colliderObj.GetComponent<BoxCollider2D>();
@@ -227,6 +237,7 @@ public class Actions : MonoBehaviour
 
         Melee melee = colliderObj.GetComponent<Melee>();
         melee.isblunk = isBlunk;
+        melee.changeOwner(attacker);
         return colliderObj;
     }
 
@@ -244,7 +255,7 @@ public class Actions : MonoBehaviour
         Vector3 endPosition = attacker.position + (Vector3)(direction * attackDistance);
 
         GameObject attackCollider = CreateSpearAttackCollider(startPosition + (Vector3)(direction * attackDistance / 2),
-            attacker.rotation, attackDistance, attackWidth, isBlunk);
+            attacker.rotation, attackDistance, attackWidth, isBlunk, attacker.gameObject);
 
         float progress = 0f;
         float totalMoveTime = attackDurationValue;
@@ -289,7 +300,7 @@ public class Actions : MonoBehaviour
     }
 
     private GameObject CreateSpearAttackCollider(Vector3 position, Quaternion rotation,
-        float attackDistance, float attackWidth, bool isBlunk)
+        float attackDistance, float attackWidth, bool isBlunk, GameObject attacker)
     {
         GameObject colliderObj = Instantiate(attackColliderPrefab, position, rotation);
         BoxCollider2D boxCollider = colliderObj.GetComponent<BoxCollider2D>();
@@ -301,6 +312,7 @@ public class Actions : MonoBehaviour
 
         Melee melee = colliderObj.GetComponent<Melee>();
         melee.isblunk = isBlunk;
+        melee.changeOwner(attacker);
 
         return colliderObj;
     }
@@ -311,17 +323,18 @@ public class Actions : MonoBehaviour
 
         Vector3 spawnPosition = bulletSpawnPoint != null ? bulletSpawnPoint.position : shooter.position;
 
-        GameObject bullet = CreateBullet(spawnPosition, shooter.rotation);
+        GameObject bullet = CreateBullet(spawnPosition, shooter.rotation, shooter.gameObject);
 
         yield return new WaitForSeconds(shootCooldown_single);
         canShoot = true;
     }
 
-    private GameObject CreateBullet(Vector3 position, Quaternion rotation)
+    private GameObject CreateBullet(Vector3 position, Quaternion rotation, GameObject shooter)
     {
         if (bulletPrefab)
         {
             GameObject bullet = Instantiate(bulletPrefab, position, rotation);
+            bullet.GetComponent<Bullet>().changeShooter(shooter);
             return bullet;
         }
 
@@ -344,7 +357,7 @@ public class Actions : MonoBehaviour
 
             Vector3 randomPosition = shooter.position + forward * spreadDistance;
 
-            CreateSpreadBullet(randomPosition, randomRotation, randomDisableTime);
+            CreateSpreadBullet(randomPosition, randomRotation, shooter.gameObject, randomDisableTime);
 
             yield return new WaitForSeconds(spreadFireRate);
         }
@@ -353,7 +366,7 @@ public class Actions : MonoBehaviour
         canShoot = true;
     }
 
-    private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, float disableTime = 0.1f)
+    private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, GameObject shooter, float disableTime = 0.1f)
     {
         if (bulletPrefab)
         {
@@ -364,7 +377,7 @@ public class Actions : MonoBehaviour
             {
                 bulletScript.SetDisableTime(disableTime);
             }
-
+            bulletScript.changeShooter(shooter);
             return bullet;
         }
 
@@ -380,7 +393,7 @@ public class Actions : MonoBehaviour
         float randomAngleOffset = Random.Range(-rifleAngleRange, rifleAngleRange);
         Quaternion randomRotation = Quaternion.Euler(0, 0, shooter.eulerAngles.z + randomAngleOffset);
 
-        CreateBullet(spawnPosition, randomRotation);
+        CreateBullet(spawnPosition, randomRotation, shooter.gameObject);
 
         yield return new WaitForSeconds(shootCooldown_rifle);
         canShoot = true;

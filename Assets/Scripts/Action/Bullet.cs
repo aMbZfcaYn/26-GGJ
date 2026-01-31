@@ -12,12 +12,20 @@ public class Bullet : MonoBehaviour
     private float disableTime; // 实际使用的禁用时间
     private Rigidbody2D rb;
     private bool canFly = false;
+    private GameObject Shooter;
+    private Taggable shootertaggable;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentDisableTime = 0f;
         disableTime = defaultDisableTime;
+    }
+
+    public void changeShooter(GameObject newShooter)
+    {
+        Shooter = newShooter;
+        shootertaggable = Shooter.GetComponent<Taggable>();
     }
 
 
@@ -55,13 +63,27 @@ public class Bullet : MonoBehaviour
         {
             GameObject enemyObject = other.gameObject;
             Taggable taggable = enemyObject.GetComponent<Taggable>();
-            if (taggable && taggable.HasTag(TagManager.GetTag("Enemy")))
+            if (shootertaggable.HasTag(TagManager.GetTag("Player")))
             {
-                Debug.Log("子弹击中敌人: " + other.name);
-                EnemyFSM otherFSM = other.GetComponent<EnemyFSM>();
-                otherFSM.TransitionState(new Dead(otherFSM));
-                DestroyBullet();
+                if (taggable && taggable.HasTag(TagManager.GetTag("Enemy")))
+                {
+                    Debug.Log("子弹击中敌人: " + other.name);
+                    EnemyFSM otherFSM = other.GetComponent<EnemyFSM>();
+                    otherFSM.TransitionState(new Dead(otherFSM));
+                    DestroyBullet();
+                }
             }
+            else if (shootertaggable.HasTag(TagManager.GetTag("Enemy")))
+            {
+                if (taggable && taggable.HasTag(TagManager.GetTag("Player")))
+                {
+                    Debug.Log("子弹击中玩家: " + other.name);
+                    // PlayerFSM otherFSM = other.GetComponent<PlayerFSM>();
+                    // otherFSM.TransitionState(new Dead(otherFSM));
+                    DestroyBullet();
+                }
+            }
+            DestroyBullet();
         }
     }
 
