@@ -1,93 +1,160 @@
-using InputNamespace;
 using UnityEngine;
 
-namespace Player
+public class PlayerControl : MonoBehaviour
 {
-    public class PlayerControl : MonoBehaviour
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Actions actions;
+    [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
+
+    private Rigidbody2D rb;
+
+    void Start()
     {
-        public bool blocked = false;
-        
-        [SerializeField] private float moveSpeed = 5f;
-        [SerializeField] private Actions actions;
+        rb = GetComponent<Rigidbody2D>();
 
-        [SerializeField] private float attackRadius = 1.5f;
-        [SerializeField] private float attackWidth = 0.3f;
-        [SerializeField] private float attackAngle = 90f;
-        [SerializeField] private float attackDuration = 0.2f;
-        [SerializeField] private LayerMask enemyLayer;
-        private Rigidbody2D rb;
-        private AbilityManager ability;
-        
-        private bool inAbility = false;
-
-        void Start()
+        // 设置当前武器类型
+        if (actions != null)
         {
-            var camScript = Camera.main.GetComponent<CameraControl>();
-            camScript.target = transform;
-            
-            rb = GetComponent<Rigidbody2D>();
-            ability = GetComponent<AbilityManager>();
+            actions.SetCurrentWeapon(currentWeaponType);
         }
+    }
 
-        void Update()
+    void FixedUpdate()
+    {
+        Vector2 movement = InputManager.Movement;
+        rb.linearVelocity = movement * moveSpeed;
+
+        RotateTowardsMouse();
+    }
+
+    void Update()
+    {
+        if (InputManager.DefaultAttackWasPressed)
         {
-            RotateTowardsMouse();
-            if (InputManager.DefaultAttackWasPressed)
+            switch (currentWeaponType)
             {
-                PerformMeleeAttack();
-            }
-
-            if (InputManager.SkillWasPressed)
-            {
-                if (ability.needSwitcher)
-                {
-                    if (!inAbility)
-                        ability.OnAbilityButtonPressed();
-                    inAbility = !inAbility;
-                }
-                else
-                    ability.OnAbilityButtonPressed();
+                case WeaponType.knife:
+                case WeaponType.sword:
+                case WeaponType.hammer:
+                case WeaponType.magic_magic:
+                    PerformMeleeAttack();
+                    break;
+                case WeaponType.Spear:
+                    PerformSpearAttack();
+                    break;
+                case WeaponType.magic_single:
+                    PerformShoot();
+                    break;
+                case WeaponType.magic_spread:
+                    PerformSpreadShot();
+                    break;
             }
         }
-        
-        void FixedUpdate()
-        {
-            if (blocked)
-            {
-                rb.linearVelocity = Vector3.zero;
-                return;
-            }
-            Vector2 movement = InputManager.Movement;
-            rb.linearVelocity = movement * moveSpeed;
-        }
-        private void PerformMeleeAttack()
-        {
-            if (actions != null)
-            {
 
-                actions.PerformMeleeAttack(transform, attackRadius, attackWidth,
-                    attackAngle, attackDuration, enemyLayer);
-
-            }
-            else
+        if (InputManager.DefaultAttackIsHeld)
+        {
+            if (currentWeaponType == WeaponType.magic_riffle)
             {
-                Debug.LogError("Actions组件未分配！");
+                PerformRiffleShot();
             }
         }
-        private void RotateTowardsMouse()
+
+        if (InputManager.SpecialAttackWasPressed)
         {
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            mouseWorldPos.z = 0;
-
-            Vector2 directionToMouse = new Vector2(
-                mouseWorldPos.x - transform.position.x,
-                mouseWorldPos.y - transform.position.y
-            );
-
-            float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
-
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            if (currentWeaponType == WeaponType.magic_riffle ||
+                currentWeaponType == WeaponType.magic_spread ||
+                currentWeaponType == WeaponType.magic_single)
+            {
+                PerformMagicMeleeAttack();
+            }
         }
+    }
+
+    private void PerformMeleeAttack()
+    {
+        if (actions != null)
+        {
+            actions.PerformMeleeAttack(transform);
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void PerformMagicMeleeAttack()
+    {
+        if (actions != null)
+        {
+            actions.PerformMeleeAttack(transform, true); // 魔法近战使用钝击
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void PerformSpearAttack()
+    {
+        if (actions != null)
+        {
+            actions.PerformSpearAttack(transform);
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void PerformShoot()
+    {
+        if (actions != null)
+        {
+            actions.PerformShoot(transform);
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void PerformSpreadShot()
+    {
+        if (actions != null)
+        {
+            actions.PerformSpreadShot(transform);
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void PerformRiffleShot()
+    {
+        if (actions != null)
+        {
+            actions.PerformRiffleShot(transform);
+        }
+        else
+        {
+            Debug.LogError("Actions组件未分配！");
+        }
+    }
+
+    private void RotateTowardsMouse()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        mouseWorldPos.z = 0;
+
+        Vector2 directionToMouse = new Vector2(
+            mouseWorldPos.x - transform.position.x,
+            mouseWorldPos.y - transform.position.y
+        );
+
+        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

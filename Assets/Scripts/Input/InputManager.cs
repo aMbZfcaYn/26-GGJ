@@ -10,6 +10,7 @@ namespace InputNamespace
         public static Vector2 Movement;
 
         public static bool DefaultAttackWasPressed;
+        public static bool DefaultAttackIsHeld;
         public static bool SpecialAttackWasPressed;
         public static bool SkillWasPressed;
 
@@ -40,6 +41,8 @@ namespace InputNamespace
 
             DefaultAttackWasPressed = _defaultAttackAction.WasPressedThisFrame();
 
+            DefaultAttackIsHeld = _defaultAttackAction.IsPressed();
+
             SpecialAttackWasPressed = _specialAttackAction.WasPressedThisFrame();
 
             SkillWasPressed = _interactAction.WasPressedThisFrame();
@@ -47,8 +50,6 @@ namespace InputNamespace
             CameraMoveIsheld = _cameraMoveAction.IsPressed();
 
             CameraMoveIsReleased = _cameraMoveAction.WasPressedThisFrame();
-
-
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Management.SceneManage
 
         public Scene CurrentScene => SceneManager.GetActiveScene();
 
-        [SerializeField] [SceneName] private string startSceneName;
+        [SerializeField][SceneName] private string startSceneName;
 
         //[SerializeField] private string mainSceneName;
         //[SerializeField] private CanvasGroup fadeCanvasGroup;
