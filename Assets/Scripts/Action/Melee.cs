@@ -1,12 +1,22 @@
+using System;
+using Management;
 using UnityEngine;
 using Management.Tag;
-using System.Runtime.CompilerServices;
 
 public class Melee : MonoBehaviour
 {
     public bool isblunk = false;
     private GameObject Owner;
     private Taggable ownertaggable;
+
+    private Taggable _taggable;
+
+    private void Awake()
+    {
+        _taggable = GetComponent<Taggable>();
+        _taggable.TryAddTag(TagUtils.Type_AttckEntity);
+    }
+
     public void changeOwner(GameObject owner)
     {
         Owner = owner;
@@ -23,9 +33,9 @@ public class Melee : MonoBehaviour
         Debug.Log("创建攻击碰撞体" + other.name);
         GameObject enemyObject = other.gameObject;
         Taggable taggable = enemyObject.GetComponent<Taggable>();
-        if (ownertaggable.HasTag(TagManager.GetTag("Player")))
+        if (ownertaggable.HasTag(TagUtils.Type_Player))
         {
-            if (taggable.HasTag(TagManager.GetTag("Enemy")))
+            if (taggable.HasTag(TagUtils.Type_Enemy))
             {
                 EnemyFSM otherFSM = other.GetComponent<EnemyFSM>();
                 if (isblunk)
@@ -37,20 +47,28 @@ public class Melee : MonoBehaviour
                 {
                     otherFSM.TransitionState(new Dead(otherFSM));
                     Debug.Log("锐器击中敌人: " + other.name);
+                    GameEventManager.Instance.onEnemyKilled.Invoke(other.gameObject);
+                    taggable.TryRemoveTag(TagUtils.Type_Enemy);
                 }
             }
         }
-        else if (ownertaggable.HasTag(TagManager.GetTag("Enemy")))
+        else if (ownertaggable.HasTag(TagUtils.Type_Enemy))
         {
-            if (taggable.HasTag(TagManager.GetTag("Player")))
+            if (taggable.HasTag(TagUtils.Type_Player))
             {
                 // PlayerFSM otherFSM = other.GetComponent<PlayerFSM>();
-
                 Debug.Log("击中玩家: " + other.name);
                 // otherFSM.TransitionState(new Stun(otherFSM, transform));
-
+                GameManager.Instance.playerHp--;
+                if (GameManager.Instance.playerHp > 0)
+                {
+                    GameEventManager.Instance.onPossessionTrigger.Invoke(Owner, other.gameObject);
+                }
+                else
+                {
+                    GameEventManager.Instance.onLevelFail.Invoke();
+                }
             }
         }
-
     }
 }

@@ -1,3 +1,4 @@
+using Management;
 using UnityEngine;
 using Management.Tag;
 
@@ -71,6 +72,8 @@ public class Bullet : MonoBehaviour
                     EnemyFSM otherFSM = other.GetComponent<EnemyFSM>();
                     otherFSM.TransitionState(new Dead(otherFSM));
                     DestroyBullet();
+                    GameEventManager.Instance.onEnemyKilled.Invoke(other.gameObject);
+                    taggable.TryRemoveTag(TagUtils.Type_Enemy);
                 }
             }
             else if (shootertaggable.HasTag(TagManager.GetTag("Enemy")))
@@ -81,6 +84,15 @@ public class Bullet : MonoBehaviour
                     // PlayerFSM otherFSM = other.GetComponent<PlayerFSM>();
                     // otherFSM.TransitionState(new Dead(otherFSM));
                     DestroyBullet();
+                    GameManager.Instance.playerHp--;
+                    if (GameManager.Instance.playerHp > 0)
+                    {
+                        GameEventManager.Instance.onPossessionTrigger.Invoke(Shooter, other.gameObject);
+                    }
+                    else
+                    {
+                        GameEventManager.Instance.onLevelFail.Invoke();
+                    }
                 }
             }
             DestroyBullet();

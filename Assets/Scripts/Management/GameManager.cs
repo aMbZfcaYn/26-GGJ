@@ -16,6 +16,7 @@ namespace Management
 
         [SerializeField] private float possessionMaxEnergy;
         [Range(1, 10)] [SerializeField] private float possessionReduceRate;
+        [Range(1, 200)] [SerializeField] private float possessionGain;
         [ReadOnly] [SerializeField] private bool isEnergyFilled;
 
         [Space(20)] [Header("Scenes")] [SerializeField]
@@ -176,7 +177,8 @@ namespace Management
         /// <param name="killed">Enemy that be killed</param>
         public void PossessionEnergyGain(GameObject killed)
         {
-            // TODO: add energy
+            possessionEnergy += possessionGain;
+            Debug.Log("Possession Energy Gain: " + possessionEnergy);
         }
 
         /// <summary>
@@ -190,6 +192,7 @@ namespace Management
             {
                 GameEventManager.Instance.onLevelClear.Invoke();
             }
+            Debug.Log("Enemy killed: " + killed.name);
         }
     }
 }
