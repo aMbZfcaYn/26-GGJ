@@ -8,14 +8,31 @@ public class AStarAgent : MonoBehaviour
     [SerializeField] private AIPath _aiPath;
     [SerializeField] private Seeker _seeker;
     [SerializeField] private AIDestinationSetter _destinationSetter;
+    public void SetSpeed(float speed)
+    {
+        if (_aiPath != null)
+        {
+            _aiPath.maxSpeed = speed;
+        }
+    }
 
     // Waypoints Mode ----------------------------------------------------
-    public Transform CurrentWaypoint => HasWaypoints ? _waypoints[_currentWaypointIndex] : null;
-    public bool HasWaypoints => _currentWaypointIndex < _waypoints.Count;
+    public Transform CurrentWaypoint
+    {
+        get
+        {
+            if (_temporaryWaypoint != null) return _temporaryWaypoint;
+            return _patrolWaypoints.Count > 0 ? _patrolWaypoints[_currentPatrolIndex] : null;
+        }
+    }
 
-    [SerializeField] private List<Transform> _waypoints = new();
+    public bool HasWaypoints => _patrolWaypoints.Count != 0 || _temporaryWaypoint != null;
+    public bool HasReachedCurrentWaypoint => _hasReachedCurrentWaypoint;
 
-    [SerializeField] private int _currentWaypointIndex = 0;
+    [SerializeField] private List<Transform> _patrolWaypoints = new();
+    [SerializeField] private int _currentPatrolIndex = 0;
+    [SerializeField] private Transform _temporaryWaypoint;
+
 
     [SerializeField] private float _showRouteDuration = 1.5f;
 
@@ -23,30 +40,25 @@ public class AStarAgent : MonoBehaviour
 
     public void ClearWaypoints()
     {
-        _waypoints.Clear();
-        _currentWaypointIndex = 0;
+        _patrolWaypoints.Clear();
+        _currentPatrolIndex = 0;
+        _temporaryWaypoint = null;
         _hasReachedCurrentWaypoint = false;
         if (_seeker != null) _seeker.drawGizmos = false;
     }
 
-    public void AddWayPoint(Transform target)
+    public void SetTempWaypoint(Transform target)
     {
         if (target == null)
         {
             Debug.LogWarning($"[Agent] Attempted to add null waypoint to {name}");
             return;
         }
-        _waypoints.Add(target);
-        if (_waypoints.Count == 1 && _currentWaypointIndex == 0 && _aiPath != null)
-        {
-            SetDestinationToCurrentWaypoint();
-        }
+
+        _temporaryWaypoint = target;
+        SetDestinationToCurrentWaypoint();
     }
 
-    protected void OnReachedFinalDestination()
-    {
-        if (_seeker != null) _seeker.drawGizmos = false;
-    }
     private void SetDestinationToCurrentWaypoint()
     {
         if (CurrentWaypoint != null && _aiPath != null)
@@ -56,14 +68,18 @@ public class AStarAgent : MonoBehaviour
         }
     }
 
-    private void MoveToNextWaypoint()
+    private void PatrolToNextWaypoint()
     {
-        if (_currentWaypointIndex >= _waypoints.Count - 1)
+        if (_temporaryWaypoint != null)
         {
-            OnReachedFinalDestination();
+            _temporaryWaypoint = null;
+            SetDestinationToCurrentWaypoint();
             return;
         }
-        _currentWaypointIndex++;
+
+        _currentPatrolIndex++;
+        if (_currentPatrolIndex == _patrolWaypoints.Count)
+            _currentPatrolIndex = 0;
         SetDestinationToCurrentWaypoint();
     }
     // --------------------------------------------------------------------
@@ -78,12 +94,12 @@ public class AStarAgent : MonoBehaviour
     {
         if (movingTarget == null)
         {
-            //Debug.LogWarning($"[Agent] Attempted to follow null target for {name}");
+            Debug.LogWarning($"[Agent] Attempted to follow null target for {name}");
             return;
         }
         if (_isFollowing)
         {
-            //Debug.LogWarning($"[Agent] {name} is already following a target");
+            Debug.LogWarning($"[Agent] {name} is already following a target");
             return;
         }
         _movingTarget = movingTarget;
@@ -96,7 +112,7 @@ public class AStarAgent : MonoBehaviour
     {
         if (!_isFollowing)
         {
-            //Debug.LogWarning($"[Agent] {name} is not currently following a target");
+            Debug.LogWarning($"[Agent] {name} is not currently following a target");
             return;
         }
         _movingTarget = null;
@@ -117,7 +133,7 @@ public class AStarAgent : MonoBehaviour
     private void Awake()
     {
         GetComponents();
-        if (_waypoints.Count > 0) SetDestinationToCurrentWaypoint();
+        if (_patrolWaypoints.Count > 0) SetDestinationToCurrentWaypoint();
     }
 
     private void Update()
@@ -129,7 +145,7 @@ public class AStarAgent : MonoBehaviour
         if (_aiPath.reachedEndOfPath != _hasReachedCurrentWaypoint)
         {
             _hasReachedCurrentWaypoint = _aiPath.reachedEndOfPath;
-            if (_hasReachedCurrentWaypoint) MoveToNextWaypoint();
+            if (_hasReachedCurrentWaypoint) PatrolToNextWaypoint();
         }
     }
 
@@ -143,13 +159,6 @@ public class AStarAgent : MonoBehaviour
         }
     }
 
-    public void SetSpeed(float speed)
-    {
-        if (_aiPath != null)
-        {
-            _aiPath.maxSpeed = speed;
-        }
-    }
 
     private void OnDrawGizmosSelected()
     {
@@ -160,28 +169,28 @@ public class AStarAgent : MonoBehaviour
             Gizmos.DrawWireSphere(_movingTarget.position, 0.4f);
         }
 
-        if (_waypoints == null || _waypoints.Count == 0 || _isFollowing) return;
+        if (_patrolWaypoints == null || _patrolWaypoints.Count == 0 || _isFollowing) return;
 
         Gizmos.color = Color.yellow;
-        for (int i = _currentWaypointIndex; i < _waypoints.Count; i++)
+        for (int i = _currentPatrolIndex; i < _patrolWaypoints.Count; i++)
         {
-            if (_waypoints[i] == null) continue;
-            if (i == _currentWaypointIndex)
+            if (_patrolWaypoints[i] == null) continue;
+            if (i == _currentPatrolIndex)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(_waypoints[i].position, 0.8f);
+                Gizmos.DrawWireSphere(_patrolWaypoints[i].position, 0.8f);
             }
             else
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(_waypoints[i].position, 0.5f);
+                Gizmos.DrawWireSphere(_patrolWaypoints[i].position, 0.5f);
             }
 
             // Draw lines between _waypoints
-            if (i > _currentWaypointIndex)
+            if (i > _currentPatrolIndex)
             {
                 Gizmos.color = Color.cyan;
-                Gizmos.DrawLine(_waypoints[i - 1].position, _waypoints[i].position);
+                Gizmos.DrawLine(_patrolWaypoints[i - 1].position, _patrolWaypoints[i].position);
             }
         }
 
