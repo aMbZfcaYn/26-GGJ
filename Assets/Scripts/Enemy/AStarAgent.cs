@@ -143,6 +143,14 @@ public class AStarAgent : MonoBehaviour
         }
     }
 
+    public void SetSpeed(float speed)
+    {
+        if (_aiPath != null)
+        {
+            _aiPath.maxSpeed = speed;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (_isFollowing && _movingTarget != null)

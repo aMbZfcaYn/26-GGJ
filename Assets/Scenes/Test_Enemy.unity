@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 54399640}
   - component: {fileID: 54399641}
   - component: {fileID: 54399642}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 165299585}
   - component: {fileID: 165299586}
   - component: {fileID: 165299587}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 217208163}
   - component: {fileID: 217208164}
   - component: {fileID: 217208165}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 220233141}
   - component: {fileID: 220233142}
   - component: {fileID: 220233143}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 292115219}
   - component: {fileID: 292115220}
   - component: {fileID: 292115221}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +887,7 @@ GameObject:
   - component: {fileID: 312144290}
   - component: {fileID: 312144291}
   - component: {fileID: 312144292}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1021,7 +1021,7 @@ GameObject:
   - component: {fileID: 338382338}
   - component: {fileID: 338382339}
   - component: {fileID: 338382340}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1155,7 @@ GameObject:
   - component: {fileID: 587672920}
   - component: {fileID: 587672921}
   - component: {fileID: 587672922}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1334,7 +1334,7 @@ GameObject:
   - component: {fileID: 617087646}
   - component: {fileID: 617087647}
   - component: {fileID: 617087648}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1468,7 +1468,7 @@ GameObject:
   - component: {fileID: 656921401}
   - component: {fileID: 656921402}
   - component: {fileID: 656921403}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1602,7 +1602,7 @@ GameObject:
   - component: {fileID: 868358146}
   - component: {fileID: 868358147}
   - component: {fileID: 868358148}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1736,7 +1736,7 @@ GameObject:
   - component: {fileID: 1027618521}
   - component: {fileID: 1027618522}
   - component: {fileID: 1027618523}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1870,7 +1870,7 @@ GameObject:
   - component: {fileID: 1028924353}
   - component: {fileID: 1028924354}
   - component: {fileID: 1028924355}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2004,7 +2004,7 @@ GameObject:
   - component: {fileID: 1136163151}
   - component: {fileID: 1136163152}
   - component: {fileID: 1136163153}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2138,7 +2138,7 @@ GameObject:
   - component: {fileID: 1277526261}
   - component: {fileID: 1277526262}
   - component: {fileID: 1277526263}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2272,7 +2272,7 @@ GameObject:
   - component: {fileID: 1340748703}
   - component: {fileID: 1340748704}
   - component: {fileID: 1340748705}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2406,7 +2406,7 @@ GameObject:
   - component: {fileID: 1486109525}
   - component: {fileID: 1486109526}
   - component: {fileID: 1486109527}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2540,7 +2540,7 @@ GameObject:
   - component: {fileID: 1506777596}
   - component: {fileID: 1506777597}
   - component: {fileID: 1506777598}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2674,7 +2674,7 @@ GameObject:
   - component: {fileID: 1609854206}
   - component: {fileID: 1609854207}
   - component: {fileID: 1609854208}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2958,7 +2958,7 @@ GameObject:
   - component: {fileID: 1712682351}
   - component: {fileID: 1712682352}
   - component: {fileID: 1712682353}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3092,7 +3092,7 @@ GameObject:
   - component: {fileID: 1716897648}
   - component: {fileID: 1716897649}
   - component: {fileID: 1716897650}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3229,6 +3229,8 @@ GameObject:
   - component: {fileID: 1725146545}
   - component: {fileID: 1725146544}
   - component: {fileID: 1725146543}
+  - component: {fileID: 1725146549}
+  - component: {fileID: 1725146550}
   m_Layer: 0
   m_Name: EnemySamle
   m_TagString: Untagged
@@ -3415,6 +3417,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1725146549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725146542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35bf20cb2da4154c85e84342006ee9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameters: {fileID: 11400000, guid: 4b08631e55540a34492d08dbcbe7d37a, type: 2}
+  agent: {fileID: 1725146543}
+  animator: {fileID: 1725146550}
+  target: {fileID: 0}
+--- !u!95 &1725146550
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725146542}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 38723bd3e5fc35644afd602ba03bae6a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1825253490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3426,7 +3466,7 @@ GameObject:
   - component: {fileID: 1825253491}
   - component: {fileID: 1825253492}
   - component: {fileID: 1825253493}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3560,7 +3600,7 @@ GameObject:
   - component: {fileID: 1835164365}
   - component: {fileID: 1835164366}
   - component: {fileID: 1835164367}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3694,7 +3734,7 @@ GameObject:
   - component: {fileID: 1889356809}
   - component: {fileID: 1889356810}
   - component: {fileID: 1889356811}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3828,7 +3868,7 @@ GameObject:
   - component: {fileID: 2100393289}
   - component: {fileID: 2100393290}
   - component: {fileID: 2100393291}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3962,7 +4002,7 @@ GameObject:
   - component: {fileID: 2101543336}
   - component: {fileID: 2101543337}
   - component: {fileID: 2101543338}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4096,7 +4136,7 @@ GameObject:
   - component: {fileID: 2138203791}
   - component: {fileID: 2138203792}
   - component: {fileID: 2138203793}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: WallSample(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
