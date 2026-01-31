@@ -14,7 +14,7 @@ namespace Management.SceneManage
 
         public Scene CurrentScene => SceneManager.GetActiveScene();
 
-        [SerializeField][SceneName] private string startSceneName;
+        [SerializeField] [SceneName] private string startSceneName;
 
         //[SerializeField] private string mainSceneName;
         //[SerializeField] private CanvasGroup fadeCanvasGroup;
@@ -30,7 +30,7 @@ namespace Management.SceneManage
         protected override void Initialize()
         {
             base.Initialize();
-            if (astarPath == null)
+            if (!astarPath)
                 astarPath = GameObject.Find("A*").GetComponent<AstarPath>();
         }
 

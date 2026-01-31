@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public bool blocked = false;
-    
+
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Actions actions;
     [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
 
     private Rigidbody2D rb;
     private AbilityManager ability;
-    
+
     private bool inAbility = false;
 
     void Start()
@@ -24,14 +24,14 @@ public class PlayerControl : MonoBehaviour
     {
         var camScript = Camera.main.GetComponent<CameraControl>();
         camScript.target = transform;
-        
+
         rb = GetComponent<Rigidbody2D>();
         ability = GetComponent<AbilityManager>();
-        
+
         GameManager.Instance.RegisterPlayer(gameObject, first);
 
         // 设置当前武器类型
-        if (actions != null)
+        if (actions)
         {
             actions.SetCurrentWeapon(currentWeaponType);
         }
@@ -44,7 +44,7 @@ public class PlayerControl : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             return;
         }
-        
+
         Vector2 movement = InputManager.Movement;
         rb.linearVelocity = movement * moveSpeed;
 
@@ -64,7 +64,7 @@ public class PlayerControl : MonoBehaviour
             else
                 ability.OnAbilityButtonPressed();
         }
-        
+
         if (InputManager.DefaultAttackWasPressed)
         {
             switch (currentWeaponType)
@@ -111,7 +111,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PerformMeleeAttack(WeaponType weaponType)
     {
-        if (actions != null)
+        if (actions)
         {
             actions.PerformMeleeAttack(transform, weaponType);
         }
@@ -122,10 +122,9 @@ public class PlayerControl : MonoBehaviour
     }
 
 
-
     private void PerformSpearAttack()
     {
-        if (actions != null)
+        if (actions)
         {
             actions.PerformSpearAttack(transform);
         }
@@ -133,7 +132,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PerformShoot()
     {
-        if (actions != null)
+        if (actions)
         {
             actions.PerformShoot(transform);
         }
@@ -145,7 +144,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PerformSpreadShot()
     {
-        if (actions != null)
+        if (actions)
         {
             actions.PerformSpreadShot(transform);
         }
@@ -157,7 +156,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PerformRiffleShot()
     {
-        if (actions != null)
+        if (actions)
         {
             actions.PerformRiffleShot(transform);
         }
@@ -170,7 +169,7 @@ public class PlayerControl : MonoBehaviour
     private void RotateTowardsMouse()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+
         mouseWorldPos.z = 0;
 
         Vector2 directionToMouse = new Vector2(

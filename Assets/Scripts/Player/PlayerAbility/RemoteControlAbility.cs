@@ -3,27 +3,27 @@ using UnityEngine.Events;
 
 public class RemoteControlAbility : AbilityBase
 {
-    [Header("能力3设置")]
-    public float flightSpeed = 10f;
+    [Header("能力3设置")] public float flightSpeed = 10f;
 
     private PlayerControl playerScript;
 
     public override void TriggerAbility()
     {
         isAbilityActive = true;
-        
+
         // 1. 禁用玩家本体控制
         playerScript = playerObj.GetComponent<PlayerControl>();
         playerScript.blocked = true;
 
         // 2. 生成飞行物
-        GameObject proj = Instantiate(PrefabLibrary.Instance.FlyMaskPrefab, playerObj.transform.position, Quaternion.identity);
-        
+        GameObject proj = Instantiate(PrefabLibrary.Instance.FlyMaskPrefab, playerObj.transform.position,
+            Quaternion.identity);
+
         // 3. 初始化飞行物
         var controller = proj.GetComponent<ControlledProjectile>();
-        if(controller) controller.Setup(this, flightSpeed);
+        if (controller) controller.Setup(this, flightSpeed);
         controller.initialTransform = transform;
-        
+
         var camScript = Camera.main.GetComponent<CameraControl>();
         camScript.target = proj.transform;
     }

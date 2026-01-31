@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class SelectAbility : AbilityBase
 {
-    [Header("能力1设置")]
-    public float slowMotionScale = 0.1f;
+    [Header("能力1设置")] public float slowMotionScale = 0.1f;
 
     private int cnt = 0;
-    
+
     public override void TriggerAbility()
     {
         isAbilityActive = true;
         TimeManager.Instance.SetTimeScale(slowMotionScale);
-        
+
         var enemies = GameManager.Instance.EnemyList;
         foreach (GameObject enemy in enemies)
         {
@@ -35,16 +34,16 @@ public class SelectAbility : AbilityBase
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity);
-                
+
             Debug.Log(hit.collider);
-                
-            if (hit.collider != null && hit.collider.CompareTag("TestEnemy"))
+
+            if (hit.collider && hit.collider.CompareTag("TestEnemy"))
             {
                 ExecuteEnemy(hit.collider.gameObject);
             }
         }
-        
-        if(InputManager.SkillWasPressed && cnt > 0)
+
+        if (InputManager.SkillWasPressed && cnt > 0)
             FinishAbility();
         cnt++;
     }
@@ -53,7 +52,7 @@ public class SelectAbility : AbilityBase
     {
         base.FinishAbility();
         TimeManager.Instance.SetTimeScale(1); // 恢复时间
-        
+
         var enemies = GameManager.Instance.EnemyList;
         foreach (GameObject enemy in enemies)
         {

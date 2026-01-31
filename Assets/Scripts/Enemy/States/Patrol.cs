@@ -19,6 +19,5 @@ public class Patrol : StateBase, IState
 
     public void OnExit()
     {
-    
     }
 }

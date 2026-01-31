@@ -6,7 +6,7 @@ using UnityEngine;
 public class ControlledProjectile : MonoBehaviour
 {
     public Transform initialTransform;
-    
+
     private RemoteControlAbility ownerAbility;
     private float speed;
 
@@ -18,7 +18,7 @@ public class ControlledProjectile : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(InputManager.Movement * speed * Time.deltaTime);
+        transform.Translate(InputManager.Movement * (speed * Time.deltaTime));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +26,7 @@ public class ControlledProjectile : MonoBehaviour
         Debug.Log(collision.name);
 
         var tag = collision.GetComponent<Taggable>();
-        
+
         if (Taggable.HasTag(collision.gameObject, TagManager.GetTag("Enemy")))
         {
             // 通知能力脚本处理结果

@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class SceneNameAttribute : PropertyAttribute
 {
-    // ²»ĞèÒª¶îÍâ×Ö¶Î£¬½ö×÷Îª±ê¼ÇÊôĞÔ
+    // ä¸éœ€è¦é¢å¤–å­—æ®µï¼Œä»…ä½œä¸ºæ ‡è®°å±æ€§
 }

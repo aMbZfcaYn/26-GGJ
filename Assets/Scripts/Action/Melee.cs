@@ -1,9 +1,11 @@
 using UnityEngine;
 using Management.Tag;
 using System.Runtime.CompilerServices;
+
 public class Melee : MonoBehaviour
 {
     public bool isblunk = false;
+
     public void changeblunk(bool blunk)
     {
         isblunk = blunk;
@@ -27,8 +29,6 @@ public class Melee : MonoBehaviour
                 otherFSM.TransitionState(new Dead(otherFSM));
                 Debug.Log("锐器击中敌人: " + other.name);
             }
-
-
         }
     }
 }

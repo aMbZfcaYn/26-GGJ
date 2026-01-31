@@ -4,61 +4,77 @@ using Management.Tag;
 
 public enum WeaponType
 {
-    knife, sword, hammer, Spear, magic_single, magic_spread, magic_riffle, magic_melee
+    knife,
+    sword,
+    hammer,
+    Spear,
+    magic_single,
+    magic_spread,
+    magic_riffle,
+    magic_melee
 }
 
 public class Actions : MonoBehaviour
 {
-    [Header("Melee Attack Settings")]
-    [SerializeField] private float attackDuration = 0.2f;
+    [Header("Melee Attack Settings")] [SerializeField]
+    private float attackDuration = 0.2f;
+
     [SerializeField] private GameObject attackColliderPrefab;
 
-    [Header("Shooting Settings")]
-    [SerializeField] private GameObject bulletPrefab;
+    [Header("Shooting Settings")] [SerializeField]
+    private GameObject bulletPrefab;
+
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private Transform bulletSpawnPoint;
 
-    [Header("Knife Settings")]
-    [SerializeField] private float attackRadius_knife = 0.5f;
+    [Header("Knife Settings")] [SerializeField]
+    private float attackRadius_knife = 0.5f;
+
     [SerializeField] private float attackWidth_knife = 0.3f;
     [SerializeField] private float attackAngle_knife = 90f;
     [SerializeField] private float attackDuration_knife = 0.2f;
 
-    [Header("Sword Settings")]
-    [SerializeField] private float attackRadius_sword = 1f;
+    [Header("Sword Settings")] [SerializeField]
+    private float attackRadius_sword = 1f;
+
     [SerializeField] private float attackWidth_sword = 0.3f;
     [SerializeField] private float attackAngle_sword = 90f;
     [SerializeField] private float attackDuration_sword = 0.2f;
 
-    [Header("Hammer Settings")]
-    [SerializeField] private float attackRadius_hammer = 1.5f;
+    [Header("Hammer Settings")] [SerializeField]
+    private float attackRadius_hammer = 1.5f;
+
     [SerializeField] private float attackWidth_hammer = 0.3f;
     [SerializeField] private float attackAngle_hammer = 90f;
     [SerializeField] private float attackDuration_hammer = 0.2f;
 
-    [Header("Spear Settings")]
-    [SerializeField] private float attackRadius_spear = 2f;
+    [Header("Spear Settings")] [SerializeField]
+    private float attackRadius_spear = 2f;
+
     [SerializeField] private float attackWidth_spear = 0.3f;
     [SerializeField] private float attackDuration_spear = 0.2f;
 
-    [Header("Magic Melee Settings")]
-    [SerializeField] private float attackRadius_magic = 0.5f;
+    [Header("Magic Melee Settings")] [SerializeField]
+    private float attackRadius_magic = 0.5f;
+
     [SerializeField] private float attackWidth_magic = 0.3f;
     [SerializeField] private float attackAngle_magic = 90f;
     [SerializeField] private float attackDuration_magic = 0.2f;
 
-    [Header("Magic Single Shot Settings")]
-    [SerializeField] private float shootCooldown_single = 0.5f;
+    [Header("Magic Single Shot Settings")] [SerializeField]
+    private float shootCooldown_single = 0.5f;
 
-    [Header("Magic Spread Shot Settings")]
-    [SerializeField] private float shootCooldown_spread = 1f;
+    [Header("Magic Spread Shot Settings")] [SerializeField]
+    private float shootCooldown_spread = 1f;
+
     [SerializeField] private int spreadBulletsCount = 10;
     [SerializeField] private float spreadAngleRange = 15f;
     [SerializeField] private float spreadFireRate = 0.02f;
     [SerializeField] private float spreadDistance = 0.8f;
 
-    [Header("Magic Rifle Settings")]
-    [SerializeField] private float shootCooldown_rifle = 0.2f;
+    [Header("Magic Rifle Settings")] [SerializeField]
+    private float shootCooldown_rifle = 0.2f;
+
     [SerializeField] private float rifleAngleRange = 10f;
 
     [SerializeField] private LayerMask enemyLayer;
@@ -71,7 +87,7 @@ public class Actions : MonoBehaviour
     {
         currentWeaponType = weaponType;
     }
-    
+
     public void PerformMeleeAttack(Transform attacker, WeaponType currentWeaponType, bool isBlunk = false)
     {
         if (isAttacking) return;
@@ -151,7 +167,7 @@ public class Actions : MonoBehaviour
     }
 
     private IEnumerator MeleeAttackCoroutine(Transform attacker, float attackRadius, float attackWidth,
-     float attackAngle, float attackDurationValue, LayerMask enemyLayer, bool isBlunk)
+        float attackAngle, float attackDurationValue, LayerMask enemyLayer, bool isBlunk)
     {
         isAttacking = true;
 
@@ -166,7 +182,8 @@ public class Actions : MonoBehaviour
 
         Vector3 attackPosition = attacker.position + (Vector3)(startDirection * attackRadius / 2);
 
-        GameObject attackCollider = CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk);
+        GameObject attackCollider =
+            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk);
 
         float progress = 0f;
         float totalRotationTime = attackDurationValue;
@@ -180,7 +197,7 @@ public class Actions : MonoBehaviour
             float radian = currentAngle * Mathf.Deg2Rad;
             Vector2 currentDirection = new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
 
-            if (attackCollider != null)
+            if (attackCollider)
             {
                 attackCollider.transform.position = attacker.position + (Vector3)(currentDirection * attackRadius / 2);
                 attackCollider.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
@@ -189,7 +206,7 @@ public class Actions : MonoBehaviour
             yield return null;
         }
 
-        if (attackCollider != null)
+        if (attackCollider)
         {
             Destroy(attackCollider);
         }
@@ -198,14 +215,16 @@ public class Actions : MonoBehaviour
         isAttacking = false;
     }
 
-    private GameObject CreateAttackCollider(Vector3 position, Quaternion rotation, float attackRadius, float attackWidth, bool isBlunk)
+    private GameObject CreateAttackCollider(Vector3 position, Quaternion rotation, float attackRadius,
+        float attackWidth, bool isBlunk)
     {
         GameObject colliderObj = Instantiate(attackColliderPrefab, position, rotation);
         BoxCollider2D boxCollider = colliderObj.GetComponent<BoxCollider2D>();
-        if (boxCollider != null)
+        if (boxCollider)
         {
             boxCollider.size = new Vector2(attackRadius, attackWidth);
         }
+
         Melee melee = colliderObj.GetComponent<Melee>();
         melee.isblunk = isBlunk;
         return colliderObj;
@@ -234,7 +253,7 @@ public class Actions : MonoBehaviour
         {
             progress = Mathf.Clamp01(progress + Time.deltaTime / (totalMoveTime * 0.4f));
 
-            if (attackCollider != null)
+            if (attackCollider)
             {
                 Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, progress);
                 attackCollider.transform.position = newPosition + (Vector3)(direction * attackDistance / 2);
@@ -251,7 +270,7 @@ public class Actions : MonoBehaviour
         {
             returnProgress = Mathf.Clamp01(returnProgress + Time.deltaTime / (totalMoveTime * 0.4f));
 
-            if (attackCollider != null)
+            if (attackCollider)
             {
                 Vector3 newPosition = Vector3.Lerp(endPosition, startPosition, returnProgress);
                 attackCollider.transform.position = newPosition + (Vector3)(direction * attackDistance / 2);
@@ -260,7 +279,7 @@ public class Actions : MonoBehaviour
             yield return null;
         }
 
-        if (attackCollider != null)
+        if (attackCollider)
         {
             Destroy(attackCollider);
         }
@@ -275,7 +294,7 @@ public class Actions : MonoBehaviour
         GameObject colliderObj = Instantiate(attackColliderPrefab, position, rotation);
         BoxCollider2D boxCollider = colliderObj.GetComponent<BoxCollider2D>();
 
-        if (boxCollider != null)
+        if (boxCollider)
         {
             boxCollider.size = new Vector2(attackDistance, attackWidth);
         }
@@ -300,11 +319,12 @@ public class Actions : MonoBehaviour
 
     private GameObject CreateBullet(Vector3 position, Quaternion rotation)
     {
-        if (bulletPrefab != null)
+        if (bulletPrefab)
         {
             GameObject bullet = Instantiate(bulletPrefab, position, rotation);
             return bullet;
         }
+
         return null;
     }
 
@@ -335,18 +355,19 @@ public class Actions : MonoBehaviour
 
     private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, float disableTime = 0.1f)
     {
-        if (bulletPrefab != null)
+        if (bulletPrefab)
         {
             GameObject bullet = Instantiate(bulletPrefab, position, rotation);
 
             Bullet bulletScript = bullet.GetComponent<Bullet>();
-            if (bulletScript != null)
+            if (bulletScript)
             {
                 bulletScript.SetDisableTime(disableTime);
             }
 
             return bullet;
         }
+
         return null;
     }
 
@@ -354,7 +375,7 @@ public class Actions : MonoBehaviour
     {
         canShoot = false;
 
-        Vector3 spawnPosition = bulletSpawnPoint != null ? bulletSpawnPoint.position : shooter.position;
+        Vector3 spawnPosition = bulletSpawnPoint ? bulletSpawnPoint.position : shooter.position;
 
         float randomAngleOffset = Random.Range(-rifleAngleRange, rifleAngleRange);
         Quaternion randomRotation = Quaternion.Euler(0, 0, shooter.eulerAngles.z + randomAngleOffset);

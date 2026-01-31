@@ -8,14 +8,14 @@ public class SceneNameDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        // È·±£ÊôĞÔÊÇ×Ö·û´®ÀàĞÍ
+        // ç¡®ä¿å±æ€§æ˜¯å­—ç¬¦ä¸²ç±»å‹
         if (property.propertyType != SerializedPropertyType.String)
         {
             EditorGUI.PropertyField(position, property, label, true);
             return;
         }
 
-        // »ñÈ¡Build SettingsÖĞµÄ³¡¾°Ãû³ÆÁĞ±í
+        // è·å–Build Settingsä¸­çš„åœºæ™¯åç§°åˆ—è¡¨
         List<string> sceneNames = GetSceneNames();
 
         if (sceneNames.Count == 0)
@@ -24,15 +24,15 @@ public class SceneNameDrawer : PropertyDrawer
             return;
         }
 
-        // »ñÈ¡µ±Ç°ÖµÔÚÁĞ±íÖĞµÄË÷Òı
+        // è·å–å½“å‰å€¼åœ¨åˆ—è¡¨ä¸­çš„ç´¢å¼•
         string currentValue = property.stringValue;
         int currentIndex = sceneNames.IndexOf(currentValue);
         if (currentIndex < 0) currentIndex = 0;
 
-        // ´´½¨ÏÂÀ­²Ëµ¥
+        // åˆ›å»ºä¸‹æ‹‰èœå•
         int selectedIndex = EditorGUI.Popup(position, label.text, currentIndex, sceneNames.ToArray());
 
-        // ¸üĞÂÊôĞÔÖµ
+        // æ›´æ–°å±æ€§å€¼
         if (selectedIndex >= 0 && selectedIndex < sceneNames.Count)
         {
             property.stringValue = sceneNames[selectedIndex];
@@ -47,7 +47,7 @@ public class SceneNameDrawer : PropertyDrawer
         {
             if (scene.enabled)
             {
-                // ´ÓÂ·¾¶ÖĞÌáÈ¡³¡¾°Ãû³Æ
+                // ä»è·¯å¾„ä¸­æå–åœºæ™¯åç§°
                 string sceneName = System.IO.Path.GetFileNameWithoutExtension(scene.path);
                 names.Add(sceneName);
             }

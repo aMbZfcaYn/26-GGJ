@@ -8,16 +8,14 @@ using UnityEngine.UI;
 
 public class AbilitySelectionSystem : MonoBehaviour
 {
-    [Header("配置")]
-    [SerializeField] private List<AbilityData> abilities; // 拖入你的数据
-    [SerializeField] private GameObject cardPrefab;      // 拖入制作好的Prefab
-    [SerializeField] private Transform cardContainer;     // 放置卡片的父物体
+    [Header("配置")] [SerializeField] private List<AbilityData> abilities; // 拖入你的数据
+    [SerializeField] private GameObject cardPrefab; // 拖入制作好的Prefab
+    [SerializeField] private Transform cardContainer; // 放置卡片的父物体
 
-    [Header("UI 引用")]
-    [SerializeField] private TextMeshProUGUI descriptionText;
+    [Header("UI 引用")] [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private CanvasGroup mainCanvasGroup; // 整个面板的CanvasGroup
-    [SerializeField] private HorizontalLayoutGroup layoutGroup; 
-    
+    [SerializeField] private HorizontalLayoutGroup layoutGroup;
+
     private List<AbilityCard> _spawnedCards = new List<AbilityCard>();
     private int _currentSelectedIndex = -1;
     private bool _isLocked = true; // 锁定操作防止连点
@@ -26,9 +24,9 @@ public class AbilitySelectionSystem : MonoBehaviour
     {
         descriptionText.alpha = 0; // 初始隐藏描述
         SpawnCards();
-        
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(cardContainer as RectTransform);
-        
+
         // 播放入场动画
         float delay = 0.1f;
         for (int i = 0; i < _spawnedCards.Count; i++)
@@ -42,9 +40,9 @@ public class AbilitySelectionSystem : MonoBehaviour
 
     private void SpawnCards()
     {
-        if(layoutGroup != null) 
+        if (layoutGroup)
             layoutGroup.enabled = true;
-        
+
         // 清理旧的
         foreach (Transform child in cardContainer) Destroy(child.gameObject);
         _spawnedCards.Clear();
@@ -56,7 +54,6 @@ public class AbilitySelectionSystem : MonoBehaviour
             card.Setup(abilities[i], i, OnCardClicked);
             _spawnedCards.Add(card);
         }
-        
     }
 
     private void OnCardClicked(int index)
@@ -107,12 +104,9 @@ public class AbilitySelectionSystem : MonoBehaviour
             GameManager.Instance.playerAbilityIndex = index + 1;
             GameEventManager.Instance.onLevelStart.Invoke();
             InputManager.SetGameInputState(true);
-            
+
             // 3. 整个 UI 淡出消失
-            mainCanvasGroup.DOFade(0, 0.5f).OnComplete(() =>
-            {
-                gameObject.SetActive(false);
-            });
+            mainCanvasGroup.DOFade(0, 0.5f).OnComplete(() => { gameObject.SetActive(false); });
         });
     }
 }

@@ -1,21 +1,8 @@
 using System;
 using UnityEngine;
+using Utilities;
 
-public class PrefabLibrary : MonoBehaviour
+public class PrefabLibrary : GenericSingleton<PrefabLibrary>
 {
-    public static PrefabLibrary Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(Instance.gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-
     public GameObject FlyMaskPrefab;
 }

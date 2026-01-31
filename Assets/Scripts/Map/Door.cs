@@ -62,7 +62,7 @@ public class RotateAroundPoint : MonoBehaviour
 
     void Update()
     {
-        if (hasStartedRotating && !hasReachedMax && rotationTarget != null)
+        if (hasStartedRotating && !hasReachedMax && rotationTarget)
         {
             if (rotator == 0)
             {
@@ -166,7 +166,7 @@ public class RotateAroundPoint : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-        if (rotationTarget != null)
+        if (rotationTarget)
         {
             Gizmos.DrawLine(transform.position, rotationTarget.position);
         }

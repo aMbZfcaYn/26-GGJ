@@ -3,20 +3,21 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    [Header("CameraSetting")]
-    public Transform target;
+    [Header("CameraSetting")] public Transform target;
     [SerializeField] private Vector3 offset = new Vector3(0, 0, -10);
 
-    [Header("MoveSetting")]
-    [SerializeField] private float specialMoveSpeed = 2.0f;
+    [Header("MoveSetting")] [SerializeField]
+    private float specialMoveSpeed = 2.0f;
+
     [SerializeField] private float maxDistanceFromTarget = 5.0f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float backSpeed = 2.0f;
 
     private Vector3 defaultPosition;
+
     void LateUpdate()
     {
-        if (target == null) return;
+        if (!target) return;
 
         defaultPosition = target.position + offset;
 
@@ -41,21 +42,20 @@ public class CameraControl : MonoBehaviour
         {
             directionToMouse = directionToMouse.normalized * maxDistanceFromTarget;
         }
+
         Vector3 specialPosition = target.position + directionToMouse + offset;
 
         transform.position = Vector3.Lerp(transform.position, specialPosition,
-                                        specialMoveSpeed * Time.deltaTime);
+            specialMoveSpeed * Time.deltaTime);
 
         if (InputManager.CameraMoveIsReleased)
         {
             transform.position = Vector3.Lerp(transform.position, defaultPosition, backSpeed);
-
         }
     }
 
     private Vector3 GetMouseWorldPosition()
     {
-
         Vector3 mouseScreenPos = Input.mousePosition;
 
         mouseScreenPos.z = Camera.main.transform.position.y - target.position.y;

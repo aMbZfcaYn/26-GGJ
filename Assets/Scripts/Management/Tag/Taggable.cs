@@ -37,7 +37,5 @@ namespace Management.Tag
 
             return taggable.HasTag(tagToCompare);
         }
-        
-        
     }
 }

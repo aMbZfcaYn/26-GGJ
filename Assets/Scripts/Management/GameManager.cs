@@ -9,9 +9,8 @@ namespace Management
 {
     public class GameManager : GenericSingleton<GameManager>
     {
-        [Header("UI")]
-        public GameObject abilityCanvas;
-        
+        [Header("UI")] public GameObject abilityCanvas;
+
         [Header("Possession")] [SerializeField]
         private float possessionEnergy;
 
@@ -31,7 +30,7 @@ namespace Management
         public GameObject player;
 
         public int playerAbilityIndex;
-        
+
         [SerializeField] public int playerHp;
 
 
@@ -104,6 +103,7 @@ namespace Management
                 taggable.TryAddTag(TagUtils.Type_Player);
                 taggable.TryRemoveTag(TagUtils.Type_Enemy);
             }
+
             if (taggable.HasTag(TagUtils.Type_Player) || !taggable.HasTag(TagUtils.Type_Enemy))
             {
                 Debug.LogError($"Unexpected Register to {newPlayer.name}");

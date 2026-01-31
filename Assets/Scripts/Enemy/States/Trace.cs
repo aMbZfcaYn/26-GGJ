@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class Trace : StateBase,IState
+public class Trace : StateBase, IState
 {
     private readonly Transform _soundSource;
+
     public Trace(EnemyFSM fsm, Transform soundSource) : base(fsm)
     {
         _soundSource = soundSource;

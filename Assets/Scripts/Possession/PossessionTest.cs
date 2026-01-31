@@ -11,7 +11,7 @@ namespace Possession
 
         private void Update()
         {
-            if(InputManager.SkillWasPressed)
+            if (InputManager.SkillWasPressed)
             {
                 StartPossessionTest();
             }

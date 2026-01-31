@@ -24,9 +24,9 @@ public class EnemyFSM : MonoBehaviour
 
     private void Awake()
     {
-        if (agent == null) agent = GetComponent<AStarAgent>();
-        if (animator == null) animator = GetComponentInChildren<Animator>();
-        if (taggable == null) taggable = GetComponent<Taggable>();
+        if (!agent) agent = GetComponent<AStarAgent>();
+        if (!animator) animator = GetComponentInChildren<Animator>();
+        if (!taggable) taggable = GetComponent<Taggable>();
     }
 
     private void Start()
@@ -94,6 +94,7 @@ public class EnemyFSM : MonoBehaviour
 
         return true;
     }
+
     /// <summary>
     /// Event func of event: onSoundEmit
     /// </summary>

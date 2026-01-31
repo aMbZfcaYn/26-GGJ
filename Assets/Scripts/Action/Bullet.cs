@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
         {
             GameObject enemyObject = other.gameObject;
             Taggable taggable = enemyObject.GetComponent<Taggable>();
-            if (taggable != null && taggable.HasTag(TagManager.GetTag("Enemy")))
+            if (taggable && taggable.HasTag(TagManager.GetTag("Enemy")))
             {
                 Debug.Log("子弹击中敌人: " + other.name);
                 EnemyFSM otherFSM = other.GetComponent<EnemyFSM>();

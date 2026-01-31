@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class AutoSelectAbility : AbilityBase
 {
-    [Header("能力2设置")]
-    public float searchRadius = 150f;
+    [Header("能力2设置")] public float searchRadius = 150f;
     public LayerMask enemyLayer = 3;
 
     public override void TriggerAbility()
@@ -25,7 +24,7 @@ public class AutoSelectAbility : AbilityBase
             }
         }
 
-        if (nearestEnemy != null)
+        if (nearestEnemy)
         {
             // 可以在这里加一些特效，比如瞬移过去或者发射光束
             ExecuteEnemy(nearestEnemy);

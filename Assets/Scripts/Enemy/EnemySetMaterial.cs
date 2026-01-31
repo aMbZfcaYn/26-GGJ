@@ -17,15 +17,15 @@ public class EnemySetMaterial : MonoBehaviour
     private bool CheckSelected()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+
         return mousePos.x >= transform.position.x - xRange && mousePos.x <= transform.position.x + xRange &&
                mousePos.y >= transform.position.y - yRange && mousePos.y <= transform.position.y + yRange;
     }
-    
+
     public void SetSelected(bool isSelected)
     {
         var renderer = GetComponent<SpriteRenderer>();
-        if (renderer != null)
+        if (renderer)
         {
             renderer.material = isSelected ? selectedMat : defaultMat;
         }

@@ -8,23 +8,21 @@ namespace Possession
 {
     public class PossessionProcess : MonoBehaviour
     {
-        [Header("配置")]
-        public Camera mainCamera;
+        [Header("配置")] public Camera mainCamera;
         public SpriteRenderer darkOverlay;
-    
-        [Header("动画参数")]
-        public float focusDuration = 0.5f;    // 移向玩家耗时
-        public float pauseDuration = 0.5f;    // 停顿耗时
+
+        [Header("动画参数")] public float focusDuration = 0.5f; // 移向玩家耗时
+        public float pauseDuration = 0.5f; // 停顿耗时
         public float transferDuration = 0.8f; // 移向敌人耗时
-    
-        [Header("镜头缩放")]
-        public float closeUpSize = 3.0f; // 特写时的镜头大小 (越小放得越大)
-        
+
+        [Header("镜头缩放")] public float closeUpSize = 3.0f; // 特写时的镜头大小 (越小放得越大)
+
         [Header("高亮设置")]
         // 设置一个非常大的排序值，确保盖过黑色遮罩(遮罩假设是100)
-        public int highlightSortingOrder = 200; 
+        public int highlightSortingOrder = 200;
+
         public float overlayAlpha = 0.85f; // 背景变黑的程度 (0-1)
-        
+
         private float originalSize;
         private float originalZ;
         private int originalPlayerOrder;
@@ -33,14 +31,14 @@ namespace Possession
         private SortingGroup enemySG;
         private SpriteRenderer playerSR;
         private SpriteRenderer enemySR;
-            
+
         private CameraControl camScript;
-        
+
         private void Start()
         {
             GameEventManager.Instance.onPossessionTrigger.AddListener(StartPossessionSequence);
-            if (mainCamera == null) mainCamera = Camera.main;
-            
+            if (!mainCamera) mainCamera = Camera.main;
+
             camScript = mainCamera.GetComponent<CameraControl>();
         }
 
@@ -64,7 +62,7 @@ namespace Possession
             playerSG = player.GetComponent<SortingGroup>();
             enemySG = enemy.GetComponent<SortingGroup>();
 
-            if (playerSG != null)
+            if (playerSG)
             {
                 originalPlayerOrder = playerSG.sortingOrder;
                 playerSG.sortingOrder = highlightSortingOrder;
@@ -79,7 +77,7 @@ namespace Possession
                 }
             }
 
-            if (enemySG != null)
+            if (enemySG)
             {
                 originalEnemyOrder = enemySG.sortingOrder;
                 enemySG.sortingOrder = highlightSortingOrder;
@@ -95,13 +93,14 @@ namespace Possession
             }
 
             // 3. 将黑色背景图移到摄像机前并淡入
-            if (darkOverlay != null)
+            if (darkOverlay)
             {
                 // 确保遮罩在摄像机前面，但在角色后面
                 // 比如：角色200，遮罩100，地图0
-                darkOverlay.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0);
+                darkOverlay.transform.position =
+                    new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0);
                 // 让遮罩跟随摄像机(或者直接作为摄像机子物体)
-                darkOverlay.transform.SetParent(mainCamera.transform); 
+                darkOverlay.transform.SetParent(mainCamera.transform);
                 darkOverlay.transform.localPosition = new Vector3(0, 0, 10); // 放在摄像机前方
 
                 darkOverlay.DOFade(overlayAlpha, 0.3f).SetUpdate(true);
@@ -126,9 +125,9 @@ namespace Possession
             seq.OnComplete(() =>
             {
                 // 恢复遮罩
-                if (darkOverlay != null)
+                if (darkOverlay)
                 {
-                    darkOverlay.DOFade(0, 0.5f).SetUpdate(true).OnComplete(()=> 
+                    darkOverlay.DOFade(0, 0.5f).SetUpdate(true).OnComplete(() =>
                     {
                         darkOverlay.transform.SetParent(null); // 解除父子关系
                     });
@@ -136,7 +135,7 @@ namespace Possession
 
                 // 恢复镜头
                 mainCamera.DOOrthoSize(originalSize, 0.5f).SetUpdate(true);
-                
+
                 // 恢复时间
                 TimeManager.Instance.SetTimeScale(1);
                 camScript.enabled = true;
@@ -152,23 +151,23 @@ namespace Possession
             Taggable taggable = newBody.GetComponent<Taggable>();
             taggable.TryRemoveTag(TagManager.GetTag("Enemy"));
             taggable.TryAddTag(TagManager.GetTag("Player"));
-            
+
             var playerControl = newBody.AddComponent<PlayerControl>();
             var ability = newBody.AddComponent<AbilityManager>();
-            
+
             playerControl.Init();
             ability.SelectAbility();
-            
+
             Destroy(oldPlayer);
         }
-    
+
         void SetLayerRecursively(GameObject obj, int newLayer)
         {
-            if (obj == null) return;
+            if (!obj) return;
             obj.layer = newLayer;
             foreach (Transform child in obj.transform)
             {
-                if (child == null) continue;
+                if (!child) continue;
                 SetLayerRecursively(child.gameObject, newLayer);
             }
         }

@@ -30,20 +30,20 @@ public class SceneManagerTool : EditorWindow
         {
             EditorGUILayout.BeginHorizontal();
 
-            // ÏÔÊ¾³¡¾°ÆôÓÃ×´Ì¬
+            // æ˜¾ç¤ºåœºæ™¯å¯ç”¨çŠ¶æ€
             bool enabled = scene.enabled;
             enabled = EditorGUILayout.Toggle(enabled, GUILayout.Width(20));
 
-            // ÏÔÊ¾³¡¾°Ãû³Æ
+            // æ˜¾ç¤ºåœºæ™¯åç§°
             string sceneName = System.IO.Path.GetFileNameWithoutExtension(scene.path);
             EditorGUILayout.LabelField(sceneName);
 
-            // ÏÔÊ¾³¡¾°Â·¾¶
+            // æ˜¾ç¤ºåœºæ™¯è·¯å¾„
             EditorGUILayout.LabelField(scene.path, EditorStyles.miniLabel, GUILayout.Width(300));
 
             EditorGUILayout.EndHorizontal();
 
-            // ¸üĞÂ³¡¾°×´Ì¬
+            // æ›´æ–°åœºæ™¯çŠ¶æ€
             if (scene.enabled != enabled)
             {
                 scene.enabled = enabled;
@@ -56,8 +56,8 @@ public class SceneManagerTool : EditorWindow
         EditorGUILayout.Space();
 
         EditorGUILayout.HelpBox("Changes to scene enable/disable status will take effect immediately. " +
-                               "Use the 'Refresh Scene List' button to update inspector dropdowns.",
-                               MessageType.Info);
+                                "Use the 'Refresh Scene List' button to update inspector dropdowns.",
+            MessageType.Info);
     }
 
     private void SaveBuildSettings()

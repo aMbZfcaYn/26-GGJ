@@ -3,6 +3,7 @@ using UnityEngine;
 public class Attack : StateBase, IState
 {
     private AnimatorStateInfo currentAnimState;
+
     public Attack(EnemyFSM fsm) : base(fsm) { }
 
     public void OnEnter()

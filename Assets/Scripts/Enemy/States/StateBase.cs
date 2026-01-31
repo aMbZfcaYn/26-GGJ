@@ -6,6 +6,7 @@ public interface IState
     void OnUpdate();
     void OnExit();
 }
+
 public class StateBase
 {
     protected EnemyFSM _fsm;
@@ -17,4 +18,3 @@ public class StateBase
         _parameters = fsm.Parameters;
     }
 }
-

@@ -8,26 +8,28 @@ public class AStarAgent : MonoBehaviour
     [SerializeField] private AIPath _aiPath;
     [SerializeField] private Seeker _seeker;
     [SerializeField] private AIDestinationSetter _destinationSetter;
+
     public void SetSpeed(float speed)
     {
-        if (_aiPath != null)
+        if (_aiPath)
         {
             _aiPath.maxSpeed = speed;
         }
     }
-    public float CurrentSpeed=> _aiPath != null ? _aiPath.velocity.magnitude : 0f;
+
+    public float CurrentSpeed => _aiPath ? _aiPath.velocity.magnitude : 0f;
 
     // Waypoints Mode ----------------------------------------------------
     public Transform CurrentWaypoint
     {
         get
         {
-            if (_temporaryWaypoint != null) return _temporaryWaypoint;
+            if (_temporaryWaypoint) return _temporaryWaypoint;
             return _patrolWaypoints.Count > 0 ? _patrolWaypoints[_currentPatrolIndex] : null;
         }
     }
 
-    public bool HasWaypoints => _patrolWaypoints.Count != 0 || _temporaryWaypoint != null;
+    public bool HasWaypoints => _patrolWaypoints.Count != 0 || _temporaryWaypoint;
     public bool HasReachedCurrentWaypoint => _hasReachedCurrentWaypoint;
 
     [SerializeField] private List<Transform> _patrolWaypoints = new();
@@ -45,12 +47,12 @@ public class AStarAgent : MonoBehaviour
         _currentPatrolIndex = 0;
         _temporaryWaypoint = null;
         _hasReachedCurrentWaypoint = false;
-        if (_seeker != null) _seeker.drawGizmos = false;
+        if (_seeker) _seeker.drawGizmos = false;
     }
 
     public void SetTempWaypoint(Transform target)
     {
-        if (target == null)
+        if (!target)
         {
             Debug.LogWarning($"[Agent] Attempted to add null waypoint to {name}");
             return;
@@ -62,7 +64,7 @@ public class AStarAgent : MonoBehaviour
 
     private void SetDestinationToCurrentWaypoint()
     {
-        if (CurrentWaypoint != null && _aiPath != null)
+        if (CurrentWaypoint && _aiPath)
         {
             _aiPath.destination = CurrentWaypoint.position;
             StartCoroutine(nameof(ShowRoute));
@@ -71,7 +73,7 @@ public class AStarAgent : MonoBehaviour
 
     private void PatrolToNextWaypoint()
     {
-        if (_temporaryWaypoint != null)
+        if (_temporaryWaypoint)
         {
             _temporaryWaypoint = null;
             SetDestinationToCurrentWaypoint();
@@ -94,16 +96,18 @@ public class AStarAgent : MonoBehaviour
 
     public void EnableFollow(Transform movingTarget)
     {
-        if (movingTarget == null)
+        if (!movingTarget)
         {
             Debug.LogWarning($"[Agent] Attempted to follow null target for {name}");
             return;
         }
+
         if (_isFollowing)
         {
             Debug.LogWarning($"[Agent] {name} is already following a target");
             return;
         }
+
         _movingTarget = movingTarget;
         _isFollowing = true;
         _destinationSetter.enabled = _isFollowing;
@@ -117,6 +121,7 @@ public class AStarAgent : MonoBehaviour
             Debug.LogWarning($"[Agent] {name} is not currently following a target");
             return;
         }
+
         _movingTarget = null;
         _isFollowing = false;
         _destinationSetter.target = null;
@@ -127,9 +132,9 @@ public class AStarAgent : MonoBehaviour
 
     private void GetComponents()
     {
-        if (_aiPath == null) _aiPath = GetComponent<AIPath>();
-        if (_seeker == null) _seeker = GetComponent<Seeker>();
-        if (_destinationSetter == null) _destinationSetter = GetComponent<AIDestinationSetter>();
+        if (!_aiPath) _aiPath = GetComponent<AIPath>();
+        if (!_seeker) _seeker = GetComponent<Seeker>();
+        if (!_destinationSetter) _destinationSetter = GetComponent<AIDestinationSetter>();
     }
 
     private void Awake()
@@ -140,7 +145,7 @@ public class AStarAgent : MonoBehaviour
 
     private void Update()
     {
-        if (_aiPath == null) return;
+        if (!_aiPath) return;
         if (_isFollowing) return; // follow mode overrides waypoints
         if (!HasWaypoints) return;
 
@@ -153,7 +158,7 @@ public class AStarAgent : MonoBehaviour
 
     private IEnumerator ShowRoute()
     {
-        if (_seeker != null)
+        if (_seeker)
         {
             _seeker.drawGizmos = true;
             yield return new WaitForSeconds(_showRouteDuration);
@@ -164,7 +169,7 @@ public class AStarAgent : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (_isFollowing && _movingTarget != null)
+        if (_isFollowing && _movingTarget)
         {
             Gizmos.color = Color.magenta;
             Gizmos.DrawLine(transform.position, _movingTarget.position);
@@ -176,7 +181,7 @@ public class AStarAgent : MonoBehaviour
         Gizmos.color = Color.yellow;
         for (int i = _currentPatrolIndex; i < _patrolWaypoints.Count; i++)
         {
-            if (_patrolWaypoints[i] == null) continue;
+            if (!_patrolWaypoints[i]) continue;
             if (i == _currentPatrolIndex)
             {
                 Gizmos.color = Color.green;
@@ -197,7 +202,7 @@ public class AStarAgent : MonoBehaviour
         }
 
         // Draw line from agent to current target
-        if (CurrentWaypoint != null)
+        if (CurrentWaypoint)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, CurrentWaypoint.position);

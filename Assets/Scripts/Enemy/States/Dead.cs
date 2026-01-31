@@ -18,8 +18,8 @@ public class Dead : StateBase, IState
         if (currentAnimState.normalizedTime >= 1.0f)
             _fsm.enabled = false;
     }
+
     public void OnExit()
     {
-
     }
 }

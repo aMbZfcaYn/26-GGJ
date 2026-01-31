@@ -7,16 +7,14 @@ using System;
 [RequireComponent(typeof(CanvasGroup))]
 public class AbilityCard : MonoBehaviour
 {
-    [Header("UI 绑定")]
-    [SerializeField] private Image iconImage;
+    [Header("UI 绑定")] [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private GameObject highlightBorder; // 选中时显示的高亮框
 
-    [Header("动画参数")]
-    [SerializeField] private float selectScale = 1.1f; // 选中放大的倍数
+    [Header("动画参数")] [SerializeField] private float selectScale = 1.1f; // 选中放大的倍数
     [SerializeField] private float normalScale = 1.0f;
-    [SerializeField] private float dimScale = 0.9f;    // 未选中缩小的倍数
-    [SerializeField] private float dimAlpha = 0.5f;    // 未选中变暗的透明度
+    [SerializeField] private float dimScale = 0.9f; // 未选中缩小的倍数
+    [SerializeField] private float dimAlpha = 0.5f; // 未选中变暗的透明度
 
     private int _index;
     private Action<int> _onClickCallback;
@@ -34,7 +32,7 @@ public class AbilityCard : MonoBehaviour
         _index = index;
         _onClickCallback = onClick;
 
-        if (data != null)
+        if (data)
         {
             //iconImage.sprite = data.icon;
             nameText.text = data.abilityName;
@@ -67,7 +65,7 @@ public class AbilityCard : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         // 这里不要用 SetRelative，直接移动到终点最稳
-        seq.Append(_rectTransform.DOAnchorPos(finalPos, 0.5f).SetEase(Ease.OutBack)); 
+        seq.Append(_rectTransform.DOAnchorPos(finalPos, 0.5f).SetEase(Ease.OutBack));
         seq.Join(_canvasGroup.DOFade(1f, 0.5f));
     }
 

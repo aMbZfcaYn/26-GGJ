@@ -19,7 +19,9 @@ namespace Utilities
                 Initialize();
             }
         }
-        
-        protected virtual void Initialize() { }
+
+        protected virtual void Initialize()
+        {
+        }
     }
 }

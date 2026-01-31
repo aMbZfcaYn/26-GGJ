@@ -11,7 +11,7 @@ public class EnemyParameter : ScriptableObject
 
     [SerializeField] private float stunDuration;
     [SerializeField] private float knockbackMagnitude;
-    
+
     [SerializeField] private float viewAngle;
 
     [SerializeField] private float hearDistance;
