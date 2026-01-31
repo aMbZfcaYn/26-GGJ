@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Management;
 using UnityEngine;
 
 public class EnemyFSM : MonoBehaviour
@@ -32,15 +34,30 @@ public class EnemyFSM : MonoBehaviour
     {
         currentState?.OnUpdate();
     }
+
     public void TransitionState(StateBase state)
     {
         currentState?.OnExit();
         currentState = state;
         currentState?.OnEnter();
     }
+
     public bool CanSeePlayer()
     {
-        throw new System.NotImplementedException();
+        // Do not check player is null, since it just should crack when happen rather than consume an "if"
+        player = GameManager.Instance.player.transform;
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        // Check if player in angle
+        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+        if (angleToPlayer > parameters.ViewAngle / 2)
+        {
+            return false;
+        }
+
+        if (Physics.Raycast(transform.position, directionToPlayer.normalized, out RaycastHit hit,
+                float.PositiveInfinity) && hit.transform != player) return false;
+        return true;
     }
 
     public bool CanAttackPlayer()
