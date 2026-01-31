@@ -83,10 +83,10 @@ namespace Management
     /// Some entity made a sound
     /// </summary>
     /// <para>
-    /// first: entity that made the sound
+    /// first: entity transform that made the sound
     /// </para>
     [System.Serializable]
-    public class SoundEmissionEvent : UnityEvent<GameObject>
+    public class SoundEmissionEvent : UnityEvent<Transform>
     {
     }
 }

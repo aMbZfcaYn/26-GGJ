@@ -33,6 +33,7 @@ public class EnemyFSM : MonoBehaviour
     {
         taggable.TryAddTag(TagUtils.Type_Enemy);
         GameManager.Instance.RegisterEnemy(gameObject);
+        GameEventManager.Instance.onSoundEmit.AddListener(HeardSound);
         TransitionState(new Patrol(this));
     }
 
