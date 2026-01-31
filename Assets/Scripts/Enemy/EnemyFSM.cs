@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Management;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ public class EnemyFSM : MonoBehaviour
     public Transform Player => player;
 
     private StateBase currentState;
+
+    // Tips: 50 may cause bug if we have some unexpected small entities.
+    private RaycastHit[] _hits = new RaycastHit[50];
 
     private void Awake()
     {
@@ -55,14 +59,35 @@ public class EnemyFSM : MonoBehaviour
             return false;
         }
 
-        if (Physics.Raycast(transform.position, directionToPlayer.normalized, out RaycastHit hit,
-                float.PositiveInfinity) && hit.transform != player) return false;
-        return true;
+        // Check if there is an obstacle in ray path.
+        if (Physics.Raycast(transform.position, directionToPlayer.normalized, out RaycastHit hit, 100000f))
+        {
+            return hit.transform == player;
+        }
+
+        // hit and hit player
+        return false;
     }
 
     public bool CanAttackPlayer()
     {
-        throw new System.NotImplementedException();
+        if (!CanSeePlayer()) return false;
+        player = GameManager.Instance.player.transform;
+        Vector3 directionToPlayer = player.position - transform.position;
+        // In half of atkRange
+        if (directionToPlayer.sqrMagnitude > parameters.AtkRange * parameters.AtkRange / 4)
+        {
+            return false;
+        }
+
+        // In half of atkAngle
+        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+        if (angleToPlayer > parameters.AtkAngle / 3)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public bool HitByBlunt()
