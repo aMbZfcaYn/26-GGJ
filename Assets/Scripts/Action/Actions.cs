@@ -4,7 +4,7 @@ using Management.Tag;
 
 public enum WeaponType
 {
-    knife, sword, hammer, Spear, magic_single, magic_spread, magic_riffle, magic_magic
+    knife, sword, hammer, Spear, magic_single, magic_spread, magic_riffle, magic_melee
 }
 
 public class Actions : MonoBehaviour
@@ -65,14 +65,9 @@ public class Actions : MonoBehaviour
 
     private bool isAttacking = false;
     private bool canShoot = true;
-    private WeaponType currentWeaponType = WeaponType.knife;
 
-    public void SetCurrentWeapon(WeaponType weaponType)
-    {
-        currentWeaponType = weaponType;
-    }
 
-    public void PerformMeleeAttack(Transform attacker, bool isBlunk = false)
+    public void PerformMeleeAttack(Transform attacker, WeaponType currentWeaponType, bool isBlunk = false)
     {
         if (isAttacking) return;
 
@@ -98,7 +93,7 @@ public class Actions : MonoBehaviour
                 attackAngle = attackAngle_hammer;
                 attackDurationValue = attackDuration_hammer;
                 break;
-            case WeaponType.magic_magic: // Magic melee
+            case WeaponType.magic_melee:
                 attackRadius = attackRadius_magic;
                 attackWidth = attackWidth_magic;
                 attackAngle = attackAngle_magic;
