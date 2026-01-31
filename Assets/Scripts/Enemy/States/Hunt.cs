@@ -7,7 +7,8 @@ public class Hunt : StateBase
     public override void OnEnter()
     {
         base.OnEnter();
-        _fsm.Agent.EnableFollow(_fsm.Player);
+        if(!_fsm.Agent.IsFollowing)
+            _fsm.Agent.EnableFollow(_fsm.Player);
         _fsm.Agent.SetSpeed(_parameters.HuntSpeed);
         _fsm.Animator.SetBool("IsHunting", true);
     }
@@ -15,6 +16,8 @@ public class Hunt : StateBase
     public override void OnUpdate()
     {
         base.OnUpdate();
+
+        _fsm.Animator.SetFloat("MoveSpeed", _fsm.Agent.CurrentSpeed);
 
         if (_fsm.CanAttackPlayer())
             _fsm.TransitionState(new Attack(_fsm));

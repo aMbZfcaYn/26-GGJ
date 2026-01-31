@@ -9,7 +9,7 @@ public class Dead : StateBase
     public override void OnEnter()
     {
         base.OnEnter();
-        _fsm.Animator.SetTrigger("Dead");
+        _fsm.Animator.SetTrigger("HitByOtherAttack");
         _fsm.Agent.SetSpeed(0f);
     }
 
