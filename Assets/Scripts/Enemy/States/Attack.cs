@@ -9,7 +9,7 @@ public class Attack : StateBase
     {
         base.OnEnter();
         _fsm.Agent.SetSpeed(0f);
-        _fsm.Animator.SetTrigger("Attack");
+        _fsm.Animator.SetBool("Attack", true);
     }
 
     public override void OnUpdate()
@@ -18,16 +18,12 @@ public class Attack : StateBase
 
         currentAnimState = _fsm.Animator.GetCurrentAnimatorStateInfo(0);
         if (currentAnimState.normalizedTime >= 1.0f)
-        {
-            if (_fsm.CanAttackPlayer())
-                _fsm.TransitionState(new Attack(_fsm));
-            else
-                _fsm.TransitionState(new Hunt(_fsm));
-        }
+            _fsm.TransitionState(new Hunt(_fsm));
     }
 
     public override void OnExit()
     {
+        _fsm.Animator.SetBool("Attack", false);
         base.OnExit();
     }
 }

@@ -14,6 +14,8 @@ public class Patrol : StateBase
     {
         base.OnUpdate();
 
+        _fsm.Animator.SetFloat("MoveSpeed", _fsm.Agent.CurrentSpeed);
+
         if (_fsm.CanSeePlayer())
             _fsm.TransitionState(new Hunt(_fsm));
         else if (_fsm.HeardSound())

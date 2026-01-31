@@ -15,6 +15,7 @@ public class AStarAgent : MonoBehaviour
             _aiPath.maxSpeed = speed;
         }
     }
+    public float CurrentSpeed=> _aiPath != null ? _aiPath.velocity.magnitude : 0f;
 
     // Waypoints Mode ----------------------------------------------------
     public Transform CurrentWaypoint
@@ -85,10 +86,11 @@ public class AStarAgent : MonoBehaviour
     // --------------------------------------------------------------------
 
     // Follow Mode -------------------------------------------------------
-    private bool _isFollowing = false;
 
     [SerializeField] private Transform _movingTarget;
     public Transform MovingTarget => _movingTarget;
+    public bool IsFollowing => _isFollowing;
+    private bool _isFollowing = false;
 
     public void EnableFollow(Transform movingTarget)
     {

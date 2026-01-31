@@ -10,7 +10,7 @@ public class Stun : StateBase
     {
         base.OnEnter();
         _stunTimer = 0f;
-        _fsm.Animator.SetTrigger("Stun");
+        _fsm.Animator.SetTrigger("HitByBlunt");
         _fsm.Agent.SetSpeed(0f);
     }
 
@@ -27,5 +27,6 @@ public class Stun : StateBase
     public override void OnExit()
     {
         base.OnExit();
+        _fsm.Animator.SetTrigger("WakeFromStun");
     }
 }
