@@ -10,13 +10,11 @@ public class EnemyFSM : MonoBehaviour
     [SerializeField] private EnemyParameter parameters;
     [SerializeField] private AStarAgent agent;
     [SerializeField] private Animator animator;
-    [SerializeField] private Transform soundSource;
     [SerializeField] private Transform player;
 
     public EnemyParameter Parameters => parameters;
     public AStarAgent Agent => agent;
     public Animator Animator => animator;
-    public Transform SoundSource => soundSource;
     public Transform Player => GameManager.Instance.player.transform;
 
     private IState currentState;
