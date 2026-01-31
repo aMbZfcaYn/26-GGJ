@@ -19,7 +19,7 @@ public class EnemyFSM : MonoBehaviour
     public Transform SoundSource => soundSource;
     public Transform Player => player;
 
-    private StateBase currentState;
+    private IState currentState;
     private Taggable taggable;
 
     // Tips: 50 may cause bug if we have some unexpected small entities.
@@ -29,13 +29,13 @@ public class EnemyFSM : MonoBehaviour
     {
         if (agent == null) agent = GetComponent<AStarAgent>();
         if (animator == null) animator = GetComponent<Animator>();
-        if (taggable == null) taggable = gameObject.AddComponent<Taggable>();
-        taggable.TryAddTag(TagUtils.Type_Enemy);
+        if (taggable == null) taggable = GetComponent<Taggable>();
     }
 
     private void Start()
     {
-        GameManager.Instance.RegisterEnemy(this.gameObject);
+        taggable.TryAddTag(TagUtils.Type_Enemy);
+        GameManager.Instance.RegisterEnemy(gameObject);
         TransitionState(new Patrol(this));
     }
 
@@ -44,11 +44,13 @@ public class EnemyFSM : MonoBehaviour
         currentState?.OnUpdate();
     }
 
-    public void TransitionState(StateBase state)
+    public void TransitionState(IState state)
     {
+        Debug.Log(name + " Exited State: " + state.GetType().Name);
         currentState?.OnExit();
         currentState = state;
         currentState?.OnEnter();
+        Debug.Log(name + " Entered State: " + state.GetType().Name);
     }
 
     public bool CanSeePlayer()
@@ -93,16 +95,6 @@ public class EnemyFSM : MonoBehaviour
         }
 
         return true;
-    }
-
-    public bool HitByBlunt()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public bool HitByOtherAttack()
-    {
-        throw new System.NotImplementedException();
     }
 
     public bool HeardSound()

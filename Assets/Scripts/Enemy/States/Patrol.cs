@@ -1,19 +1,16 @@
 using UnityEngine;
 
-public class Patrol : StateBase
+public class Patrol : StateBase, IState
 {
     public Patrol(EnemyFSM fsm) : base(fsm) { }
 
-    public override void OnEnter()
+    public void OnEnter()
     {
-        base.OnEnter();
         _fsm.Agent.SetSpeed(_fsm.Parameters.PatrolSpeed);
     }
 
-    public override void OnUpdate()
+    public void OnUpdate()
     {
-        base.OnUpdate();
-
         _fsm.Animator.SetFloat("MoveSpeed", _fsm.Agent.CurrentSpeed);
 
         if (_fsm.CanSeePlayer())
@@ -22,8 +19,8 @@ public class Patrol : StateBase
             _fsm.TransitionState(new Trace(_fsm, _fsm.SoundSource));
     }
 
-    public override void OnExit()
+    public void OnExit()
     {
-        base.OnExit();
+    
     }
 }
