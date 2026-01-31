@@ -1,60 +1,83 @@
+using InputNamespace;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private Actions actions;
-
-    [SerializeField] private float attackRadius = 1.5f;
-    [SerializeField] private float attackWidth = 0.3f;
-    [SerializeField] private float attackAngle = 90f;
-    [SerializeField] private float attackDuration = 0.2f;
-    [SerializeField] private LayerMask enemyLayer;
-    private Rigidbody2D rb;
-
-    void Start()
+    public class PlayerControl : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private Actions actions;
 
-    void FixedUpdate()
-    {
-        Vector2 movement = InputManager.Movement;
-        rb.linearVelocity = movement * moveSpeed;
+        [SerializeField] private float attackRadius = 1.5f;
+        [SerializeField] private float attackWidth = 0.3f;
+        [SerializeField] private float attackAngle = 90f;
+        [SerializeField] private float attackDuration = 0.2f;
+        [SerializeField] private LayerMask enemyLayer;
+        private Rigidbody2D rb;
+        private AbilityManager ability;
+        
+        private bool inAbility = false;
 
-        RotateTowardsMouse();
-        if (InputManager.DefaultAttackWasPressed)
+        void Start()
         {
-            PerformMeleeAttack();
+            rb = GetComponent<Rigidbody2D>();
+            ability = GetComponent<AbilityManager>();
         }
-    }
-    private void PerformMeleeAttack()
-    {
-        if (actions != null)
+
+        void Update()
         {
+            RotateTowardsMouse();
+            if (InputManager.DefaultAttackWasPressed)
+            {
+                PerformMeleeAttack();
+            }
 
-            actions.PerformMeleeAttack(transform, attackRadius, attackWidth,
-                attackAngle, attackDuration, enemyLayer);
-
+            if (InputManager.SkillWasPressed)
+            {
+                if (ability.needSwitcher)
+                {
+                    if (!inAbility)
+                        ability.OnAbilityButtonPressed();
+                    inAbility = !inAbility;
+                }
+                else
+                    ability.OnAbilityButtonPressed();
+            }
         }
-        else
+        
+        void FixedUpdate()
         {
-            Debug.LogError("Actions组件未分配！");
+            Vector2 movement = InputManager.Movement;
+            rb.linearVelocity = movement * moveSpeed;
         }
-    }
-    private void RotateTowardsMouse()
-    {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        private void PerformMeleeAttack()
+        {
+            if (actions != null)
+            {
 
-        mouseWorldPos.z = 0;
+                actions.PerformMeleeAttack(transform, attackRadius, attackWidth,
+                    attackAngle, attackDuration, enemyLayer);
 
-        Vector2 directionToMouse = new Vector2(
-            mouseWorldPos.x - transform.position.x,
-            mouseWorldPos.y - transform.position.y
-        );
+            }
+            else
+            {
+                Debug.LogError("Actions组件未分配！");
+            }
+        }
+        private void RotateTowardsMouse()
+        {
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+            mouseWorldPos.z = 0;
 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Vector2 directionToMouse = new Vector2(
+                mouseWorldPos.x - transform.position.x,
+                mouseWorldPos.y - transform.position.y
+            );
+
+            float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 }

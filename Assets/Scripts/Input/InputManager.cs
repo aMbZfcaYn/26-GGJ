@@ -1,51 +1,54 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+namespace InputNamespace
 {
-    public static PlayerInput PlayerInput;
-
-    public static Vector2 Movement;
-
-    public static bool DefaultAttackWasPressed;
-    public static bool SpecialAttackWasPressed;
-    public static bool SkillWasPressed;
-
-    public static bool CameraMoveIsheld;
-    public static bool CameraMoveIsReleased;
-
-    private InputAction _moveAction;
-    private InputAction _defaultAttackAction;
-    private InputAction _specialAttackAction;
-    private InputAction _interactAction;
-    private InputAction _cameraMoveAction;
-
-
-    private void Awake()
+    public class InputManager : MonoBehaviour
     {
-        PlayerInput = GetComponent<PlayerInput>();
+        public static PlayerInput PlayerInput;
 
-        _moveAction = PlayerInput.actions["Move"];
-        _defaultAttackAction = PlayerInput.actions["DefaultAttack"];
-        _specialAttackAction = PlayerInput.actions["SpecialAttack"];
-        _interactAction = PlayerInput.actions["Interact"];
-        _cameraMoveAction = PlayerInput.actions["CameraMove"];
-    }
+        public static Vector2 Movement;
 
-    private void Update()
-    {
-        Movement = _moveAction.ReadValue<Vector2>();
+        public static bool DefaultAttackWasPressed;
+        public static bool SpecialAttackWasPressed;
+        public static bool SkillWasPressed;
 
-        DefaultAttackWasPressed = _defaultAttackAction.WasPressedThisFrame();
+        public static bool CameraMoveIsheld;
+        public static bool CameraMoveIsReleased;
 
-        SpecialAttackWasPressed = _specialAttackAction.WasPressedThisFrame();
-
-        SkillWasPressed = _interactAction.WasPressedThisFrame();
-
-        CameraMoveIsheld = _cameraMoveAction.IsPressed();
-
-        CameraMoveIsReleased = _cameraMoveAction.WasPressedThisFrame();
+        private InputAction _moveAction;
+        private InputAction _defaultAttackAction;
+        private InputAction _specialAttackAction;
+        private InputAction _interactAction;
+        private InputAction _cameraMoveAction;
 
 
+        private void Awake()
+        {
+            PlayerInput = GetComponent<PlayerInput>();
+
+            _moveAction = PlayerInput.actions["Move"];
+            _defaultAttackAction = PlayerInput.actions["DefaultAttack"];
+            _specialAttackAction = PlayerInput.actions["SpecialAttack"];
+            _interactAction = PlayerInput.actions["Interact"];
+            _cameraMoveAction = PlayerInput.actions["CameraMove"];
+        }
+
+        private void Update()
+        {
+            Movement = _moveAction.ReadValue<Vector2>();
+
+            DefaultAttackWasPressed = _defaultAttackAction.WasPressedThisFrame();
+
+            SpecialAttackWasPressed = _specialAttackAction.WasPressedThisFrame();
+
+            SkillWasPressed = _interactAction.WasPressedThisFrame();
+
+            CameraMoveIsheld = _cameraMoveAction.IsPressed();
+
+            CameraMoveIsReleased = _cameraMoveAction.WasPressedThisFrame();
+
+
+        }
     }
 }

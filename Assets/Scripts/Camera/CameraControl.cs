@@ -1,9 +1,10 @@
+using InputNamespace;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
     [Header("CameraSetting")]
-    [SerializeField] private Transform target;
+    public Transform target;
     [SerializeField] private Vector3 offset = new Vector3(0, 0, -10);
 
     [Header("MoveSetting")]

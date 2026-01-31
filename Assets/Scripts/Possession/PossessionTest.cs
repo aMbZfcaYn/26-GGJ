@@ -1,21 +1,25 @@
-using System;
+using InputNamespace;
+using Management;
 using UnityEngine;
 
-public class PossessionTest : MonoBehaviour
+namespace Possession
 {
-    public GameObject target;
-    public GameObject player;
-
-    private void Update()
+    public class PossessionTest : MonoBehaviour
     {
-        if(InputManager.SkillWasPressed)
+        public GameObject target;
+        public GameObject player;
+
+        private void Update()
         {
-            StartPossessionTest();
+            if(InputManager.SkillWasPressed)
+            {
+                StartPossessionTest();
+            }
         }
-    }
 
-    public void StartPossessionTest()
-    {
-        GameEventManager.Instance.onPossessionTrigger.Invoke(target, player);
+        public void StartPossessionTest()
+        {
+            GameEventManager.Instance.onPossessionTrigger.Invoke(target, player);
+        }
     }
 }
