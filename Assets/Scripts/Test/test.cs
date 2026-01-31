@@ -1,4 +1,5 @@
 
+using InputNamespace;
 using UnityEngine;
 
 public class test : MonoBehaviour

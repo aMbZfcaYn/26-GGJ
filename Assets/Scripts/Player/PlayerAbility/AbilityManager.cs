@@ -1,3 +1,4 @@
+using Management;
 using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class AbilityManager : MonoBehaviour
     
     private void Start()
     {
-        SelectAbility(3);
+        SelectAbility(GameManager.Instance.playerAbilityIndex);
     }
 
     // 供UI界面调用：传入 1, 2, 3 来选择

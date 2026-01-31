@@ -1,16 +1,31 @@
+using InputNamespace;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public bool blocked = false;
+    
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Actions actions;
     [SerializeField] private WeaponType currentWeaponType = WeaponType.knife;
 
     private Rigidbody2D rb;
+    private AbilityManager ability;
+    
+    private bool inAbility = false;
 
     void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        var camScript = Camera.main.GetComponent<CameraControl>();
+        camScript.target = transform;
+        
         rb = GetComponent<Rigidbody2D>();
+        ability = GetComponent<AbilityManager>();
 
         // 设置当前武器类型
         if (actions != null)
@@ -21,6 +36,12 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (blocked)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+        
         Vector2 movement = InputManager.Movement;
         rb.linearVelocity = movement * moveSpeed;
 
@@ -29,6 +50,18 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        if (InputManager.SkillWasPressed)
+        {
+            if (ability.needSwitcher)
+            {
+                if (!inAbility)
+                    ability.OnAbilityButtonPressed();
+                inAbility = !inAbility;
+            }
+            else
+                ability.OnAbilityButtonPressed();
+        }
+        
         if (InputManager.DefaultAttackWasPressed)
         {
             switch (currentWeaponType)

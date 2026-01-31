@@ -1,4 +1,5 @@
 using InputNamespace;
+using Management.Tag;
 using UnityEngine;
 
 // 挂在生成的飞行物Prefab上
@@ -23,8 +24,10 @@ public class ControlledProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.name);
-        // 假设敌人的Tag是Enemy
-        if (collision.CompareTag("TestEnemy"))
+
+        var tag = collision.GetComponent<Taggable>();
+        
+        if (Taggable.HasTag(collision.gameObject, TagManager.GetTag("Enemy")))
         {
             // 通知能力脚本处理结果
             ownerAbility.OnProjectileHit(collision.gameObject);

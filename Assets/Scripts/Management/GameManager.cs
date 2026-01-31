@@ -28,6 +28,8 @@ namespace Management
         [Space(20)] [Header("Player")] [SerializeField]
         public GameObject player;
 
+        public int playerAbilityIndex;
+        
         [SerializeField] public int playerHp;
 
 

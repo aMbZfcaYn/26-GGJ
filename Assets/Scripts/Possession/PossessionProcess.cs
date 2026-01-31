@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Management;
+using Management.Tag;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -52,6 +53,7 @@ namespace Possession
         {
             TimeManager.Instance.SetTimeScale(0);
             camScript.enabled = false;
+            GameEventManager.Instance.onEnemyKilled.Invoke(enemy);
 
             // 2. 记录原始数据 并 提升渲染层级
             originalSize = mainCamera.orthographicSize;
@@ -141,17 +143,23 @@ namespace Possession
 
                 // 逻辑交接
                 PerformPossessionLogic(player, enemy);
+                GameEventManager.Instance.onPossessionEnd.Invoke();
             });
         }
 
         private void PerformPossessionLogic(GameObject oldPlayer, GameObject newBody)
         {
+            Taggable taggable = newBody.GetComponent<Taggable>();
+            taggable.TryRemoveTag(TagManager.GetTag("Enemy"));
+            taggable.TryAddTag(TagManager.GetTag("Player"));
+            
+            var playerControl = newBody.AddComponent<PlayerControl>();
+            var ability = newBody.AddComponent<AbilityManager>();
+            
+            playerControl.Init();
+            ability.SelectAbility(GameManager.Instance.playerAbilityIndex);
+            
             Destroy(oldPlayer);
-            newBody.tag = "Player";
-        
-            // 如果你有类似于 Cinemachine 或者 CameraFollow 的脚本
-            // 记得在这里更新它的 Target，否则摄像机会停在原地
-            if(camScript) camScript.target = newBody.transform;
         }
     
         void SetLayerRecursively(GameObject obj, int newLayer)
