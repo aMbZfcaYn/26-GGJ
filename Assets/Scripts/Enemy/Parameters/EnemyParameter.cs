@@ -6,7 +6,8 @@ public class EnemyParameter : ScriptableObject
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float huntSpeed;
 
-    [SerializeField] private int atkRange;
+    [SerializeField] private float atkRange;
+    [SerializeField] private float atkAngle;
 
     [SerializeField] private float stunDuration;
     
@@ -14,7 +15,8 @@ public class EnemyParameter : ScriptableObject
 
     public float PatrolSpeed => patrolSpeed;
     public float HuntSpeed => huntSpeed;
-    public int AtkRange => atkRange;
+    public float AtkRange => atkRange;
+    public float AtkAngle => atkAngle;
     public float StunDuration => stunDuration;
 
     public float ViewAngle => viewAngle;
