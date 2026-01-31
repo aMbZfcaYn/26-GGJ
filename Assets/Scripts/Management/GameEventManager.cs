@@ -8,6 +8,8 @@ namespace Management
     {
         public PossessionEvent onPossessionTrigger = new();
         public PossessionEndEvent onPossessionEnd = new();
+        public LevelEnterEvent onLevelEnter = new();
+        public LevelStartEvent onLevelStart = new();
         public LevelFailEvent onLevelFail = new();
         public LevelClearEvent onLevelClear = new();
         public LevelFinishEvent onLevelFinish = new();
@@ -29,6 +31,25 @@ namespace Management
 
     [System.Serializable]
     public class PossessionEndEvent : UnityEvent
+    {
+    }
+
+    /// <summary>
+    /// When first enter level.
+    /// Will do ability choose and other things.
+    /// Only execute once for one level.
+    /// </summary>
+    [System.Serializable]
+    public class LevelEnterEvent : UnityEvent
+    {
+    }
+
+    /// <summary>
+    /// Execute everytime when start a level.
+    /// May execute multiple times.
+    /// </summary>
+    [System.Serializable]
+    public class LevelStartEvent : UnityEvent
     {
     }
 

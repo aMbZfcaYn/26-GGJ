@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Management.SceneManage;
+using Unity.Collections;
 using UnityEngine;
 using Utilities;
 
@@ -16,22 +17,29 @@ namespace Management
         private bool _possessionReduceAllowed = true;
 
         [Space(20)] [Header("Scenes")] [SerializeField]
-        private int sceneIndex;
+        private int sceneIndex = 0;
 
         [SerializeField] [TextArea(2, 10)] [Tooltip("Write scene names in sequence.")]
         private List<string> scenes;
-        
-        public HashSet<GameObject> EnemyList;
 
+        public HashSet<GameObject> EnemyList = new();
+
+        [Space(20)] [Header("Player")] [SerializeField]
         public GameObject player;
+
+        [SerializeField] public int playerHp;
+
 
         private void OnDisable()
         {
             GameEventManager.Instance?.onPossessionEnd.RemoveListener(PossessionDone);
-            GameEventManager.Instance?.onEnemyKilled.RemoveListener(PossessionEnergyGain);
-            GameEventManager.Instance?.onLevelClear.RemoveListener(LevelClear);
+            GameEventManager.Instance?.onLevelStart.RemoveListener(LevelEnter);
+            GameEventManager.Instance?.onLevelStart.RemoveListener(LevelStart);
             GameEventManager.Instance?.onLevelFail.RemoveListener(LevelFail);
+            GameEventManager.Instance?.onLevelClear.RemoveListener(LevelClear);
             GameEventManager.Instance?.onLevelFinish.RemoveListener(LevelFinish);
+            GameEventManager.Instance?.onEnemyKilled.RemoveListener(PossessionEnergyGain);
+            GameEventManager.Instance?.onEnemyKilled.RemoveListener(EnemyKilled);
         }
 
         private void FixedUpdate()
@@ -58,7 +66,8 @@ namespace Management
 
         public void StartGame()
         {
-            // TODO: 
+            EnemyList.Clear();
+            SceneController.Instance.LoadScene(scenes[sceneIndex]);
         }
 
         /// <summary>
@@ -71,17 +80,38 @@ namespace Management
         }
 
         /// <summary>
-        /// Event func of event: onLevelClear
+        /// Event func of event: onLevelEnter
         /// </summary>
-        public void LevelClear()
+        public void LevelEnter()
         {
-            // TODO: 
+            GameEventManager.Instance.onLevelStart.Invoke();
+            // TODO: choose ability
+        }
+
+        /// <summary>
+        /// Event func of event: onLevelStart
+        /// </summary>
+        public void LevelStart()
+        {
+            // May Optimize: better enemy list clear logic
+            EnemyList.Clear();
+            SceneController.Instance.LoadScene(scenes[sceneIndex]);
         }
 
         /// <summary>
         /// Event func of event: onLevelFail
         /// </summary>
         public void LevelFail()
+        {
+            // May change: reload after input
+            // restart level
+            GameEventManager.Instance.onLevelStart.Invoke();
+        }
+
+        /// <summary>
+        /// Event func of event: onLevelClear
+        /// </summary>
+        public void LevelClear()
         {
             // TODO: 
         }
@@ -91,9 +121,9 @@ namespace Management
         /// </summary>
         public void LevelFinish()
         {
-            EnemyList.Clear();
+            // add index and it will be used when start new level
             ++sceneIndex;
-            SceneController.Instance.LoadScene(scenes[sceneIndex]);
+            GameEventManager.Instance.onLevelEnter.Invoke();
         }
 
         /// <summary>
@@ -111,7 +141,7 @@ namespace Management
         /// <param name="killed">Enemy that be killed</param>
         public void PossessionEnergyGain(GameObject killed)
         {
-            // TODO: 
+            // TODO: add energy
         }
 
         /// <summary>
@@ -121,6 +151,10 @@ namespace Management
         public void EnemyKilled(GameObject killed)
         {
             EnemyList.Remove(killed);
+            if (EnemyList.Count == 0)
+            {
+                GameEventManager.Instance.onLevelClear.Invoke();
+            }
         }
     }
 }
