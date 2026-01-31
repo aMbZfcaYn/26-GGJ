@@ -14,7 +14,7 @@ namespace Management
         public LevelClearEvent onLevelClear = new();
         public LevelFinishEvent onLevelFinish = new();
         public EnemyKilled onEnemyKilled = new();
-        public EnergyFilled onEnergyFilled = new();
+        public SoundEmissionEvent onSoundEmit = new();
     }
 
     /// <summary>
@@ -79,8 +79,14 @@ namespace Management
     {
     }
 
+    /// <summary>
+    /// Some entity made a sound
+    /// </summary>
+    /// <para>
+    /// first: entity that made the sound
+    /// </para>
     [System.Serializable]
-    public class EnergyFilled : UnityEvent
+    public class SoundEmissionEvent : UnityEvent<GameObject>
     {
     }
 }
