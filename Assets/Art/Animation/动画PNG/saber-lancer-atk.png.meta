@@ -119,11 +119,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
-        width: 64
-        height: 48
+        y: 0
+        width: 48
+        height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: saber-lancer-atk_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 144
-        width: 64
-        height: 48
+        x: 48
+        y: 0
+        width: 48
+        height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: saber-lancer-atk_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
-        width: 64
-        height: 48
+        x: 96
+        y: 0
+        width: 48
+        height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,19 +184,19 @@ TextureImporter:
       name: saber-lancer-atk_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
-        width: 64
-        height: 48
+        x: 144
+        y: 0
+        width: 48
+        height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3566ba42b7ef9dd70800000000000000
+      spriteID: c7bd9d158ed4a564cb8435738cb5ddc3
       internalID: 9068559129536849491
       vertices: []
       indices: 
@@ -206,19 +206,19 @@ TextureImporter:
       name: saber-lancer-atk_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 192
         y: 0
-        width: 64
-        height: 48
+        width: 48
+        height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5020c65a27c31fba0800000000000000
+      spriteID: a4e2aa2b7607657419abe77c42326441
       internalID: -6056993560737349115
       vertices: []
       indices: 

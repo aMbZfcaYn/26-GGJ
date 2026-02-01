@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2155751189706811277}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.453, y: -0.001, z: 0}
+  m_LocalPosition: {x: 0.01, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,10 +77,10 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -5257969306998324467, guid: f80ee9fa0c7d3df49baf322e2c3cc1a8, type: 3}
+  m_Sprite: {fileID: -476578445266525375, guid: 458755e45918989458477609701237cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 2, y: 1.1875}
   m_AdaptiveModeThreshold: 0.5
@@ -251,7 +251,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6617500429597999383, guid: f5085f8e039e1744f9fa1ca665fc71af, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -259,7 +259,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 1.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7273171126615922613
@@ -589,6 +589,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  hasShootCount: 0
 --- !u!1 &9196674189499156031
 GameObject:
   m_ObjectHideFlags: 0

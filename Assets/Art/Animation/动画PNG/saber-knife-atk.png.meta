@@ -119,11 +119,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
+        y: 0
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,12 +140,12 @@ TextureImporter:
       name: saber-knife-atk_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 64
+        y: 0
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: saber-knife-atk_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
+        x: 128
+        y: 0
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: saber-knife-atk_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 192
+        y: 0
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,12 +206,12 @@ TextureImporter:
       name: saber-knife-atk_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
+        x: 256
+        y: 0
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: saber-knife-atk_5
       rect:
         serializedVersion: 2
-        x: 0
+        x: 320
         y: 0
         width: 64
         height: 64
       alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

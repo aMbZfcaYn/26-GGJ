@@ -15,6 +15,10 @@ public class Dead : StateBase, IState
         _fsm.HeadAnimator.SetTrigger("HitByOtherAttack");
         _fsm.LegAnimator.SetTrigger("HitByOtherAttack");
         _fsm.Agent.SetSpeed(0f);
+        if (isPossessioned)
+        {
+            _fsm.HeadAnimator.Rebind();
+        }
     }
 
     public void OnUpdate()

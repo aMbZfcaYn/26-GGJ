@@ -64,8 +64,10 @@ public class EnemyFSM : MonoBehaviour
         // Do not check player is null, since it just should crack when happen rather than consume an "if"
         Vector2 directionToPlayer = Player.position - transform.position;
 
+        // Vector2 trueForward = new Vector2(-transform.forward.y, transform.forward.x);
+
         // Check if player in angle
-        float angleToPlayer = Vector2.Angle(transform.forward, directionToPlayer);
+        float angleToPlayer = Vector2.Angle(transform.up, directionToPlayer);
         if (angleToPlayer > parameters.ViewAngle / 2)
         {
             return false;
@@ -94,7 +96,8 @@ public class EnemyFSM : MonoBehaviour
         }
 
         // In half of atkAngle
-        float angleToPlayer = Vector2.Angle(transform.forward, directionToPlayer);
+        // Vector2 trueForward = new Vector2(-transform.forward.y, transform.forward.x);
+        float angleToPlayer = Vector2.Angle(transform.up, directionToPlayer);
         if (angleToPlayer > parameters.AtkAngle / 3)
         {
             return false;

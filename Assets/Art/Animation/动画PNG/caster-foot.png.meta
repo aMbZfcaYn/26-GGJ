@@ -118,8 +118,8 @@ TextureImporter:
       name: caster-foot_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 224
+        x: 32
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -128,9 +128,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8f48b6b36a7100150800000000000000
+      spriteID: 3f9df86e3408c7e47b38140d914a10dc
       internalID: 5836691119801074936
       vertices: []
       indices: 
@@ -140,8 +140,8 @@ TextureImporter:
       name: caster-foot_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
+        x: 64
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -150,9 +150,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e4128fb3699866880800000000000000
+      spriteID: 18dc61f7bd3e81f4686f7178f77ec5ef
       internalID: -8618049558582648498
       vertices: []
       indices: 
@@ -162,8 +162,8 @@ TextureImporter:
       name: caster-foot_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 160
+        x: 96
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -172,9 +172,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4a6068d17d770d3c0800000000000000
+      spriteID: 356d2f9e80ee4dc4ca82daaa93a39414
       internalID: -4336834675360790876
       vertices: []
       indices: 
@@ -184,8 +184,8 @@ TextureImporter:
       name: caster-foot_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 160
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -194,9 +194,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 63ef2436932921610800000000000000
+      spriteID: 2f2e984cfba0ede49a7aed03327438bb
       internalID: 1590494393591332406
       vertices: []
       indices: 
@@ -206,8 +206,8 @@ TextureImporter:
       name: caster-foot_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
+        x: 192
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -216,9 +216,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 378c5516308d667c0800000000000000
+      spriteID: 90f94363e520a0e469670e58591c64ce
       internalID: -4078334903507892109
       vertices: []
       indices: 
@@ -228,8 +228,8 @@ TextureImporter:
       name: caster-foot_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 224
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -238,9 +238,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1faaf588b416a0ac0800000000000000
+      spriteID: b4c339b6891accf429b679807a54d6f2
       internalID: -3888188351242589455
       vertices: []
       indices: 

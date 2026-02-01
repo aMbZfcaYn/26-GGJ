@@ -242,21 +242,34 @@ public class Actions : MonoBehaviour
     {
         isAttacking = true;
 
+            // 原本以 z 为中心（即 X 轴），现在加上 90 度变为以 Y 轴为中心
+        float centerAngle = attacker.eulerAngles.z + 90f; 
+        float startAngle = centerAngle - attackAngle / 2f;
+        float targetAngle = centerAngle + attackAngle / 2f;
+        float currentAngle = startAngle;
+        
+        float startRadian = startAngle * Mathf.Deg2Rad;
+        
         Vector2 startDirection = new Vector2(
             Mathf.Cos(attacker.eulerAngles.z * Mathf.Deg2Rad),
             Mathf.Sin(attacker.eulerAngles.z * Mathf.Deg2Rad)
         );
-
-        float startAngle = attacker.eulerAngles.z - attackAngle / 2f;
-        float currentAngle = startAngle;
-        float targetAngle = startAngle + attackAngle;
-
+        
         Vector3 attackPosition = attacker.position + (Vector3)(startDirection * attackRadius / 2);
 
-        GameObject attackCollider =
-            CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk,
-                attacker.gameObject);
+        //float startAngle = attacker.eulerAngles.z - attackAngle / 2f;
+        //float currentAngle = startAngle;
+        //float targetAngle = startAngle + attackAngle;
 
+        //Vector3 attackPosition = attacker.position + (Vector3)(startDirection * attackRadius / 2);
+
+        // GameObject attackCollider =
+        //     CreateAttackCollider(attackPosition, attacker.rotation, attackRadius, attackWidth, isBlunk,
+        //         attacker.gameObject);
+        GameObject attackCollider =
+            CreateAttackCollider(attackPosition, Quaternion.Euler(0, 0, startAngle), attackRadius, attackWidth, isBlunk,
+                attacker.gameObject);
+        
         float progress = 0f;
         float totalRotationTime = attackDurationValue;
 
@@ -290,6 +303,7 @@ public class Actions : MonoBehaviour
     private GameObject CreateAttackCollider(Vector3 position, Quaternion rotation, float attackRadius,
         float attackWidth, bool isBlunk, GameObject attacker)
     {
+        //Quaternion atkRotation = transform.rotation * Quaternion.Euler(0, 0, -90f);
         GameObject colliderObj = Instantiate(attackColliderPrefab, position, rotation);
         BoxCollider2D boxCollider = colliderObj.GetComponent<BoxCollider2D>();
         if (boxCollider)
@@ -307,17 +321,29 @@ public class Actions : MonoBehaviour
         float attackDurationValue, LayerMask enemyLayer, bool isBlunk)
     {
         isAttacking = true;
+        
+        float finalAngle = attacker.eulerAngles.z + 90f; 
+        float radian = finalAngle * Mathf.Deg2Rad;
 
         Vector2 direction = new Vector2(
-            Mathf.Cos(attacker.eulerAngles.z * Mathf.Deg2Rad),
-            Mathf.Sin(attacker.eulerAngles.z * Mathf.Deg2Rad)
+            Mathf.Cos(radian),
+            Mathf.Sin(radian)
         );
+        
+        // Vector2 direction = new Vector2(
+        //     Mathf.Cos(attacker.eulerAngles.z * Mathf.Deg2Rad),
+        //     Mathf.Sin(attacker.eulerAngles.z * Mathf.Deg2Rad)
+        // );
 
         Vector3 startPosition = attacker.position;
         Vector3 endPosition = attacker.position + (Vector3)(direction * attackDistance);
 
-        GameObject attackCollider = CreateSpearAttackCollider(startPosition + (Vector3)(direction * attackDistance / 2),
-            attacker.rotation, attackDistance, attackWidth, isBlunk, attacker.gameObject);
+        // GameObject attackCollider = CreateSpearAttackCollider(startPosition + (Vector3)(direction * attackDistance / 2),
+        //     attacker.rotation, attackDistance, attackWidth, isBlunk, attacker.gameObject);
+        GameObject attackCollider = CreateSpearAttackCollider(
+            startPosition + (Vector3)(direction * attackDistance / 2),
+            Quaternion.Euler(0, 0, finalAngle), 
+            attackDistance, attackWidth, isBlunk, attacker.gameObject);
 
         float progress = 0f;
         float totalMoveTime = attackDurationValue;
@@ -385,8 +411,9 @@ public class Actions : MonoBehaviour
 
         Vector3 spawnPosition = bulletSpawnPoint != null ? bulletSpawnPoint.position : shooter.position;
 
-        GameObject bullet = CreateBullet(spawnPosition, shooter.rotation, shooter.gameObject);
-
+        // GameObject bullet = CreateBullet(spawnPosition, shooter.rotation, shooter.gameObject);
+        GameObject bullet = CreateBullet(spawnPosition, shooter.rotation * Quaternion.Euler(0, 0, 90), shooter.gameObject);
+        
         yield return new WaitForSeconds(shootCooldown_single);
         canShoot = true;
     }
@@ -396,6 +423,7 @@ public class Actions : MonoBehaviour
 
         if (bulletPrefab)
         {
+            //Quaternion atkRotation = transform.rotation * Quaternion.Euler(0, 0, -90f);
             GameObject bullet = Instantiate(bulletPrefab, position, rotation);
             bullet.GetComponent<Bullet>().changeShooter(shooter);
             return bullet;
@@ -414,9 +442,13 @@ public class Actions : MonoBehaviour
         for (int i = 0; i < spreadBulletsCount; i++)
         {
             float randomDisableTime = Random.Range(0.05f, 0.3f);
-
+            
+            float baseAngle = shooter.eulerAngles.z + 90f;
             float randomAngleOffset = Random.Range(-spreadAngleRange, spreadAngleRange);
-            Quaternion randomRotation = Quaternion.Euler(0, 0, shooter.eulerAngles.z + randomAngleOffset);
+            Quaternion randomRotation = Quaternion.Euler(0, 0, baseAngle + randomAngleOffset);
+
+            // float randomAngleOffset = Random.Range(-spreadAngleRange, spreadAngleRange);
+            // Quaternion randomRotation = Quaternion.Euler(0, 0, shooter.eulerAngles.z + randomAngleOffset);
 
             Vector3 randomPosition = shooter.position + forward * spreadDistance;
 
@@ -456,9 +488,13 @@ public class Actions : MonoBehaviour
         canShoot = false;
 
         Vector3 spawnPosition = bulletSpawnPoint ? bulletSpawnPoint.position : shooter.position;
-
+        
+        float baseAngle = shooter.eulerAngles.z + 90f; 
         float randomAngleOffset = Random.Range(-rifleAngleRange, rifleAngleRange);
-        Quaternion randomRotation = Quaternion.Euler(0, 0, shooter.eulerAngles.z + randomAngleOffset);
+        Quaternion randomRotation = Quaternion.Euler(0, 0, baseAngle + randomAngleOffset);
+
+        // float randomAngleOffset = Random.Range(-rifleAngleRange, rifleAngleRange);
+        // Quaternion randomRotation = Quaternion.Euler(0, 0, shooter.eulerAngles.z + randomAngleOffset);
 
         CreateBullet(spawnPosition, randomRotation, shooter.gameObject);
 

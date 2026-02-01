@@ -119,18 +119,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 240
+        y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.3, y: 0.5}
+      pivot: {x: 0.5, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84bb42c03c0500b44b8fcdc2e071c0f8
+      spriteID: 894c1115aac6f2b408492b54de7c7708
       internalID: 2330545037518307413
       vertices: []
       indices: 
@@ -140,19 +140,19 @@ TextureImporter:
       name: caster-red-atk_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
+        x: 48
+        y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.3, y: 0.5}
+      pivot: {x: 0.5, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ed2bead8f1ab2142828a8bb1166f95c
+      spriteID: fd71d207730fb9240b1d3385bcb6f0a2
       internalID: -4123678407217405195
       vertices: []
       indices: 
@@ -162,19 +162,19 @@ TextureImporter:
       name: caster-red-atk_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 144
+        x: 96
+        y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.3, y: 0.5}
+      pivot: {x: 0.5, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 344d2ada10097d94f9a4862e5dbcfe11
+      spriteID: 61fd7b34dfe98cd408bfcdd5c11cb824
       internalID: 1101179060149432997
       vertices: []
       indices: 
@@ -184,19 +184,19 @@ TextureImporter:
       name: caster-red-atk_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 144
+        y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.3, y: 0.5}
+      pivot: {x: 0.5, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a05409d241948864686f7525b00b022f
+      spriteID: 953bb4bf39b86264abe1d44d0e39df32
       internalID: -7205711372280773070
       vertices: []
       indices: 
@@ -206,19 +206,19 @@ TextureImporter:
       name: caster-red-atk_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
+        x: 192
+        y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.3, y: 0.5}
+      pivot: {x: 0.5, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5279dcde86f6904cad0f1b4b1a285e7
+      spriteID: b4948a89ee414d84fb591d6d79b82507
       internalID: -4702293245360328266
       vertices: []
       indices: 
@@ -228,19 +228,19 @@ TextureImporter:
       name: caster-red-atk_5
       rect:
         serializedVersion: 2
-        x: 0
+        x: 240
         y: 0
         width: 48
         height: 48
       alignment: 9
-      pivot: {x: 0.3, y: 0.5}
+      pivot: {x: 0.5, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 194b2a92f527d434daf41a07d7412f31
+      spriteID: 2ccc65dec10ce9d47aac8a2042ed74b5
       internalID: -6937926226218789668
       vertices: []
       indices: 
