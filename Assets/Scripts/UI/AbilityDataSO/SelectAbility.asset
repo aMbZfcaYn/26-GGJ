@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SelectAbility
   m_EditorClassIdentifier: 
   id: 1
-  abilityName: 
-  icon: {fileID: 0}
-  description: 
+  abilityName: "\u611A\u8005\u5047\u9762"
+  icon: {fileID: 21300000, guid: 64c992afc57e08b48999851656d3a1dd, type: 3}
+  description: "\u65E0\u8F9C\u8005\u4EEC\u88AB\u611A\u6627\u4E4B\u706B\u711A\u6B7B\n\u6028\u7075\u5BC4\u5BD3\u5728\u60E8\u767D\u7684\u9762\u5177\u4E0A\n\u4EE5\u75DB\u82E6\u548C\u6028\u6068\u5411\u611A\u8005\u590D\u4EC7\n\n\u80FD\u529B\uFF1A\u53EF\u4EE5\u9644\u8EAB\u89C6\u7EBF\u5185\u7684\u4EFB\u4F55\u654C\u4EBA"

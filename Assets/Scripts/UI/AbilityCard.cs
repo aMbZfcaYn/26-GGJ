@@ -7,7 +7,8 @@ using System;
 [RequireComponent(typeof(CanvasGroup))]
 public class AbilityCard : MonoBehaviour
 {
-    [Header("UI 绑定")] [SerializeField] private Image iconImage;
+    [Header("UI 绑定")] 
+    [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private GameObject highlightBorder; // 选中时显示的高亮框
 
@@ -25,6 +26,7 @@ public class AbilityCard : MonoBehaviour
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
+        iconImage = GetComponentInChildren<Image>();
     }
 
     public void Setup(AbilityData data, int index, Action<int> onClick)
@@ -34,7 +36,7 @@ public class AbilityCard : MonoBehaviour
 
         if (data)
         {
-            //iconImage.sprite = data.icon;
+            iconImage.sprite = data.icon;
             nameText.text = data.abilityName;
         }
 
@@ -100,5 +102,10 @@ public class AbilityCard : MonoBehaviour
         // 震动一下
         transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 10, 1)
             .OnComplete(() => onComplete?.Invoke());
+    }
+    
+    public void SetIcon(Sprite sprite)
+    {
+        iconImage.sprite = sprite;
     }
 }

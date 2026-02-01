@@ -163,8 +163,9 @@ namespace Possession
             var ability = newBody.AddComponent<AbilityManager>();
 
             playerControl.Init();
-            playerControl.PlayerBodyAC = oldPlayerControl.PlayerBodyAC;
-            playerControl.PlayerLegAC = oldPlayerControl.PlayerLegAC;
+            Animator[] Animators = newBody.GetComponentsInChildren<Animator>();
+            playerControl.PlayerBodyAC = Animators[0].runtimeAnimatorController;
+            playerControl.PlayerLegAC = Animators[1].runtimeAnimatorController;
             playerControl.leg = newBody.transform.Find("Leg").gameObject;
             playerControl.actions = newBody.GetComponent<EnemyFSM>().Actions;
             playerControl.currentWeaponType = newBody.GetComponent<EnemyFSM>().Parameters.weaponType;

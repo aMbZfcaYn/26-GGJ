@@ -33,7 +33,8 @@ namespace Management
         public int playerAbilityIndex;
 
         [SerializeField] public int playerHp;
-
+        public float PossessionEnergy => possessionEnergy;
+        public float PossessionMaxEnergy => possessionMaxEnergy;
 
         private void OnDisable()
         {

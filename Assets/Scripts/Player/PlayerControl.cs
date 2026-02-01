@@ -19,8 +19,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject leg;
     public Animator LegAnimator;
     public Animator BodyAnimator;
-    public AnimatorController PlayerBodyAC;
-    public AnimatorController PlayerLegAC;
+    public RuntimeAnimatorController PlayerBodyAC;
+    public RuntimeAnimatorController PlayerLegAC;
 
     private bool inAbility = false;
 
@@ -54,8 +54,7 @@ public class PlayerControl : MonoBehaviour
         BodyAnimator = GetComponentsInChildren<Animator>()[0];
         LegAnimator = GetComponentsInChildren<Animator>()[1];
 
-        BodyAnimator.runtimeAnimatorController = PlayerBodyAC;
-        LegAnimator.runtimeAnimatorController = PlayerLegAC;
+
     }
 
     void FixedUpdate()
@@ -123,7 +122,7 @@ public class PlayerControl : MonoBehaviour
         if (InputManager.DefaultAttackWasPressed)
         {
             BodyAnimator.SetBool("Attack", true);
-            Debug.Log(BodyAnimator.GetBool("Attack"));
+            //Debug.Log(BodyAnimator.GetBool("Attack"));
 
             switch (currentWeaponType)
             {

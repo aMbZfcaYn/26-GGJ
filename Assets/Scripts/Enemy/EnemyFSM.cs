@@ -52,11 +52,11 @@ public class EnemyFSM : MonoBehaviour
 
     public void TransitionState(IState state)
     {
-        Debug.Log(name + " Exited State: " + state.GetType().Name);
+        //Debug.Log(name + " Exited State: " + state.GetType().Name);
         currentState?.OnExit();
         currentState = state;
         currentState?.OnEnter();
-        Debug.Log(name + " Entered State: " + state.GetType().Name);
+        //Debug.Log(name + " Entered State: " + state.GetType().Name);
     }
 
     public bool CanSeePlayer()
