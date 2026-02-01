@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponType: 4
   patrolSpeed: 3
   huntSpeed: 5
-  atkRange: 3
+  atkRange: 100000
   atkAngle: 30
   stunDuration: 2
   knockbackMagnitude: 5

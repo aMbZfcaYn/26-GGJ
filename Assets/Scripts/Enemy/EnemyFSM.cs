@@ -73,7 +73,7 @@ public class EnemyFSM : MonoBehaviour
 
         // Check if there is an obstacle in ray path.
         RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer.normalized);
-        Debug.Log("Raycast hit: " + (hit ? hit.transform.name : "Nothing"));
+        //Debug.Log("Raycast hit: " + (hit ? hit.transform.name : "Nothing"));
         if (hit)
         {
             return hit.transform == Player;

@@ -576,7 +576,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -1387,11 +1387,11 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   darkOverlay: {fileID: 595385658}
   focusDuration: 0.5
-  pauseDuration: 1
+  pauseDuration: 1.5
   transferDuration: 0.8
-  closeUpSize: 3
+  closeUpSize: 4
   highlightSortingOrder: 200
-  overlayAlpha: 0.85
+  overlayAlpha: 0.9
 --- !u!4 &1817486522
 Transform:
   m_ObjectHideFlags: 0

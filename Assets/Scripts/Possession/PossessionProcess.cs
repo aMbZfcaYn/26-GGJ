@@ -22,7 +22,7 @@ namespace Possession
         // 设置一个非常大的排序值，确保盖过黑色遮罩(遮罩假设是100)
         public int highlightSortingOrder = 200;
 
-        public float overlayAlpha = 0.85f; // 背景变黑的程度 (0-1)
+        public float overlayAlpha = 1f; // 背景变黑的程度 (0-1)
 
         private float originalSize;
         private float originalZ;
@@ -70,7 +70,7 @@ namespace Possession
             }
             else // 如果没有 SortingGroup，就找 SpriteRenderer
             {
-                playerSR = player.GetComponent<SpriteRenderer>();
+                playerSR = player.GetComponentInChildren<SpriteRenderer>();
                 if (playerSR)
                 {
                     originalPlayerOrder = playerSR.sortingOrder;
@@ -85,7 +85,7 @@ namespace Possession
             }
             else
             {
-                enemySR = enemy.GetComponent<SpriteRenderer>();
+                enemySR = enemy.GetComponentInChildren<SpriteRenderer>();
                 if (enemySR)
                 {
                     originalEnemyOrder = enemySR.sortingOrder;
