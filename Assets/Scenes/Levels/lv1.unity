@@ -203,6 +203,14 @@ PrefabInstance:
       propertyPath: PlayerBodyAC
       value: 
       objectReference: {fileID: 9100000, guid: 364bc2763f9533a47a3067e58c668400, type: 2}
+    - target: {fileID: 6055801239376362674, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
+      propertyPath: atkSoundStrength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6055801239376362674, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
+      propertyPath: walkSoundStrength
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6094876153378586165, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
       propertyPath: m_Name
       value: TestPlayer

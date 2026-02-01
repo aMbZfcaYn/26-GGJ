@@ -20,4 +20,4 @@ MonoBehaviour:
   stunDuration: 2
   knockbackMagnitude: 3
   viewAngle: 180
-  hearDistance: 10
+  hearDistance: 0.1
