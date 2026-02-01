@@ -22,7 +22,8 @@ namespace Management
         [Space(20)] [Header("Scenes")] [SerializeField]
         private int sceneIndex = 0;
 
-        [SerializeField] [TextArea(2, 10)] [Tooltip("Write scene names in sequence.")]
+        [SerializeField] [SceneName]
+        [Tooltip("Write scene names in sequence.")]
         private List<string> scenes;
 
         public HashSet<GameObject> EnemyList = new();
