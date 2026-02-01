@@ -71,11 +71,12 @@ public class Actions : MonoBehaviour
     [Header("Magic Single Shot Settings")]
     [SerializeField]
     private float shootCooldown_single = 0.5f;
+    private int bulletCount_single = 10;
 
     [Header("Magic Spread Shot Settings")]
     [SerializeField]
     private float shootCooldown_spread = 1f;
-
+    private int bulletCount_spread = 4;
     [SerializeField] private int spreadBulletsCount = 10;
     [SerializeField] private float spreadAngleRange = 15f;
     [SerializeField] private float spreadFireRate = 0.02f;
@@ -84,10 +85,12 @@ public class Actions : MonoBehaviour
     [Header("Magic Rifle Settings")]
     [SerializeField]
     private float shootCooldown_rifle = 0.2f;
+    private int bulletCount_rifle = 30;
 
     [SerializeField] private float rifleAngleRange = 10f;
 
     [SerializeField] private LayerMask enemyLayer;
+    public int hasShootCount = 0;
 
     private bool isAttacking = false;
     private bool canShoot = true;
@@ -181,8 +184,6 @@ public class Actions : MonoBehaviour
 
         StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_magic, attackWidth_magic,
             attackAngle_magic, attackDuration_magic, enemyLayer, true));
-        StartCoroutine(MeleeAttackCoroutine(attacker, attackRadius_magic, attackWidth_magic,
-            attackAngle_magic, attackDuration_magic, enemyLayer, true));
     }
     public void PerformSpearAttack(Transform attacker)
     {
@@ -199,22 +200,41 @@ public class Actions : MonoBehaviour
     public void PerformShoot(Transform shooter)
     {
         if (!canShoot) return;
+        if (hasShootCount >= bulletCount_single)
+        {
+            PerformMeleeAttack_magic(shooter);
+            return;
+        }
 
         StartCoroutine(ShootCoroutine(shooter));
+        hasShootCount++;
+
     }
 
     public void PerformSpreadShot(Transform shooter)
     {
         if (!canShoot) return;
+        if (hasShootCount >= bulletCount_spread)
+        {
+            PerformMeleeAttack_magic(shooter);
+            return;
+        }
 
         StartCoroutine(SpreadShotCoroutine(shooter));
+        hasShootCount++;
     }
 
     public void PerformRiffleShot(Transform shooter)
     {
         if (!canShoot) return;
+        if (hasShootCount >= bulletCount_rifle)
+        {
+            PerformMeleeAttack_magic(shooter);
+            return;
+        }
 
         StartCoroutine(ShootRiffleCoroutine(shooter));
+        hasShootCount++;
     }
 
     private IEnumerator MeleeAttackCoroutine(Transform attacker, float attackRadius, float attackWidth,
