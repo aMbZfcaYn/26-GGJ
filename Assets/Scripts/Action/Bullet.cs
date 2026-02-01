@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
         if (canFly)
         {
             Debug.Log("Shooter Tag: " + shootertaggable.HasTag(TagManager.GetTag("Player")));
-            
+
             GameObject enemyObject = other.gameObject;
             Taggable taggable = enemyObject.GetComponent<Taggable>();
             if (shootertaggable.HasTag(TagManager.GetTag("Player")))
@@ -97,7 +97,7 @@ public class Bullet : MonoBehaviour
                     }
                 }
             }
-            DestroyBullet();
+            // DestroyBullet();
         }
     }
 

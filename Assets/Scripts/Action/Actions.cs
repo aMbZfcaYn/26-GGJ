@@ -373,6 +373,7 @@ public class Actions : MonoBehaviour
 
     private GameObject CreateBullet(Vector3 position, Quaternion rotation, GameObject shooter)
     {
+
         if (bulletPrefab)
         {
             GameObject bullet = Instantiate(bulletPrefab, position, rotation);
@@ -411,8 +412,10 @@ public class Actions : MonoBehaviour
     private GameObject CreateSpreadBullet(Vector3 position, Quaternion rotation, GameObject shooter,
         float disableTime = 0.1f)
     {
+        Debug.Log("Shoot Spread Bullet");
         if (bulletPrefab)
         {
+            Debug.Log("Shoot Spread Bullet");
             GameObject bullet = Instantiate(bulletPrefab, position, rotation);
 
             Bullet bulletScript = bullet.GetComponent<Bullet>();

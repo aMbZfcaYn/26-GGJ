@@ -2046,6 +2046,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4882601147690550956, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 8886831872000260163, guid: dcafaf5fd60fcab4189330e2a6591ccf, type: 3}
+    - target: {fileID: 4882601147690550956, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
+      propertyPath: bulletSpawnPoint
+      value: 
+      objectReference: {fileID: 1354399986}
+    - target: {fileID: 4882601147690550956, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
       propertyPath: attackColliderPrefab
       value: 
       objectReference: {fileID: 4888175325205742111, guid: a3420afab25af41468e57eed63f0ae21, type: 3}
@@ -2146,6 +2154,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4939053729392883003, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
       insertIndex: -1
       addedObject: {fileID: 56039388}
+    - targetCorrespondingSourceObject: {fileID: 4939053729392883003, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1354399986}
     - targetCorrespondingSourceObject: {fileID: 7553241085090714900, guid: 37f42f479f5bd4a418d965624a956483, type: 3}
       insertIndex: -1
       addedObject: {fileID: 882602043}
@@ -3012,6 +3023,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1354399985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354399986}
+  m_Layer: 0
+  m_Name: firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1354399986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354399985}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1117921404}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1357174264
 GameObject:
   m_ObjectHideFlags: 0
