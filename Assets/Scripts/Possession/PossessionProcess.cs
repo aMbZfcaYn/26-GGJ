@@ -169,6 +169,7 @@ namespace Possession
             playerControl.leg = newBody.transform.Find("Leg").gameObject;
             playerControl.actions = newBody.GetComponent<EnemyFSM>().Actions;
             playerControl.currentWeaponType = newBody.GetComponent<EnemyFSM>().Parameters.weaponType;
+            playerControl.actions.hasShootCount = 0; // reset ranged weapon's ammo
 
             ability.ApplySelectAbility();
 
