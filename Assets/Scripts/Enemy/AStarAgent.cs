@@ -17,6 +17,14 @@ public class AStarAgent : MonoBehaviour
         }
     }
 
+    public void SetCanMove(bool canMove)
+    {
+        if (_aiPath)
+        {
+            _aiPath.canMove = canMove;
+        }
+    }
+
     public float CurrentSpeed => _aiPath ? _aiPath.velocity.magnitude : 0f;
 
     // Waypoints Mode ----------------------------------------------------

@@ -18,6 +18,6 @@ MonoBehaviour:
   atkRange: 100000
   atkAngle: 30
   stunDuration: 2
-  knockbackMagnitude: 5
+  knockbackMagnitude: 3
   viewAngle: 180
   hearDistance: 10
