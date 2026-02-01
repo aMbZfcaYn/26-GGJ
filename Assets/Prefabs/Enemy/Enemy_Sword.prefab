@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 6732475309535816849}
   - component: {fileID: 6441658398641733142}
   - component: {fileID: 8888288921728456722}
+  - component: {fileID: -1025687677583620406}
   m_Layer: 0
   m_Name: Enemy_Sword
   m_TagString: Untagged
@@ -438,6 +439,7 @@ MonoBehaviour:
   - {fileID: 0}
   _currentPatrolIndex: 0
   _showRouteDuration: 1.5
+  _temporaryWaypoint: {fileID: 0}
 --- !u!114 &3829031735263752487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +592,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   hasShootCount: 0
+--- !u!114 &-1025687677583620406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186928883845803440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1073741824
+  smoothType: 1
+  subdivisions: 2
+  iterations: 2
+  strength: 0.5
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: 0.4
+  offset: 0.2
+  factor: 0.1
 --- !u!1 &9196674189499156031
 GameObject:
   m_ObjectHideFlags: 0

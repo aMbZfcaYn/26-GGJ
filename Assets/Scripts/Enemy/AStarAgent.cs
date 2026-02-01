@@ -46,7 +46,7 @@ public class AStarAgent : MonoBehaviour
 
     [SerializeField] private float _showRouteDuration = 1.5f;
 
-    private Transform _temporaryWaypoint;
+    [SerializeField] private Transform _temporaryWaypoint;
     private bool _hasReachedCurrentWaypoint = false;
 
     public void ClearWaypoints()
@@ -177,6 +177,29 @@ public class AStarAgent : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // Draw current A* path
+        if (_aiPath != null && _aiPath.hasPath)
+        {
+            var pathPoints = new List<Vector3>();
+            _aiPath.GetRemainingPath(pathPoints, out bool stale);
+            
+            if (pathPoints.Count > 1)
+            {
+                Gizmos.color = stale ? Color.gray : Color.blue;
+                for (int i = 0; i < pathPoints.Count - 1; i++)
+                {
+                    Gizmos.DrawLine(pathPoints[i], pathPoints[i + 1]);
+                }
+                
+                // Draw spheres at path corners
+                Gizmos.color = Color.cyan;
+                foreach (var point in pathPoints)
+                {
+                    Gizmos.DrawWireSphere(point, 0.15f);
+                }
+            }
+        }
+
         if (_isFollowing && _movingTarget)
         {
             Gizmos.color = Color.magenta;
