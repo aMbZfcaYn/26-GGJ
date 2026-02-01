@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 1
   patrolSpeed: 3
-  huntSpeed: 5
+  huntSpeed: 12
   atkRange: 3
   atkAngle: 30
   stunDuration: 2
