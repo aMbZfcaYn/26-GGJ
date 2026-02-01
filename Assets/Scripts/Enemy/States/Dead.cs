@@ -18,6 +18,7 @@ public class Dead : StateBase, IState
         if (isPossessioned)
         {
             _fsm.HeadAnimator.Rebind();
+            _fsm.LegAnimator.Rebind();
         }
     }
 
