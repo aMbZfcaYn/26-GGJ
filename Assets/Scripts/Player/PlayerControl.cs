@@ -24,6 +24,12 @@ public class PlayerControl : MonoBehaviour
 
     private bool inAbility = false;
 
+    [Header("SoundEmit")] [Range(0, 10)] public float walkSoundStrength = 5f;
+    [Range(0, 30)] public float atkSoundStrength = 10f;
+
+    private int walkSoundEmitCooldown = 0;
+    private int walkSoundEmitCooldownMax = (int)(2 / Time.fixedDeltaTime);
+
     void Start()
     {
         Init(true);
@@ -72,7 +78,15 @@ public class PlayerControl : MonoBehaviour
         {
             float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
             leg.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // Emit walk sound event. Up to 2 times per second.
+            if (walkSoundEmitCooldown > walkSoundEmitCooldownMax)
+            {
+                walkSoundEmitCooldown = 0;
+                GameEventManager.Instance.onSoundEmit.Invoke(transform, walkSoundStrength);
+            }
         }
+
+        walkSoundEmitCooldown++;
 
         RotateTowardsMouse();
     }
@@ -85,6 +99,7 @@ public class PlayerControl : MonoBehaviour
             if (currentAnimState.normalizedTime >= 1f)
                 BodyAnimator.SetBool("Attack", false);
         }
+
         if (BodyAnimator.GetBool("Attack2"))
         {
             currentAnimState = BodyAnimator.GetCurrentAnimatorStateInfo(0);
@@ -107,7 +122,6 @@ public class PlayerControl : MonoBehaviour
 
         if (InputManager.DefaultAttackWasPressed)
         {
-
             BodyAnimator.SetBool("Attack", true);
             Debug.Log(BodyAnimator.GetBool("Attack"));
 
@@ -132,6 +146,8 @@ public class PlayerControl : MonoBehaviour
                     PerformSpreadShot();
                     break;
             }
+
+            GameEventManager.Instance.onSoundEmit.Invoke(transform, atkSoundStrength);
         }
 
         if (InputManager.DefaultAttackIsHeld)
@@ -141,7 +157,9 @@ public class PlayerControl : MonoBehaviour
                 BodyAnimator.SetBool("Attack", true);
                 PerformRiffleShot();
             }
+
             // BodyAnimator.SetBool("Attack", false);
+            GameEventManager.Instance.onSoundEmit.Invoke(transform, atkSoundStrength);
         }
 
         if (InputManager.SpecialAttackWasPressed)
@@ -153,7 +171,9 @@ public class PlayerControl : MonoBehaviour
             {
                 actions.PerformMeleeAttack_magic(transform);
             }
+
             BodyAnimator.SetBool("Attack2", false);
+            GameEventManager.Instance.onSoundEmit.Invoke(transform, atkSoundStrength);
         }
     }
 
@@ -240,5 +260,4 @@ public class PlayerControl : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
 }

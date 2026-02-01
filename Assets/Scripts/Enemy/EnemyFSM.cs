@@ -107,11 +107,13 @@ public class EnemyFSM : MonoBehaviour
     /// Event func of event: onSoundEmit
     /// </summary>
     /// <param name="soundEmitter">Entity that make the sound</param>
-    public void HeardSound(Transform soundEmitter)
+    /// <param name="strength">Strength, or range of that sound</param>
+    public void HeardSound(Transform soundEmitter, float strength)
     {
         if (currentState is not (Patrol or Trace)) return;
         Vector2 directionToEmitter = soundEmitter.position - transform.position;
-        if (directionToEmitter.sqrMagnitude > parameters.HearDistance * parameters.HearDistance)
+        // Strength plus HearDistance is the real triggerable distance
+        if (directionToEmitter.magnitude < parameters.HearDistance + strength)
         {
             TransitionState(new Trace(this, soundEmitter));
         }

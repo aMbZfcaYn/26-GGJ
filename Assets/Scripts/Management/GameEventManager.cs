@@ -85,9 +85,10 @@ namespace Management
     /// </summary>
     /// <para>
     /// first: entity transform that made the sound
+    /// second: strength of that sound
     /// </para>
     [System.Serializable]
-    public class SoundEmissionEvent : UnityEvent<Transform>
+    public class SoundEmissionEvent : UnityEvent<Transform, float>
     {
     }
 }
