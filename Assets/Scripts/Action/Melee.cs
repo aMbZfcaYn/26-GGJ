@@ -60,6 +60,7 @@ public class Melee : MonoBehaviour
                 Debug.Log("击中玩家: " + other.name);
                 // otherFSM.TransitionState(new Stun(otherFSM, transform));
                 GameManager.Instance.playerHp--;
+                GameEventManager.Instance.OnPlayerHpChanged.Invoke();
                 if (GameManager.Instance.playerHp > 0)
                 {
                     GameEventManager.Instance.onPossessionTrigger.Invoke(Owner, other.gameObject);

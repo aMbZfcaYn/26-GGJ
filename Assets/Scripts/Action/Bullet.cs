@@ -87,6 +87,7 @@ public class Bullet : MonoBehaviour
                     // otherFSM.TransitionState(new Dead(otherFSM));
                     DestroyBullet();
                     GameManager.Instance.playerHp--;
+                    GameEventManager.Instance.OnPlayerHpChanged.Invoke();
                     if (GameManager.Instance.playerHp > 0)
                     {
                         GameEventManager.Instance.onPossessionTrigger.Invoke(Shooter, other.gameObject);

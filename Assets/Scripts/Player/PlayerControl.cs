@@ -112,11 +112,17 @@ public class PlayerControl : MonoBehaviour
             if (ability.needSwitcher)
             {
                 if (!inAbility)
-                    ability.OnAbilityButtonPressed();
+                {
+                    if (GameManager.Instance.IsEnergyFilled())
+                        ability.OnAbilityButtonPressed();
+                }
                 inAbility = !inAbility;
             }
             else
-                ability.OnAbilityButtonPressed();
+            {
+                if(GameManager.Instance.IsEnergyFilled())
+                    ability.OnAbilityButtonPressed();
+            }
         }
 
         if (InputManager.DefaultAttackWasPressed)
