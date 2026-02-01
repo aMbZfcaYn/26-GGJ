@@ -41,6 +41,7 @@ namespace Management.SceneManage
 
         private IEnumerator SwitchScene(string oldSceneName, string newSceneName)
         {
+            // TODO: back to yield break
             if (newSceneName == SceneManager.GetActiveScene().name)
                 //yield break;
                 Debug.Log("Switching from " + oldSceneName);

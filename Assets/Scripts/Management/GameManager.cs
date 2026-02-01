@@ -123,6 +123,7 @@ namespace Management
         {
             // TODO: choose ability
             abilityCanvas.SetActive(true);
+            Debug.Log("Level Enter");
         }
 
         /// <summary>
@@ -151,6 +152,7 @@ namespace Management
         public void LevelClear()
         {
             // TODO: 
+            Debug.Log("Level Clear");
         }
 
         /// <summary>
@@ -192,6 +194,7 @@ namespace Management
             {
                 GameEventManager.Instance.onLevelClear.Invoke();
             }
+
             Debug.Log("Enemy killed: " + killed.name);
         }
     }

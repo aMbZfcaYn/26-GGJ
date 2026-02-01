@@ -20,8 +20,9 @@ public class AbilitySelectionSystem : MonoBehaviour
     private int _currentSelectedIndex = -1;
     private bool _isLocked = true; // 锁定操作防止连点
 
-    private void Start()
+    private void OnEnable()
     {
+        Debug.Log("AbilitySelectionSystem OnEnable");
         descriptionText.alpha = 0; // 初始隐藏描述
         SpawnCards();
 
@@ -102,6 +103,7 @@ public class AbilitySelectionSystem : MonoBehaviour
             //GameManager.Instance.StartGameWithAbility(abilities[index].id);
 
             GameManager.Instance.playerAbilityIndex = index + 1;
+            Debug.Log("Selected ability fin and will start level");
             GameEventManager.Instance.onLevelStart.Invoke();
             InputManager.SetGameInputState(true);
 

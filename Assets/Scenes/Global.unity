@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f9d45d9031db743b9cc3e30934df75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityCanvas: {fileID: 514912588}
+  abilityCanvas: {fileID: 609586707}
   possessionEnergy: 0
   possessionMaxEnergy: 1000
   possessionReduceRate: 1
@@ -200,7 +200,7 @@ MonoBehaviour:
   sceneIndex: 0
   scenes:
   - SuperTest
-  - SuperTest
+  - ambzTest
   - SuperTest
   player: {fileID: 0}
   playerAbilityIndex: 3
@@ -343,11 +343,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &514912588 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1787812161953747624, guid: f1f233bc079537147ab90ef63ef039b7, type: 3}
-  m_PrefabInstance: {fileID: 1160684007}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +603,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &609586707 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5120049456789510671, guid: f1f233bc079537147ab90ef63ef039b7, type: 3}
+  m_PrefabInstance: {fileID: 1160684007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

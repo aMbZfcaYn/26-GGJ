@@ -60,12 +60,12 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        Debug.Log(InputManager.Movement);
+        // Debug.Log(InputManager.Movement);
 
         Vector2 movement = InputManager.Movement;
         rb.linearVelocity = movement * moveSpeed;
 
-        Debug.Log(rb.linearVelocity);
+        // Debug.Log(rb.linearVelocity);
 
         LegAnimator.SetFloat("MoveSpeed", rb.linearVelocity.magnitude);
         if (movement.magnitude > 0.1f)
@@ -113,7 +113,6 @@ public class PlayerControl : MonoBehaviour
 
             switch (currentWeaponType)
             {
-
                 case WeaponType.knife:
                     actions.PerformMeleeAttack_knife(transform);
                     break;
@@ -137,8 +136,6 @@ public class PlayerControl : MonoBehaviour
 
         if (InputManager.DefaultAttackIsHeld)
         {
-
-
             if (currentWeaponType == WeaponType.magic_riffle)
             {
                 BodyAnimator.SetBool("Attack", true);

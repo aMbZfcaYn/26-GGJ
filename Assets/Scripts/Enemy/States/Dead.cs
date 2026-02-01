@@ -3,8 +3,12 @@ using UnityEngine;
 public class Dead : StateBase, IState
 {
     private AnimatorStateInfo currentAnimState;
+    private bool isPossessioned;
 
-    public Dead(EnemyFSM fsm) : base(fsm) { }
+    public Dead(EnemyFSM fsm, bool _isPossessioned = false) : base(fsm)
+    {
+        isPossessioned = _isPossessioned;
+    }
 
     public void OnEnter()
     {
@@ -17,7 +21,16 @@ public class Dead : StateBase, IState
     {
         currentAnimState = _fsm.HeadAnimator.GetCurrentAnimatorStateInfo(0);
         if (currentAnimState.normalizedTime >= 1.0f)
+        {
+            if (!isPossessioned)
+            {
+                _fsm.HeadAnimator.enabled = false;
+                _fsm.LegAnimator.enabled = false;
+                _fsm.GetComponent<Collider2D>().enabled = false;
+            }
+
             _fsm.enabled = false;
+        }
     }
 
     public void OnExit()

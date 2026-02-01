@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 6441658398641733142}
   - component: {fileID: 8888288921728456722}
   m_Layer: 0
-  m_Name: Enemy_Knife
+  m_Name: Enemy_MagicRiffle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,11 +450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35bf20cb2da4154c85e84342006ee9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parameters: {fileID: 11400000, guid: 4b08631e55540a34492d08dbcbe7d37a, type: 2}
+  parameters: {fileID: 11400000, guid: 1d88ecfbda02de0408e5f288ff926311, type: 2}
   agent: {fileID: 6262375777219128700}
   headAnimator: {fileID: 536479939960533264}
   legAnimator: {fileID: 7273171126615922613}
-  actions: {fileID: 0}
+  actions: {fileID: 8888288921728456722}
 --- !u!50 &1788040500161580604
 Rigidbody2D:
   serializedVersion: 5

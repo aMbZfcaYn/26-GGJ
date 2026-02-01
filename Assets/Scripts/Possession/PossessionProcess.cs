@@ -143,15 +143,14 @@ namespace Possession
 
                 // 逻辑交接
                 var enemyFsm = enemy.GetComponent<EnemyFSM>();
-                enemyFsm.TransitionState(new Dead(enemyFsm));
-                
+                enemyFsm.TransitionState(new Dead(enemyFsm, true));
+
                 enemy.GetComponent<AIPath>().enabled = false;
                 enemy.GetComponent<Seeker>().enabled = false;
                 enemy.GetComponent<AIDestinationSetter>().enabled = false;
                 enemy.GetComponent<AStarAgent>().enabled = false;
                 enemy.GetComponent<EnemyFSM>().enabled = false;
-                enemy.GetComponent<Collider2D>().enabled = true;
-                
+
                 PerformPossessionLogic(player, enemy);
                 GameEventManager.Instance.onPossessionEnd.Invoke();
             });
@@ -169,7 +168,7 @@ namespace Possession
             playerControl.leg = newBody.transform.Find("Leg").gameObject;
             playerControl.actions = newBody.GetComponent<EnemyFSM>().Actions;
             playerControl.currentWeaponType = newBody.GetComponent<EnemyFSM>().Parameters.weaponType;
-            
+
             ability.ApplySelectAbility();
 
             Destroy(oldPlayer);

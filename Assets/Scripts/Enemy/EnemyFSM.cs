@@ -47,10 +47,7 @@ public class EnemyFSM : MonoBehaviour
 
     private void OnDisable()
     {
-        // headAnimator.enabled = false;
-        // legAnimator.enabled = false;
         Agent.enabled = false;
-        GetComponent<Collider2D>().enabled = false;
     }
 
     public void TransitionState(IState state)
