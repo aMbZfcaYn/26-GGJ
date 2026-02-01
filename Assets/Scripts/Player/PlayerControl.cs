@@ -28,7 +28,7 @@ public class PlayerControl : MonoBehaviour
     [Range(0, 30)] public float atkSoundStrength = 10f;
 
     private int walkSoundEmitCooldown = 0;
-    private int walkSoundEmitCooldownMax = (int)(2 / Time.fixedDeltaTime);
+    private int walkSoundEmitCooldownMax = 25;
 
     void Start()
     {
