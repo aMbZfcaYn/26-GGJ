@@ -16,6 +16,7 @@ namespace Management
         public EnemyKilled onEnemyKilled = new();
         public SoundEmissionEvent onSoundEmit = new();
         public UnityEvent OnNewSceneLoaded;
+        public UnityEvent OnPlayerHpChanged;
     }
 
     /// <summary>
